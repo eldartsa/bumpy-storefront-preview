@@ -340,8 +340,9 @@
     transform: translateY(100%);
     transition: transform 260ms var(--ease);
     max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
+    pointer-events: none;
   }
-  .sheet.on { transform: none; }
+  .sheet.on { transform: none; pointer-events: auto; }
   @media (min-width: 1024px) {
     .sheet {
       left: 50%; right: auto; top: 50%; bottom: auto;
@@ -4644,6 +4645,7 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(1rem,2.5vw,1.5rem)}
   .card{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:transform var(--dur) var(--ease),border-color var(--dur) ease}
   .card:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--ink) 16%,transparent)}
+  .card:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
   .card .art{position:relative;aspect-ratio:1;overflow:hidden}
   .card .art svg{display:block;width:100%;height:100%}
   .card .date-chip{position:absolute;top:.7rem;left:.7rem;background:rgba(10,10,12,.7);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:.6rem;padding:.3rem .5rem;text-align:center;line-height:1}
@@ -4759,7 +4761,7 @@
   })();
   const PIN = '&lt;svg width=&quot;12&quot; height=&quot;12&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;circle cx=&quot;12&quot; cy=&quot;10&quot; r=&quot;2.3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;/svg&gt;';
   const card = (e,past)=&gt;`
-    &lt;div class=&quot;card ${past?'past':''}&quot;&gt;
+    &lt;div class=&quot;card ${past?'past':''}&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open ${e.t}&quot;&gt;
       &lt;div class=&quot;art&quot; style=&quot;--sky-a:${e.sky[0]};--sky-b:${e.sky[1]};--c:${e.sky[2]};--sea:${e.sky[3]}&quot;&gt;
         &lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;${e.sky[0]}&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;${e.sky[1]}&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;${e.sky[2]}&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sky)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;${e.sky[2]}&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;${e.sky[3]}&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;${e.sky[2]}&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;
         &lt;div class=&quot;date-chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;${e.d}&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;${e.m}&lt;/div&gt;&lt;/div&gt;
@@ -4782,6 +4784,15 @@
     tabs.forEach(t =&gt; t.classList.toggle('on', t.dataset.tab === which));
   }
   tabs.forEach(t =&gt; t.addEventListener('click', () =&gt; render(t.dataset.tab)));
+
+  // whole card is the click target → the event page (same full-cell affordance as WHERE)
+  function goEvent(){
+    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:'event'},'*'); return; } }catch(e){}
+    window.location.href = 'bumpy-event-page-mockup.html';
+  }
+  grid.addEventListener('click', e =&gt; { if (e.target.closest('.card')) goEvent(); });
+  grid.addEventListener('keydown', e =&gt; { const c = e.target.closest('.card'); if (c &amp;&amp; (e.key==='Enter' || e.key===' ')){ e.preventDefault(); goEvent(); } });
+
   render('up');
 &lt;/script&gt;
 "></iframe>
