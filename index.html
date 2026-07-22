@@ -166,16 +166,19 @@
   @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
   .hdr nav { display: flex; gap: 0.4rem; align-items: center; }
   .navlink {
-    color: var(--ink-2);
+    color: var(--ink);
     text-decoration: none;
-    font-size: 0.86rem;
-    padding: 0.45rem 0.85rem;
-    border-radius: var(--r-pill);
-    transition: color var(--dur) ease, background var(--dur) ease;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: opacity var(--dur) ease;
   }
-  .navlink:hover { color: var(--ink); background: var(--glass); }
-  .navlink.solid { background: var(--ink); color: #111; font-weight: 600; }
-  .navlink.solid:hover { background: #fff; color: #111; }
+  .navlink:hover { opacity: 0.7; }
+  /* bigger header on desktop */
+  @media (min-width: 1024px) {
+    .hdr { padding-top: 1.2rem; padding-bottom: 1.2rem; }
+    .wordmark { font-size: 1.6rem; }
+    .navlink { font-size: 1.05rem; }
+  }
 
   /* ============================================================ LAYOUT */
   .wrap {
@@ -756,7 +759,7 @@
 &lt;header class=&quot;hdr&quot; id=&quot;hdr&quot;&gt;
 &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
   &lt;nav&gt;
-    &lt;a class=&quot;navlink solid&quot; href=&quot;#&quot; id=&quot;loginlink&quot;&gt;Log in&lt;/a&gt;
+    &lt;a class=&quot;navlink&quot; href=&quot;#&quot; id=&quot;loginlink&quot;&gt;Log in / Sign up&lt;/a&gt;
   &lt;/nav&gt;
 &lt;/header&gt;
 
@@ -4592,7 +4595,9 @@
   .wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#ff7a45;flex:none;transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
   @keyframes bumppulse{0%,100%{transform:scale(1)}45%{transform:scale(.55)}}
   @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
-  .navlink{font-size:.85rem;font-weight:600;color:#111;background:var(--ink);padding:.42rem .95rem;border-radius:var(--r-pill)}
+  .navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;transition:opacity .18s}
+  .navlink:hover{opacity:.7}
+  @media (min-width:1024px){ .hdr-in{padding-top:1.2rem;padding-bottom:1.2rem} .wordmark{font-size:1.6rem} .navlink{font-size:1.05rem} }
   .back{display:inline-flex;align-items:center;gap:.4rem;color:var(--ink-2);font-size:.85rem;text-decoration:none}
   .back:hover{color:var(--ink)}
 
@@ -4674,7 +4679,7 @@
 
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
   &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
-  &lt;a class=&quot;navlink&quot; href=&quot;#&quot;&gt;Log in&lt;/a&gt;
+  &lt;a class=&quot;navlink&quot; href=&quot;#&quot;&gt;Log in / Sign up&lt;/a&gt;
 &lt;/div&gt;&lt;/header&gt;
 
 &lt;div class=&quot;page&quot;&gt;
