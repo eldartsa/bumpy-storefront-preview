@@ -813,11 +813,18 @@
     &lt;h1 class=&quot;title&quot;&gt;The Wave 15/07&lt;/h1&gt;
 
     &lt;div class=&quot;info&quot;&gt;
-      &lt;div&gt;
+      &lt;button type=&quot;button&quot; id=&quot;cal-btn&quot; aria-label=&quot;Add The Wave 15/07 to your calendar&quot;&gt;
         &lt;p class=&quot;k&quot;&gt;When&lt;/p&gt;
         &lt;p class=&quot;v&quot;&gt;Wed, Jul 15&lt;/p&gt;
         &lt;p class=&quot;s&quot;&gt;14:00 – 22:00 · Today&lt;/p&gt;
-      &lt;/div&gt;
+        &lt;span class=&quot;where-cue&quot;&gt;
+          &lt;svg width=&quot;12&quot; height=&quot;12&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;rect x=&quot;3.5&quot; y=&quot;5&quot; width=&quot;17&quot; height=&quot;16&quot; rx=&quot;2.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;
+            &lt;path d=&quot;M3.5 9.5h17M8 3.5v3M16 3.5v3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot; stroke-linecap=&quot;round&quot;/&gt;
+          &lt;/svg&gt;
+          Add to calendar
+        &lt;/span&gt;
+      &lt;/button&gt;
       &lt;!-- The venue is mentioned ONCE. Tapping opens the map sheet on demand —
            the heavy embed is never paid for unless it's asked for. --&gt;
       &lt;button type=&quot;button&quot; id=&quot;where-btn&quot; aria-label=&quot;Show venue map and address&quot;&gt;
@@ -1116,6 +1123,24 @@
   // clicking the organizer opens their producer page
   const orgEl = document.getElementById(&quot;org&quot;);
   if (orgEl) orgEl.addEventListener(&quot;click&quot;, () =&gt; NAV(&quot;producer&quot;));  // native button handles Enter/Space
+
+  // WHEN cell → download an .ics for the event (Asia/Bangkok, matches the shown time)
+  document.getElementById(&quot;cal-btn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    const ics = [
+      &quot;BEGIN:VCALENDAR&quot;, &quot;VERSION:2.0&quot;, &quot;PRODID:-//Bumpy//Storefront//EN&quot;, &quot;CALSCALE:GREGORIAN&quot;,
+      &quot;BEGIN:VEVENT&quot;, &quot;UID:the-wave-15-07@bumpy&quot;, &quot;DTSTAMP:20260701T000000Z&quot;,
+      &quot;DTSTART;TZID=Asia/Bangkok:20260715T140000&quot;,
+      &quot;DTEND;TZID=Asia/Bangkok:20260715T220000&quot;,
+      &quot;SUMMARY:The Wave 15/07&quot;,
+      &quot;LOCATION:The Wave Sunset\\, Koh Phangan\\, Thailand&quot;,
+      &quot;DESCRIPTION:Presented by Party X&quot;,
+      &quot;END:VEVENT&quot;, &quot;END:VCALENDAR&quot;,
+    ].join(&quot;\r\n&quot;);
+    const url = URL.createObjectURL(new Blob([ics], { type: &quot;text/calendar;charset=utf-8&quot; }));
+    const a = document.createElement(&quot;a&quot;);
+    a.href = url; a.download = &quot;the-wave-15-07.ics&quot;; document.body.appendChild(a); a.click();
+    a.remove(); URL.revokeObjectURL(url);
+  });
 
   // Sticky bar appears only while the pricing card is off-screen
   new IntersectionObserver(
