@@ -744,14 +744,46 @@
 
   footer.site {
     border-top: 1px solid var(--line);
-    margin-top: 4rem;
-    padding: 2rem clamp(1rem, 4vw, 3rem) 6rem;
-    color: var(--ink-3);
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+    margin-top: 5rem;
+    background: var(--well);
+    padding: 3.5rem clamp(1rem, 4vw, 3rem) 2.5rem;
+  }
+  .foot-in {
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.25fr 2fr; gap: clamp(2rem, 5vw, 4rem);
+  }
+  .foot-brand .wordmark { font-size: 1.5rem; }
+  .foot-tag { color: var(--ink-2); font-size: 0.9rem; line-height: 1.55; margin: 1rem 0 1.3rem; max-width: 30ch; }
+  .foot-social { display: flex; gap: 0.5rem; }
+  .foot-social a {
+    width: 2.3rem; height: 2.3rem; border-radius: 50%; display: grid; place-items: center;
+    background: var(--glass); border: 1px solid var(--line); color: var(--ink-2);
+    transition: color var(--dur) ease, background var(--dur) ease, transform var(--dur) ease;
+  }
+  .foot-social a:hover { color: var(--ink); background: var(--glass-2); transform: translateY(-2px); }
+  .foot-social a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .foot-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem 1rem; }
+  .foot-h {
+    font-size: var(--label-sm); font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--ink-2); margin: 0 0 0.9rem;
+  }
+  .foot-col a {
+    display: block; color: var(--ink-3); text-decoration: none;
+    font-size: 0.86rem; padding: 0.32rem 0; transition: color var(--dur) ease;
+  }
+  .foot-col a:hover { color: var(--ink); }
+  .foot-bottom {
+    max-width: 1180px; margin: 3rem auto 0; padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.8rem 1.5rem; flex-wrap: wrap; color: var(--ink-3); font-size: 0.78rem;
+  }
+  .foot-legal { display: flex; gap: 1.3rem; flex-wrap: wrap; }
+  .foot-legal a { color: var(--ink-3); text-decoration: none; }
+  .foot-legal a:hover { color: var(--ink-2); }
+  @media (max-width: 760px) {
+    .foot-in { grid-template-columns: 1fr; gap: 2.2rem; }
+    .foot-cols { grid-template-columns: repeat(2, 1fr); }
   }
 &lt;/style&gt;
 
@@ -979,8 +1011,46 @@
 &lt;div class=&quot;toast&quot; id=&quot;toast&quot; role=&quot;status&quot;&gt;&lt;/div&gt;
 
 &lt;footer class=&quot;site&quot;&gt;
-  &lt;span&gt;© 2026 Bumpy — event page redesign mockup&lt;/span&gt;
-  &lt;span&gt;Accent extracted from event artwork&lt;/span&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+      &lt;div class=&quot;foot-social&quot;&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;Instagram&quot; title=&quot;Instagram&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.1A6.7 6.7 0 1 0 18.7 12 6.7 6.7 0 0 0 12 5.3zm0 11a4.3 4.3 0 1 1 4.3-4.3 4.3 4.3 0 0 1-4.3 4.3zm6.9-11.3a1.6 1.6 0 1 1-1.6-1.6 1.6 1.6 0 0 1 1.6 1.6z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;TikTok&quot; title=&quot;TikTok&quot;&gt;&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.4-2.6 5.6-5.6 5.6a5.5 5.5 0 0 1-5.5-5.5c0-3.3 3-5.9 6.4-5.4v2.8c-.4-.1-.8-.2-1.2-.2a2.7 2.7 0 1 0 2.7 2.7V3h3Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;WhatsApp&quot; title=&quot;WhatsApp&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12.04 2.5a9.5 9.5 0 0 0-8.1 14.42L2.5 21.5l4.7-1.4A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 6.6 11.95c-.2.32-.14.29-.6 2.02l-1.98-.52-.36.21a7.8 7.8 0 1 1-3.66-13.66Zm-3.2 3.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.2.87 2.35.99 2.51.12.16 1.7 2.72 4.19 3.71 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.34-.76-1.83-.2-.47-.4-.41-.55-.42h-.47Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;
+        &lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;Help center&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Contact us&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Refund policy&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;
+        &lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;About Bumpy&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Careers&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;
+        &lt;p class=&quot;foot-h&quot;&gt;For organizers&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;Sell with Bumpy&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Create an event&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Organizer pricing&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;
+    &lt;span&gt;© 2026 Bumpy&lt;/span&gt;
+    &lt;div class=&quot;foot-legal&quot;&gt;
+      &lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt;
+      &lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;
+      &lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;span&gt;Thailand · THB ฿&lt;/span&gt;
+  &lt;/div&gt;
 &lt;/footer&gt;
 
 
