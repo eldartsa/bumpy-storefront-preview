@@ -746,7 +746,8 @@
     border-top: 1px solid var(--line);
     margin-top: 5rem;
     background: var(--well);
-    padding: 3.5rem clamp(1rem, 4vw, 3rem) 2.5rem;
+    /* extra bottom clearance so the © row isn't hidden by the sticky BUY NOW bar */
+    padding: 3.5rem clamp(1rem, 4vw, 3rem) 6.5rem;
   }
   .foot-in {
     max-width: 1180px; margin: 0 auto;
@@ -1024,21 +1025,17 @@
     &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
       &lt;div class=&quot;foot-col&quot;&gt;
         &lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;
-        &lt;a href=&quot;#&quot;&gt;Help center&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Contact us&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Refund policy&lt;/a&gt;
+        &lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;
       &lt;/div&gt;
       &lt;div class=&quot;foot-col&quot;&gt;
         &lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
-        &lt;a href=&quot;#&quot;&gt;About Bumpy&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Careers&lt;/a&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;
         &lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;
       &lt;/div&gt;
       &lt;div class=&quot;foot-col&quot;&gt;
-        &lt;p class=&quot;foot-h&quot;&gt;For organizers&lt;/p&gt;
-        &lt;a href=&quot;#&quot;&gt;Sell with Bumpy&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Create an event&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Organizer pricing&lt;/a&gt;
+        &lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;
+        &lt;a data-nav=&quot;partner&quot;&gt;Become Partner&lt;/a&gt;
       &lt;/div&gt;
     &lt;/nav&gt;
   &lt;/div&gt;
@@ -1049,7 +1046,6 @@
       &lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;
       &lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;
     &lt;/div&gt;
-    &lt;span&gt;Thailand · THB ฿&lt;/span&gt;
   &lt;/div&gt;
 &lt;/footer&gt;
 
@@ -1075,12 +1071,15 @@
       confirm:  &quot;bumpy-confirmation-mockup.html&quot;,
       login:    &quot;bumpy-login-mockup.html&quot;,
       producer: &quot;bumpy-producer.html&quot;,
+      partner:  &quot;bumpy-partner-mockup.html&quot;,
+      contact:  &quot;bumpy-contact-mockup.html&quot;,
+      about:    &quot;bumpy-about-mockup.html&quot;,
     };
     const onArtifact = /(^|\.)claude\.ai$/.test(location.hostname);
     return (key) =&gt; {
       // inside the combined flow shell: switch views without navigating
       try { if (window.parent &amp;&amp; window.parent !== window) { window.parent.postMessage({ bumpyNav: key }, &quot;*&quot;); return; } } catch (e) {}
-      window.location.href = (onArtifact ? A : R)[key];
+      window.location.href = (onArtifact ? A : R)[key] || R[key];
     };
   })();
 
@@ -1194,6 +1193,10 @@
   // clicking the organizer opens their producer page
   const orgEl = document.getElementById(&quot;org&quot;);
   if (orgEl) orgEl.addEventListener(&quot;click&quot;, () =&gt; NAV(&quot;producer&quot;));  // native button handles Enter/Space
+
+  // footer links that route to other pages (Contact us / About us / Become Partner)
+  document.querySelectorAll(&quot;.foot-col a[data-nav]&quot;).forEach((a) =&gt;
+    a.addEventListener(&quot;click&quot;, (e) =&gt; { e.preventDefault(); NAV(a.dataset.nav); }));
 
   // WHEN cell → download an .ics for the event (Asia/Bangkok, matches the shown time)
   document.getElementById(&quot;cal-btn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
@@ -4907,12 +4910,562 @@
   render('up');
 &lt;/script&gt;
 "></iframe>
+  <iframe class="pg" id="pg-partner" data-key="partner" title="Bumpy partner" srcdoc="&lt;title&gt;Bumpy — Become a Partner&lt;/title&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;style&gt;
+@font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+:root{
+  --bg:#0a0a0c; --well:#050507; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+  --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+  --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+  --pos:#34d399; --warn:#ffc46b; --danger:#ff8a8a;
+  --accent:#e7ff1a; --glow:#f2ff7d; --accent-ink:#1a2300;
+  --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px; --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+  --label:.72rem; --label-sm:.64rem;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;overflow-x:hidden}
+a{color:inherit}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft)}
+.hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between}
+.wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+  font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);cursor:pointer;background:none;border:none}
+.wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+  transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+@keyframes bumppulse{0%,100%{transform:scale(1)}45%{transform:scale(.55)}}
+@media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+.navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;transition:opacity .18s;background:none;border:none;cursor:pointer}
+.navlink:hover{opacity:.7}
+@media (min-width:1024px){.hdr-in{padding-top:1.2rem;padding-bottom:1.2rem}.wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+
+/* page shell */
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem) 4rem}
+.wrap.narrow{max-width:640px}
+.hero{text-align:center;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.035em;margin:0 0 1rem;text-wrap:balance}
+.hero .lead{color:var(--ink-2);font-size:clamp(1rem,2.5vw,1.2rem);margin:0 auto;max-width:46ch;line-height:1.55}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label-sm);font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 1.1rem}
+.eyebrow .d{width:.42em;height:.42em;border-radius:50%;background:var(--accent)}
+
+.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.95rem;padding:.9rem 1.7rem;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow),var(--accent));color:var(--accent-ink);
+  box-shadow:0 12px 30px -10px color-mix(in oklab,var(--accent) 55%,transparent);text-decoration:none;display:inline-block}
+.btn-primary:hover{filter:brightness(1.03)}
+.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
+  font-weight:700;font-size:.92rem;padding:.85rem 1.5rem;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* sections */
+.lbl{font-size:var(--label);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 1.2rem}
+section.blk{margin-top:clamp(2.5rem,5vw,3.5rem)}
+section.blk h2{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin:0 0 1rem}
+section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
+
+/* benefits */
+.benefits{display:grid;gap:1rem;margin:0}
+.benefit{display:flex;gap:.9rem;align-items:flex-start;background:var(--well);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:1.2rem 1.3rem}
+.benefit .ic{flex:none;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;
+  background:color-mix(in oklab,var(--accent) 16%,transparent);color:var(--accent)}
+.benefit b{display:block;font-size:1rem;margin-bottom:.2rem}
+.benefit span{color:var(--ink-2);font-size:.92rem}
+
+/* value cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.vcard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem}
+.vcard h3{font-size:1.02rem;font-weight:700;margin:0 0 .5rem}
+.vcard p{color:var(--ink-2);font-size:.9rem;margin:0}
+
+/* forms */
+.form{background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.4rem,3vw,2rem);display:grid;gap:1.1rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media (max-width:560px){.frow{grid-template-columns:1fr}}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-bottom:.45rem;letter-spacing:.01em}
+.field input,.field textarea,.field select{width:100%;background:var(--bg);border:1px solid var(--line);
+  border-radius:.9rem;padding:.8rem .95rem;color:var(--ink);font:inherit;font-size:.95rem;transition:border-color .18s}
+.field textarea{min-height:7rem;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-3)}
+.field select{appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8481' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 1rem center}
+.form-foot{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.4rem}
+.form-note{color:var(--ink-3);font-size:.8rem}
+.contact-alt{text-align:center;color:var(--ink-2);font-size:.9rem;margin-top:1.6rem}
+.contact-alt a{color:var(--accent);text-decoration:none}
+
+/* CTA band */
+.ctaband{text-align:center;background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(2rem,5vw,3rem);margin-top:clamp(2.5rem,5vw,3.5rem)}
+.ctaband h2{margin:0 0 .8rem}
+.ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
+
+/* footer (matches the event page) */
+footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
+.foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+.foot-brand .wordmark{font-size:1.5rem}
+.foot-tag{color:var(--ink-2);font-size:.9rem;line-height:1.55;margin:1rem 0 1.3rem;max-width:30ch}
+.foot-social{display:flex;gap:.5rem}
+.foot-social a{width:2.3rem;height:2.3rem;border-radius:50%;display:grid;place-items:center;background:var(--glass);
+  border:1px solid var(--line);color:var(--ink-2);transition:color .2s,background .2s,transform .2s}
+.foot-social a:hover{color:var(--ink);background:var(--glass-2);transform:translateY(-2px)}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem 1rem}
+.foot-h{font-size:var(--label-sm);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+.foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;transition:color .2s;cursor:pointer}
+.foot-col a:hover{color:var(--ink)}
+.foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+.foot-legal{display:flex;gap:1.3rem;flex-wrap:wrap}
+.foot-legal a{color:var(--ink-3);text-decoration:none}
+.foot-legal a:hover{color:var(--ink-2)}
+@media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
+&lt;/style&gt;
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;event&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;div class=&quot;hero&quot;&gt;
+    &lt;p class=&quot;eyebrow&quot;&gt;&lt;span class=&quot;d&quot;&gt;&lt;/span&gt;Partners&lt;/p&gt;
+    &lt;h1&gt;Become a Partner&lt;/h1&gt;
+    &lt;p class=&quot;lead&quot;&gt;Ready to bring your events to Bumpy? Tell us about your production and we'll get back to you shortly.&lt;/p&gt;
+    &lt;div style=&quot;margin-top:1.6rem&quot;&gt;&lt;a class=&quot;btn-primary&quot; href=&quot;#apply&quot;&gt;Apply now&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;benefits&quot; style=&quot;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))&quot;&gt;
+    &lt;div class=&quot;benefit&quot;&gt;&lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;div&gt;&lt;b&gt;Reach the right crowd&lt;/b&gt;&lt;span&gt;Reach a growing audience of event lovers actively looking for their next experience.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;benefit&quot;&gt;&lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M3 3v18h18M7 14l3-3 3 3 5-6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;div&gt;&lt;b&gt;Powerful tools&lt;/b&gt;&lt;span&gt;Manage tickets, track sales, and understand your audience — all in one place.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;benefit&quot;&gt;&lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;div&gt;&lt;b&gt;Fair, transparent pricing&lt;/b&gt;&lt;span&gt;No hidden fees — for you or your attendees. You always know what you pay.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;section class=&quot;blk&quot; id=&quot;apply&quot;&gt;
+    &lt;p class=&quot;lbl&quot;&gt;Apply to partner&lt;/p&gt;
+    &lt;form class=&quot;form&quot;&gt;
+      &lt;div class=&quot;frow&quot;&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Full name *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Your full name&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Email *&lt;/label&gt;&lt;input type=&quot;email&quot; placeholder=&quot;your@email.com&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;frow&quot;&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Phone number *&lt;/label&gt;&lt;input type=&quot;tel&quot; placeholder=&quot;+66 00 000 0000&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Production / brand name *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Your production company or brand&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Website / social link *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;https://yoursite.com or @handle&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;What kind of events do you produce?&lt;/label&gt;
+        &lt;textarea placeholder=&quot;What genres, venues, and audience sizes?&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+      &lt;div class=&quot;frow&quot;&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Typical monthly attendees&lt;/label&gt;
+          &lt;select&gt;&lt;option&gt;Select an estimate&lt;/option&gt;&lt;option&gt;Under 200&lt;/option&gt;&lt;option&gt;200–1,000&lt;/option&gt;&lt;option&gt;1,000–5,000&lt;/option&gt;&lt;option&gt;5,000+&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Country / primary market&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;e.g. Thailand, Israel, UK&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Additional notes&lt;/label&gt;&lt;textarea placeholder=&quot;Anything else we should know?&quot; style=&quot;min-height:5rem&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+      &lt;div class=&quot;form-foot&quot;&gt;
+        &lt;button class=&quot;btn-primary&quot; type=&quot;submit&quot;&gt;Send application&lt;/button&gt;
+        &lt;span class=&quot;form-note&quot;&gt;We usually reply within a couple of business days.&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+      &lt;div class=&quot;foot-social&quot;&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;Instagram&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.1A6.7 6.7 0 1 0 18.7 12 6.7 6.7 0 0 0 12 5.3zm0 11a4.3 4.3 0 1 1 4.3-4.3 4.3 4.3 0 0 1-4.3 4.3zm6.9-11.3a1.6 1.6 0 1 1-1.6-1.6 1.6 1.6 0 0 1 1.6 1.6z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;TikTok&quot;&gt;&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.4-2.6 5.6-5.6 5.6a5.5 5.5 0 0 1-5.5-5.5c0-3.3 3-5.9 6.4-5.4v2.8c-.4-.1-.8-.2-1.2-.2a2.7 2.7 0 1 0 2.7 2.7V3h3Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;WhatsApp&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12.04 2.5a9.5 9.5 0 0 0-8.1 14.42L2.5 21.5l4.7-1.4A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 6.6 11.95c-.2.32-.14.29-.6 2.02l-1.98-.52-.36.21a7.8 7.8 0 1 1-3.66-13.66Zm-3.2 3.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.2.87 2.35.99 2.51.12.16 1.7 2.72 4.19 3.71 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.34-.76-1.83-.2-.47-.4-.41-.55-.42h-.47Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;
+        &lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Become Partner&lt;/a&gt;&lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;
+    &lt;span&gt;© 2026 Bumpy&lt;/span&gt;
+    &lt;div class=&quot;foot-legal&quot;&gt;&lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+&lt;script&gt;
+  const R = { event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
+    partner:&quot;bumpy-partner-mockup.html&quot;, contact:&quot;bumpy-contact-mockup.html&quot;, about:&quot;bumpy-about-mockup.html&quot; };
+  function NAV(key){
+    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    if(R[key]) window.location.href = R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(el=&gt;el.addEventListener('click',e=&gt;{e.preventDefault();NAV(el.dataset.nav);}));
+  document.querySelectorAll('form').forEach(f=&gt;f.addEventListener('submit',e=&gt;e.preventDefault()));
+&lt;/script&gt;
+"></iframe>
+  <iframe class="pg" id="pg-contact" data-key="contact" title="Bumpy contact" srcdoc="&lt;title&gt;Bumpy — Contact Us&lt;/title&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;style&gt;
+@font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+:root{
+  --bg:#0a0a0c; --well:#050507; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+  --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+  --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+  --pos:#34d399; --warn:#ffc46b; --danger:#ff8a8a;
+  --accent:#e7ff1a; --glow:#f2ff7d; --accent-ink:#1a2300;
+  --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px; --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+  --label:.72rem; --label-sm:.64rem;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;overflow-x:hidden}
+a{color:inherit}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft)}
+.hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between}
+.wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+  font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);cursor:pointer;background:none;border:none}
+.wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+  transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+@keyframes bumppulse{0%,100%{transform:scale(1)}45%{transform:scale(.55)}}
+@media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+.navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;transition:opacity .18s;background:none;border:none;cursor:pointer}
+.navlink:hover{opacity:.7}
+@media (min-width:1024px){.hdr-in{padding-top:1.2rem;padding-bottom:1.2rem}.wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+
+/* page shell */
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem) 4rem}
+.wrap.narrow{max-width:640px}
+.hero{text-align:center;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.035em;margin:0 0 1rem;text-wrap:balance}
+.hero .lead{color:var(--ink-2);font-size:clamp(1rem,2.5vw,1.2rem);margin:0 auto;max-width:46ch;line-height:1.55}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label-sm);font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 1.1rem}
+.eyebrow .d{width:.42em;height:.42em;border-radius:50%;background:var(--accent)}
+
+.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.95rem;padding:.9rem 1.7rem;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow),var(--accent));color:var(--accent-ink);
+  box-shadow:0 12px 30px -10px color-mix(in oklab,var(--accent) 55%,transparent);text-decoration:none;display:inline-block}
+.btn-primary:hover{filter:brightness(1.03)}
+.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
+  font-weight:700;font-size:.92rem;padding:.85rem 1.5rem;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* sections */
+.lbl{font-size:var(--label);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 1.2rem}
+section.blk{margin-top:clamp(2.5rem,5vw,3.5rem)}
+section.blk h2{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin:0 0 1rem}
+section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
+
+/* benefits */
+.benefits{display:grid;gap:1rem;margin:0}
+.benefit{display:flex;gap:.9rem;align-items:flex-start;background:var(--well);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:1.2rem 1.3rem}
+.benefit .ic{flex:none;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;
+  background:color-mix(in oklab,var(--accent) 16%,transparent);color:var(--accent)}
+.benefit b{display:block;font-size:1rem;margin-bottom:.2rem}
+.benefit span{color:var(--ink-2);font-size:.92rem}
+
+/* value cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.vcard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem}
+.vcard h3{font-size:1.02rem;font-weight:700;margin:0 0 .5rem}
+.vcard p{color:var(--ink-2);font-size:.9rem;margin:0}
+
+/* forms */
+.form{background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.4rem,3vw,2rem);display:grid;gap:1.1rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media (max-width:560px){.frow{grid-template-columns:1fr}}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-bottom:.45rem;letter-spacing:.01em}
+.field input,.field textarea,.field select{width:100%;background:var(--bg);border:1px solid var(--line);
+  border-radius:.9rem;padding:.8rem .95rem;color:var(--ink);font:inherit;font-size:.95rem;transition:border-color .18s}
+.field textarea{min-height:7rem;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-3)}
+.field select{appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8481' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 1rem center}
+.form-foot{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.4rem}
+.form-note{color:var(--ink-3);font-size:.8rem}
+.contact-alt{text-align:center;color:var(--ink-2);font-size:.9rem;margin-top:1.6rem}
+.contact-alt a{color:var(--accent);text-decoration:none}
+
+/* CTA band */
+.ctaband{text-align:center;background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(2rem,5vw,3rem);margin-top:clamp(2.5rem,5vw,3.5rem)}
+.ctaband h2{margin:0 0 .8rem}
+.ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
+
+/* footer (matches the event page) */
+footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
+.foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+.foot-brand .wordmark{font-size:1.5rem}
+.foot-tag{color:var(--ink-2);font-size:.9rem;line-height:1.55;margin:1rem 0 1.3rem;max-width:30ch}
+.foot-social{display:flex;gap:.5rem}
+.foot-social a{width:2.3rem;height:2.3rem;border-radius:50%;display:grid;place-items:center;background:var(--glass);
+  border:1px solid var(--line);color:var(--ink-2);transition:color .2s,background .2s,transform .2s}
+.foot-social a:hover{color:var(--ink);background:var(--glass-2);transform:translateY(-2px)}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem 1rem}
+.foot-h{font-size:var(--label-sm);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+.foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;transition:color .2s;cursor:pointer}
+.foot-col a:hover{color:var(--ink)}
+.foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+.foot-legal{display:flex;gap:1.3rem;flex-wrap:wrap}
+.foot-legal a{color:var(--ink-3);text-decoration:none}
+.foot-legal a:hover{color:var(--ink-2)}
+@media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
+&lt;/style&gt;
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;event&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;div class=&quot;wrap narrow&quot;&gt;
+  &lt;div class=&quot;hero&quot;&gt;
+    &lt;h1&gt;Contact Us&lt;/h1&gt;
+    &lt;p class=&quot;lead&quot;&gt;Have a question or need help? Fill out the form below and we'll get back to you as soon as possible.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;form class=&quot;form&quot;&gt;
+    &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Name&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Your full name&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Email&lt;/label&gt;&lt;input type=&quot;email&quot; placeholder=&quot;your@email.com&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Message&lt;/label&gt;&lt;textarea placeholder=&quot;How can we help you?&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+    &lt;div class=&quot;form-foot&quot;&gt;&lt;button class=&quot;btn-primary&quot; type=&quot;submit&quot;&gt;Send message&lt;/button&gt;&lt;/div&gt;
+  &lt;/form&gt;
+  &lt;p class=&quot;contact-alt&quot;&gt;You can also reach us directly at &lt;a href=&quot;#&quot;&gt;bumpy.fm@gmail.com&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+      &lt;div class=&quot;foot-social&quot;&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;Instagram&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.1A6.7 6.7 0 1 0 18.7 12 6.7 6.7 0 0 0 12 5.3zm0 11a4.3 4.3 0 1 1 4.3-4.3 4.3 4.3 0 0 1-4.3 4.3zm6.9-11.3a1.6 1.6 0 1 1-1.6-1.6 1.6 1.6 0 0 1 1.6 1.6z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;TikTok&quot;&gt;&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.4-2.6 5.6-5.6 5.6a5.5 5.5 0 0 1-5.5-5.5c0-3.3 3-5.9 6.4-5.4v2.8c-.4-.1-.8-.2-1.2-.2a2.7 2.7 0 1 0 2.7 2.7V3h3Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;WhatsApp&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12.04 2.5a9.5 9.5 0 0 0-8.1 14.42L2.5 21.5l4.7-1.4A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 6.6 11.95c-.2.32-.14.29-.6 2.02l-1.98-.52-.36.21a7.8 7.8 0 1 1-3.66-13.66Zm-3.2 3.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.2.87 2.35.99 2.51.12.16 1.7 2.72 4.19 3.71 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.34-.76-1.83-.2-.47-.4-.41-.55-.42h-.47Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;
+        &lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Become Partner&lt;/a&gt;&lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;
+    &lt;span&gt;© 2026 Bumpy&lt;/span&gt;
+    &lt;div class=&quot;foot-legal&quot;&gt;&lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+&lt;script&gt;
+  const R = { event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
+    partner:&quot;bumpy-partner-mockup.html&quot;, contact:&quot;bumpy-contact-mockup.html&quot;, about:&quot;bumpy-about-mockup.html&quot; };
+  function NAV(key){
+    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    if(R[key]) window.location.href = R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(el=&gt;el.addEventListener('click',e=&gt;{e.preventDefault();NAV(el.dataset.nav);}));
+  document.querySelectorAll('form').forEach(f=&gt;f.addEventListener('submit',e=&gt;e.preventDefault()));
+&lt;/script&gt;
+"></iframe>
+  <iframe class="pg" id="pg-about" data-key="about" title="Bumpy about" srcdoc="&lt;title&gt;Bumpy — About&lt;/title&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;style&gt;
+@font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+:root{
+  --bg:#0a0a0c; --well:#050507; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+  --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+  --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+  --pos:#34d399; --warn:#ffc46b; --danger:#ff8a8a;
+  --accent:#e7ff1a; --glow:#f2ff7d; --accent-ink:#1a2300;
+  --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px; --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+  --label:.72rem; --label-sm:.64rem;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;overflow-x:hidden}
+a{color:inherit}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft)}
+.hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between}
+.wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+  font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);cursor:pointer;background:none;border:none}
+.wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+  transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+@keyframes bumppulse{0%,100%{transform:scale(1)}45%{transform:scale(.55)}}
+@media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+.navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;transition:opacity .18s;background:none;border:none;cursor:pointer}
+.navlink:hover{opacity:.7}
+@media (min-width:1024px){.hdr-in{padding-top:1.2rem;padding-bottom:1.2rem}.wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+
+/* page shell */
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem) 4rem}
+.wrap.narrow{max-width:640px}
+.hero{text-align:center;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.035em;margin:0 0 1rem;text-wrap:balance}
+.hero .lead{color:var(--ink-2);font-size:clamp(1rem,2.5vw,1.2rem);margin:0 auto;max-width:46ch;line-height:1.55}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label-sm);font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 1.1rem}
+.eyebrow .d{width:.42em;height:.42em;border-radius:50%;background:var(--accent)}
+
+.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.95rem;padding:.9rem 1.7rem;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow),var(--accent));color:var(--accent-ink);
+  box-shadow:0 12px 30px -10px color-mix(in oklab,var(--accent) 55%,transparent);text-decoration:none;display:inline-block}
+.btn-primary:hover{filter:brightness(1.03)}
+.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
+  font-weight:700;font-size:.92rem;padding:.85rem 1.5rem;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* sections */
+.lbl{font-size:var(--label);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 1.2rem}
+section.blk{margin-top:clamp(2.5rem,5vw,3.5rem)}
+section.blk h2{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin:0 0 1rem}
+section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
+
+/* benefits */
+.benefits{display:grid;gap:1rem;margin:0}
+.benefit{display:flex;gap:.9rem;align-items:flex-start;background:var(--well);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:1.2rem 1.3rem}
+.benefit .ic{flex:none;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;
+  background:color-mix(in oklab,var(--accent) 16%,transparent);color:var(--accent)}
+.benefit b{display:block;font-size:1rem;margin-bottom:.2rem}
+.benefit span{color:var(--ink-2);font-size:.92rem}
+
+/* value cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.vcard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem}
+.vcard h3{font-size:1.02rem;font-weight:700;margin:0 0 .5rem}
+.vcard p{color:var(--ink-2);font-size:.9rem;margin:0}
+
+/* forms */
+.form{background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.4rem,3vw,2rem);display:grid;gap:1.1rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media (max-width:560px){.frow{grid-template-columns:1fr}}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-bottom:.45rem;letter-spacing:.01em}
+.field input,.field textarea,.field select{width:100%;background:var(--bg);border:1px solid var(--line);
+  border-radius:.9rem;padding:.8rem .95rem;color:var(--ink);font:inherit;font-size:.95rem;transition:border-color .18s}
+.field textarea{min-height:7rem;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-3)}
+.field select{appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8481' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 1rem center}
+.form-foot{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.4rem}
+.form-note{color:var(--ink-3);font-size:.8rem}
+.contact-alt{text-align:center;color:var(--ink-2);font-size:.9rem;margin-top:1.6rem}
+.contact-alt a{color:var(--accent);text-decoration:none}
+
+/* CTA band */
+.ctaband{text-align:center;background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(2rem,5vw,3rem);margin-top:clamp(2.5rem,5vw,3.5rem)}
+.ctaband h2{margin:0 0 .8rem}
+.ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
+
+/* footer (matches the event page) */
+footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
+.foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+.foot-brand .wordmark{font-size:1.5rem}
+.foot-tag{color:var(--ink-2);font-size:.9rem;line-height:1.55;margin:1rem 0 1.3rem;max-width:30ch}
+.foot-social{display:flex;gap:.5rem}
+.foot-social a{width:2.3rem;height:2.3rem;border-radius:50%;display:grid;place-items:center;background:var(--glass);
+  border:1px solid var(--line);color:var(--ink-2);transition:color .2s,background .2s,transform .2s}
+.foot-social a:hover{color:var(--ink);background:var(--glass-2);transform:translateY(-2px)}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem 1rem}
+.foot-h{font-size:var(--label-sm);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+.foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;transition:color .2s;cursor:pointer}
+.foot-col a:hover{color:var(--ink)}
+.foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+.foot-legal{display:flex;gap:1.3rem;flex-wrap:wrap}
+.foot-legal a{color:var(--ink-3);text-decoration:none}
+.foot-legal a:hover{color:var(--ink-2)}
+@media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
+&lt;/style&gt;
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;event&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;div class=&quot;hero&quot;&gt;
+    &lt;h1&gt;About Bumpy&lt;/h1&gt;
+    &lt;p class=&quot;lead&quot;&gt;Your destination for discovering and booking unforgettable live experiences.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;section class=&quot;blk&quot;&gt;
+    &lt;h2&gt;Our mission&lt;/h2&gt;
+    &lt;p&gt;At Bumpy, we believe that live events have the power to create lasting memories and bring people together. Our mission is to make discovering and attending events as seamless as possible, connecting fans with the experiences they love.&lt;/p&gt;
+    &lt;p&gt;Whether you're looking for intimate club nights, large-scale festivals, or everything in between, we're here to help you find your next unforgettable moment.&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;blk&quot;&gt;
+    &lt;p class=&quot;lbl&quot;&gt;What we do&lt;/p&gt;
+    &lt;div class=&quot;cards&quot;&gt;
+      &lt;div class=&quot;vcard&quot;&gt;&lt;h3&gt;Event discovery&lt;/h3&gt;&lt;p&gt;Browse curated events from top venues and promoters. Find exactly what you're looking for with powerful search and filtering.&lt;/p&gt;&lt;/div&gt;
+      &lt;div class=&quot;vcard&quot;&gt;&lt;h3&gt;Seamless ticketing&lt;/h3&gt;&lt;p&gt;Purchase tickets securely and receive them instantly. Our streamlined checkout makes getting tickets quick and easy.&lt;/p&gt;&lt;/div&gt;
+      &lt;div class=&quot;vcard&quot;&gt;&lt;h3&gt;For event organizers&lt;/h3&gt;&lt;p&gt;Powerful tools for promoters and venues to manage their events, sell tickets, and connect with their audience.&lt;/p&gt;&lt;/div&gt;
+      &lt;div class=&quot;vcard&quot;&gt;&lt;h3&gt;Community focused&lt;/h3&gt;&lt;p&gt;We're passionate about supporting local scenes and helping fans discover new artists and venues in their area.&lt;/p&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;div class=&quot;ctaband&quot;&gt;
+    &lt;h2&gt;Get in touch&lt;/h2&gt;
+    &lt;p&gt;Have questions or want to learn more? We'd love to hear from you.&lt;/p&gt;
+    &lt;a class=&quot;btn-primary&quot; data-nav=&quot;contact&quot; href=&quot;#&quot;&gt;Contact us&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+      &lt;div class=&quot;foot-social&quot;&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;Instagram&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.1A6.7 6.7 0 1 0 18.7 12 6.7 6.7 0 0 0 12 5.3zm0 11a4.3 4.3 0 1 1 4.3-4.3 4.3 4.3 0 0 1-4.3 4.3zm6.9-11.3a1.6 1.6 0 1 1-1.6-1.6 1.6 1.6 0 0 1 1.6 1.6z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;TikTok&quot;&gt;&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.4-2.6 5.6-5.6 5.6a5.5 5.5 0 0 1-5.5-5.5c0-3.3 3-5.9 6.4-5.4v2.8c-.4-.1-.8-.2-1.2-.2a2.7 2.7 0 1 0 2.7 2.7V3h3Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;WhatsApp&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12.04 2.5a9.5 9.5 0 0 0-8.1 14.42L2.5 21.5l4.7-1.4A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 6.6 11.95c-.2.32-.14.29-.6 2.02l-1.98-.52-.36.21a7.8 7.8 0 1 1-3.66-13.66Zm-3.2 3.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.2.87 2.35.99 2.51.12.16 1.7 2.72 4.19 3.71 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.34-.76-1.83-.2-.47-.4-.41-.55-.42h-.47Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;
+        &lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Become Partner&lt;/a&gt;&lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;
+    &lt;span&gt;© 2026 Bumpy&lt;/span&gt;
+    &lt;div class=&quot;foot-legal&quot;&gt;&lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+&lt;script&gt;
+  const R = { event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
+    partner:&quot;bumpy-partner-mockup.html&quot;, contact:&quot;bumpy-contact-mockup.html&quot;, about:&quot;bumpy-about-mockup.html&quot; };
+  function NAV(key){
+    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    if(R[key]) window.location.href = R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(el=&gt;el.addEventListener('click',e=&gt;{e.preventDefault();NAV(el.dataset.nav);}));
+  document.querySelectorAll('form').forEach(f=&gt;f.addEventListener('submit',e=&gt;e.preventDefault()));
+&lt;/script&gt;
+"></iframe>
 </div>
 <button class="reset" id="reset" title="Back to the event page">↻ Restart flow</button>
 <button class="reset chip2" id="gatebtn" title="Preview a private (password-gated) event">🔒 Private event</button>
 
 <script>
-  const KEYS = ["event","select","checkout","confirm","login","gate","producer"];
+  const KEYS = ["event","select","checkout","confirm","login","gate","producer","partner","contact","about"];
   // the tickets chosen on "Choose Ticket", carried forward to Pay + Confirmation
   let lastOrder = null;
   let loggedIn = false;        // demo auth state that drives the checkout gate
