@@ -120,6 +120,7 @@
     background: var(--bg);
     color: var(--ink);
     font-family: system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    font-variant-numeric: tabular-nums;  /* one numeric system across the funnel */
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -1212,6 +1213,7 @@
     background: var(--bg);
     color: var(--ink);
     font-family: system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    font-variant-numeric: tabular-nums;  /* one numeric system across the funnel */
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -1384,7 +1386,7 @@
   .row.invalid .r-err { display: flex; }
   .r-err svg { flex-shrink: 0; }
   .r-price {
-    font-weight: 750;
+    font-weight: 700;
     font-size: 1.02rem;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
@@ -2230,6 +2232,7 @@
   body {
     margin: 0; background: var(--bg); color: var(--ink);
     font-family: system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    font-variant-numeric: tabular-nums;  /* one numeric system across the funnel */
     line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
   .ambient {
@@ -2341,7 +2344,7 @@
     gap: 1rem; padding: 0.62rem 0; font-size: 0.9rem;
   }
   .ord-row .n { color: var(--ink-2); min-width: 0; }
-  .ord-row .v { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
+  .ord-row .v { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
   .ord-row.item .n { color: var(--ink); }
   .ord-row.item .n b { font-weight: 700; margin-right: 0.3rem; }
   .ord-row.disc .n, .ord-row.disc .v { color: var(--pos); }
@@ -3415,6 +3418,7 @@
   body {
     margin: 0; background: var(--bg); color: var(--ink);
     font-family: system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    font-variant-numeric: tabular-nums;  /* one numeric system across the funnel */
     line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
   /* Brightest ambient in the funnel — this is the payoff, not a form */
@@ -3562,7 +3566,7 @@
     gap: 1rem; padding: 0.55rem 0; font-size: 0.88rem;
   }
   .sum-row .n { color: var(--ink-2); }
-  .sum-row .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .sum-row .v { font-variant-numeric: tabular-nums; font-weight: 700; }
   .sum-row.disc .n, .sum-row.disc .v { color: var(--pos); }
   .sum-sep { height: 1px; background: var(--line); margin: 0.5rem 0; }
   .sum-row.total .n { color: var(--ink); font-weight: 700; font-size: 1rem; }
