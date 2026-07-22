@@ -4599,7 +4599,8 @@
   .page{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem) 5rem}
 
   /* cover */
-  .cover{position:relative;height:clamp(180px,32vw,300px);border-radius:0 0 var(--r-xl) var(--r-xl);overflow:hidden;margin-bottom:0}
+  /* full-bleed cover — spans the whole viewport width, content stays in the 1180 container */
+  .cover{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:clamp(200px,30vw,360px);border-radius:0;overflow:hidden;margin-bottom:0}
   .cover .img{position:absolute;inset:0;background:
     radial-gradient(80% 120% at 20% 0%, #ff8a4a 0%, transparent 55%),
     radial-gradient(90% 130% at 90% 20%, #7c3bd6 0%, transparent 55%),
