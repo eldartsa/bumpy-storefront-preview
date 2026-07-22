@@ -21,6 +21,274 @@
 </style>
 
 <div class="stage">
+  <iframe class="pg" id="pg-home" data-key="home" title="Bumpy home" srcdoc="&lt;title&gt;Bumpy — Live events, honest pricing&lt;/title&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;style&gt;
+@font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+:root{
+  --bg:#0a0a0c; --well:#050507; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+  --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+  --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+  --pos:#34d399; --warn:#ffc46b; --danger:#ff8a8a;
+  --accent:#e7ff1a; --glow:#f2ff7d; --accent-ink:#1a2300;
+  --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px; --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+  --label:.72rem; --label-sm:.64rem;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;overflow-x:hidden}
+a{color:inherit}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft)}
+.hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between}
+.wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+  font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);cursor:pointer;background:none;border:none}
+.wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+  transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+@keyframes bumppulse{0%,100%{transform:scale(1)}45%{transform:scale(.55)}}
+@media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+.navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;transition:opacity .18s;background:none;border:none;cursor:pointer}
+.navlink:hover{opacity:.7}
+@media (min-width:1024px){.hdr-in{padding-top:1.2rem;padding-bottom:1.2rem}.wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+
+/* page shell */
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem) 4rem}
+.wrap.narrow{max-width:640px}
+.hero{text-align:center;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.035em;margin:0 0 1rem;text-wrap:balance}
+.hero .lead{color:var(--ink-2);font-size:clamp(1rem,2.5vw,1.2rem);margin:0 auto;max-width:46ch;line-height:1.55}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label-sm);font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 1.1rem}
+.eyebrow .d{width:.42em;height:.42em;border-radius:50%;background:var(--accent)}
+
+.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.95rem;padding:.9rem 1.7rem;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow),var(--accent));color:var(--accent-ink);
+  box-shadow:0 12px 30px -10px color-mix(in oklab,var(--accent) 55%,transparent);text-decoration:none;display:inline-block}
+.btn-primary:hover{filter:brightness(1.03)}
+.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
+  font-weight:700;font-size:.92rem;padding:.85rem 1.5rem;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* sections */
+.lbl{font-size:var(--label);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 1.2rem}
+section.blk{margin-top:clamp(2.5rem,5vw,3.5rem)}
+section.blk h2{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin:0 0 1rem}
+section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
+
+/* benefits */
+.benefits{display:grid;gap:1rem;margin:0}
+.benefit{display:flex;gap:.9rem;align-items:flex-start;background:var(--well);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:1.2rem 1.3rem}
+.benefit .ic{flex:none;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;
+  background:color-mix(in oklab,var(--accent) 16%,transparent);color:var(--accent)}
+.benefit b{display:block;font-size:1rem;margin-bottom:.2rem}
+.benefit span{color:var(--ink-2);font-size:.92rem}
+
+/* value cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.vcard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem}
+.vcard h3{font-size:1.02rem;font-weight:700;margin:0 0 .5rem}
+.vcard p{color:var(--ink-2);font-size:.9rem;margin:0}
+
+/* forms */
+.form{background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.4rem,3vw,2rem);display:grid;gap:1.1rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media (max-width:560px){.frow{grid-template-columns:1fr}}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-bottom:.45rem;letter-spacing:.01em}
+.field input,.field textarea,.field select{width:100%;background:var(--bg);border:1px solid var(--line);
+  border-radius:.9rem;padding:.8rem .95rem;color:var(--ink);font:inherit;font-size:.95rem;transition:border-color .18s}
+.field textarea{min-height:7rem;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-3)}
+.field select{appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8481' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 1rem center}
+.form-foot{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.4rem}
+.form-note{color:var(--ink-3);font-size:.8rem}
+.contact-alt{text-align:center;color:var(--ink-2);font-size:.9rem;margin-top:1.6rem}
+.contact-alt a{color:var(--accent);text-decoration:none}
+
+/* CTA band */
+.ctaband{text-align:center;background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(2rem,5vw,3rem);margin-top:clamp(2.5rem,5vw,3.5rem)}
+.ctaband h2{margin:0 0 .8rem}
+.ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
+
+/* home hero */
+.home-hero{position:relative;min-height:calc(100vh - 64px);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:2rem 1rem}
+.home-hero .bgfx{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(60% 50% at 22% 18%, color-mix(in oklab,var(--accent) 22%, transparent), transparent 60%),
+    radial-gradient(55% 45% at 80% 30%, rgba(124,59,214,.4), transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(20,10,40,.9), transparent 70%),
+    linear-gradient(180deg,#0b0b14,#0a0a0c 60%);}
+.home-hero .grain{position:absolute;inset:0;z-index:0;opacity:.5;mix-blend-mode:overlay;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 38%),radial-gradient(circle at 72% 62%,rgba(255,255,255,.07),transparent 34%)}
+.home-hero .scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(10,10,12,.35),transparent 40%,var(--bg))}
+.home-hero .inner{position:relative;z-index:1;max-width:56rem}
+.home-hero h1{font-size:clamp(2.8rem,9vw,6rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin:0 0 1.2rem;text-wrap:balance}
+.home-hero h1 .dim{color:var(--ink-2)}
+.home-hero .sub{color:var(--ink);font-size:clamp(1.05rem,2.6vw,1.5rem);font-weight:300;margin:0 auto 2rem;opacity:.9}
+.home-hero .cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.scrollcue{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:1;color:var(--ink-3);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+@media (prefers-reduced-motion:reduce){.scrollcue{animation:none}}
+
+/* value props */
+.vprops{max-width:1080px;margin:0 auto;padding:clamp(3rem,7vw,5rem) clamp(1rem,4vw,3rem);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center}
+@media (max-width:720px){.vprops{grid-template-columns:1fr;gap:2.2rem}}
+.vprop .ic{width:3rem;height:3rem;margin:0 auto 1rem;color:var(--accent)}
+.vprop h3{font-size:1.15rem;font-weight:800;letter-spacing:-.01em;margin:0 0 .4rem}
+.vprop p{color:var(--ink-2);font-size:.92rem;margin:0}
+
+/* section heading */
+.sec{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1.4rem}
+.sec-head h2{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;letter-spacing:-.02em;margin:0}
+.sec-head a{color:var(--accent);text-decoration:none;font-size:.9rem;font-weight:600}
+
+/* event cards (poster-forward, like producer) */
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(1rem,2.5vw,1.5rem)}
+.ecard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;
+  transition:transform var(--dur) var(--ease),border-color var(--dur) ease;text-align:left}
+.ecard:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--ink) 16%,transparent)}
+.ecard .art{position:relative;aspect-ratio:1;overflow:hidden}
+.ecard .art svg{display:block;width:100%;height:100%}
+.ecard .chip{position:absolute;top:.7rem;left:.7rem;background:rgba(10,10,12,.7);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:.6rem;padding:.3rem .5rem;text-align:center;line-height:1}
+.ecard .chip .d{font-size:1.05rem;font-weight:800}
+.ecard .chip .m{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:.15rem}
+.ecard .body{padding:.9rem 1rem 1.1rem}
+.ecard .body h3{font-size:1rem;font-weight:700;margin:0 0 .2rem}
+.ecard .body .v{color:var(--ink-2);font-size:.82rem}
+.ecard .body .p{margin-top:.6rem;font-size:.86rem;font-weight:700}
+.ecard .body .p small{color:var(--ink-3);font-weight:500}
+
+/* partnership band */
+.partband{max-width:1180px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1rem,4vw,3rem)}
+.partband .in{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 10%, var(--well)),var(--well));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(2rem,5vw,3.5rem);
+  display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+@media (max-width:760px){.partband .in{grid-template-columns:1fr;gap:1.6rem}}
+.partband h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem}
+.partband .lead{color:var(--ink-2);margin:0 0 1.3rem}
+.partband ul{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.7rem}
+.partband li{display:flex;gap:.7rem;color:var(--ink-2);font-size:.95rem}
+.partband li svg{color:var(--accent);flex:none;margin-top:.15rem}
+
+/* footer (matches the event page) */
+footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
+.foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+.foot-brand .wordmark{font-size:1.5rem}
+.foot-tag{color:var(--ink-2);font-size:.9rem;line-height:1.55;margin:1rem 0 1.3rem;max-width:30ch}
+.foot-social{display:flex;gap:.5rem}
+.foot-social a{width:2.3rem;height:2.3rem;border-radius:50%;display:grid;place-items:center;background:var(--glass);
+  border:1px solid var(--line);color:var(--ink-2);transition:color .2s,background .2s,transform .2s}
+.foot-social a:hover{color:var(--ink);background:var(--glass-2);transform:translateY(-2px)}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem 1rem}
+.foot-h{font-size:var(--label-sm);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+.foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;transition:color .2s;cursor:pointer}
+.foot-col a:hover{color:var(--ink)}
+.foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+.foot-legal{display:flex;gap:1.3rem;flex-wrap:wrap}
+.foot-legal a{color:var(--ink-3);text-decoration:none}
+.foot-legal a:hover{color:var(--ink-2)}
+@media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
+&lt;/style&gt;
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;home&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;section class=&quot;home-hero&quot;&gt;
+  &lt;div class=&quot;bgfx&quot;&gt;&lt;/div&gt;&lt;div class=&quot;grain&quot;&gt;&lt;/div&gt;&lt;div class=&quot;scrim&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;inner&quot;&gt;
+    &lt;h1&gt;Bump Into&lt;br&gt;&lt;span class=&quot;dim&quot;&gt;Unforgettable Moments&lt;/span&gt;&lt;/h1&gt;
+    &lt;p class=&quot;sub&quot;&gt;Live events. Honest pricing. No hassle.&lt;/p&gt;
+    &lt;div class=&quot;cta-row&quot;&gt;
+      &lt;a class=&quot;btn-primary&quot; data-nav=&quot;event&quot; href=&quot;#&quot;&gt;Explore events&lt;/a&gt;
+      &lt;a class=&quot;btn-ghost&quot; data-nav=&quot;partner&quot; href=&quot;#&quot;&gt;For organizers&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;scrollcue&quot;&gt;&lt;svg width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M7 13l5 5 5-5M7 6l5 5 5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;vprops&quot;&gt;
+  &lt;div class=&quot;vprop&quot;&gt;&lt;div class=&quot;ic&quot;&gt;&lt;svg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path d=&quot;M7 7h.01&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+    &lt;h3&gt;Bump Into Transparency&lt;/h3&gt;&lt;p&gt;Full price upfront. No surprises at checkout.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;vprop&quot;&gt;&lt;div class=&quot;ic&quot;&gt;&lt;svg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M22 11.08V12a10 10 0 1 1-5.93-9.14&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path d=&quot;M22 4 12 14.01l-3-3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+    &lt;h3&gt;Bump Into Quality&lt;/h3&gt;&lt;p&gt;Events worth showing up for.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;vprop&quot;&gt;&lt;div class=&quot;ic&quot;&gt;&lt;svg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;5&quot; y=&quot;2&quot; width=&quot;14&quot; height=&quot;20&quot; rx=&quot;2.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot;/&gt;&lt;path d=&quot;M11 18h2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+    &lt;h3&gt;Bump Into Ease&lt;/h3&gt;&lt;p&gt;Tickets on your phone. Walk right in.&lt;/p&gt;&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;sec&quot;&gt;
+  &lt;div class=&quot;sec-head&quot;&gt;&lt;h2&gt;Trending this week&lt;/h2&gt;&lt;a data-nav=&quot;event&quot; href=&quot;#&quot;&gt;See all →&lt;/a&gt;&lt;/div&gt;
+  &lt;div class=&quot;egrid&quot;&gt;
+    &lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open The Wave 15/07&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk0&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#0e1f3a&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#2a63b8&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#7fd6ec&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk0)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#7fd6ec&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#0a1526&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#7fd6ec&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Jul&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;The Wave 15/07&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Zen Beach · Koh Phangan&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 500 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Deep End&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk1&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#2b1535&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#ff6b4a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffc46b&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk1)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#ffc46b&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#1a1030&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#ffc46b&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Jul&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Deep End&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Zen Beach · Koh Phangan&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;600 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Jungle Experiment&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk2&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#05140d&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#103d2a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#c6f543&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk2)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#c6f543&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#061a12&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#c6f543&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Jul&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Jungle Experiment&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Jungle Club · Bali&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 400 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Sundowner&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk3&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#3a1508&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#ff7a2f&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffd27f&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk3)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#ffd27f&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#1c0f08&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#ffd27f&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Aug&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Sundowner&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Papaya Playa · Tulum&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 500 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;div class=&quot;partband&quot;&gt;
+  &lt;div class=&quot;in&quot;&gt;
+    &lt;div&gt;
+      &lt;h2&gt;Bring your events to Bumpy&lt;/h2&gt;
+      &lt;p class=&quot;lead&quot;&gt;Reach a growing audience, manage tickets with powerful tools, and enjoy transparent pricing.&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20 6 9 17l-5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;Reach event lovers looking for their next experience.&lt;/li&gt;
+        &lt;li&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20 6 9 17l-5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;Tools to manage tickets, track sales, and know your audience.&lt;/li&gt;
+        &lt;li&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20 6 9 17l-5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;Transparent, fair pricing — no hidden fees.&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;a class=&quot;btn-primary&quot; data-nav=&quot;partner&quot; href=&quot;#&quot;&gt;Become a Partner&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;display:grid;place-items:center&quot;&gt;
+      &lt;div style=&quot;font-family:'Baloo 2',system-ui,sans-serif;font-weight:700;font-size:clamp(3rem,10vw,5rem);line-height:1;color:var(--ink);display:inline-flex;align-items:center;gap:.2em&quot;&gt;&lt;span style=&quot;width:.28em;height:.28em;border-radius:50%;background:var(--accent)&quot;&gt;&lt;/span&gt;bumpy&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+      &lt;div class=&quot;foot-social&quot;&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;Instagram&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.1A6.7 6.7 0 1 0 18.7 12 6.7 6.7 0 0 0 12 5.3zm0 11a4.3 4.3 0 1 1 4.3-4.3 4.3 4.3 0 0 1-4.3 4.3zm6.9-11.3a1.6 1.6 0 1 1-1.6-1.6 1.6 1.6 0 0 1 1.6 1.6z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;TikTok&quot;&gt;&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.4-2.6 5.6-5.6 5.6a5.5 5.5 0 0 1-5.5-5.5c0-3.3 3-5.9 6.4-5.4v2.8c-.4-.1-.8-.2-1.2-.2a2.7 2.7 0 1 0 2.7 2.7V3h3Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; aria-label=&quot;WhatsApp&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12.04 2.5a9.5 9.5 0 0 0-8.1 14.42L2.5 21.5l4.7-1.4A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 6.6 11.95c-.2.32-.14.29-.6 2.02l-1.98-.52-.36.21a7.8 7.8 0 1 1-3.66-13.66Zm-3.2 3.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.2.87 2.35.99 2.51.12.16 1.7 2.72 4.19 3.71 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.34-.76-1.83-.2-.47-.4-.41-.55-.42h-.47Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;
+        &lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Become Partner&lt;/a&gt;&lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;
+    &lt;span&gt;© 2026 Bumpy&lt;/span&gt;
+    &lt;div class=&quot;foot-legal&quot;&gt;&lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+&lt;script&gt;
+  const R = { home:&quot;bumpy-home-mockup.html&quot;, event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
+    partner:&quot;bumpy-partner-mockup.html&quot;, contact:&quot;bumpy-contact-mockup.html&quot;, about:&quot;bumpy-about-mockup.html&quot; };
+  function NAV(key){
+    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    if(R[key]) window.location.href = R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(el=&gt;el.addEventListener('click',e=&gt;{e.preventDefault();NAV(el.dataset.nav);}));
+  document.querySelectorAll('form').forEach(f=&gt;f.addEventListener('submit',e=&gt;e.preventDefault()));
+&lt;/script&gt;
+"></iframe>
   <iframe class="pg" id="pg-event" data-key="event" title="Bumpy event" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;title&gt;Bumpy — Event Page Redesign Mockup&lt;/title&gt;
 &lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
@@ -791,7 +1059,7 @@
 &lt;div class=&quot;ambient&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
 
 &lt;header class=&quot;hdr&quot; id=&quot;hdr&quot;&gt;
-&lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+&lt;button class=&quot;wordmark&quot; id=&quot;homelink&quot; aria-label=&quot;Bumpy home&quot; style=&quot;background:none;border:none;cursor:pointer&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
   &lt;nav&gt;
     &lt;a class=&quot;navlink&quot; href=&quot;#&quot; id=&quot;loginlink&quot;&gt;Log in / Sign up&lt;/a&gt;
   &lt;/nav&gt;
@@ -1074,6 +1342,7 @@
       partner:  &quot;bumpy-partner-mockup.html&quot;,
       contact:  &quot;bumpy-contact-mockup.html&quot;,
       about:    &quot;bumpy-about-mockup.html&quot;,
+      home:     &quot;bumpy-home-mockup.html&quot;,
     };
     const onArtifact = /(^|\.)claude\.ai$/.test(location.hostname);
     return (key) =&gt; {
@@ -1197,6 +1466,9 @@
   // footer links that route to other pages (Contact us / About us / Become Partner)
   document.querySelectorAll(&quot;.foot-col a[data-nav]&quot;).forEach((a) =&gt;
     a.addEventListener(&quot;click&quot;, (e) =&gt; { e.preventDefault(); NAV(a.dataset.nav); }));
+
+  // header logo -&gt; main page
+  document.getElementById(&quot;homelink&quot;).addEventListener(&quot;click&quot;, () =&gt; NAV(&quot;home&quot;));
 
   // WHEN cell → download an .ics for the event (Asia/Bangkok, matches the shown time)
   document.getElementById(&quot;cal-btn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
@@ -4780,6 +5052,23 @@
   .sectionlbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:2.4rem .3rem 1.1rem}
   .note{margin-top:3rem;padding:1.1rem 1.2rem;background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);color:var(--ink-3);font-size:.82rem}
   .note b{color:var(--ink-2)}
+  /* footer */
+  footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
+  .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+  .foot-brand .wordmark{font-size:1.5rem}
+  .foot-tag{color:var(--ink-2);font-size:.9rem;line-height:1.55;margin:1rem 0 1.3rem;max-width:30ch}
+  .foot-social{display:flex;gap:.5rem}
+  .foot-social a{width:2.3rem;height:2.3rem;border-radius:50%;display:grid;place-items:center;background:var(--glass);border:1px solid var(--line);color:var(--ink-2);transition:color .2s,background .2s,transform .2s}
+  .foot-social a:hover{color:var(--ink);background:var(--glass-2);transform:translateY(-2px)}
+  .foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem 1rem}
+  .foot-h{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+  .foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;transition:color .2s;cursor:pointer}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+  .foot-legal{display:flex;gap:1.3rem;flex-wrap:wrap}
+  .foot-legal a{color:var(--ink-3);text-decoration:none}
+  .foot-legal a:hover{color:var(--ink-2)}
+  @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
 &lt;/style&gt;
 
 &lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot;&gt;&lt;defs&gt;
@@ -4787,8 +5076,8 @@
 &lt;/defs&gt;&lt;/svg&gt;
 
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
-  &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
-  &lt;a class=&quot;navlink&quot; href=&quot;#&quot;&gt;Log in / Sign up&lt;/a&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;home&quot; aria-label=&quot;Bumpy home&quot; style=&quot;background:none;border:none;cursor:pointer&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot; style=&quot;background:none;border:none;cursor:pointer&quot;&gt;Log in / Sign up&lt;/button&gt;
 &lt;/div&gt;&lt;/header&gt;
 
 &lt;div class=&quot;page&quot;&gt;
@@ -4844,6 +5133,24 @@
   &lt;div class=&quot;note&quot;&gt;&lt;b&gt;New page — data it needs.&lt;/b&gt; Today the event carries only &lt;code&gt;organization: { name, logo }&lt;/code&gt;. A producer page adds: &lt;b&gt;slug&lt;/b&gt; (the URL), &lt;b&gt;cover image&lt;/b&gt;, &lt;b&gt;bio&lt;/b&gt;, a &lt;b&gt;verified&lt;/b&gt; flag, a producer-chosen set of &lt;b&gt;channels&lt;/b&gt; (Instagram / WhatsApp / Phone / Facebook / TikTok / Email / website — any subset), and an &lt;b&gt;events-by-organizer&lt;/b&gt; query (upcoming + past, each with title, poster, date, venue, &lt;b&gt;city + country&lt;/b&gt;, from-price, ticket-type count, status). &lt;b&gt;The descriptor line (&quot;Nightlife · Beach&quot;) is auto-derived&lt;/b&gt; from the top 1–2 of the producer's existing &lt;code&gt;event.categories&lt;/code&gt; — no genre to write, no AI to guess; a Shabbat-dinner house reads &quot;Community · Food&quot;. &lt;b&gt;No location on the producer&lt;/b&gt; — they run events in many places. “48 events” is a real count; sample events are placeholder.&lt;/div&gt;
 &lt;/div&gt;
 
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+      &lt;div class=&quot;foot-social&quot;&gt;&lt;a href=&quot;#&quot; aria-label=&quot;Instagram&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.1A6.7 6.7 0 1 0 18.7 12 6.7 6.7 0 0 0 12 5.3zm0 11a4.3 4.3 0 1 1 4.3-4.3 4.3 4.3 0 0 1-4.3 4.3zm6.9-11.3a1.6 1.6 0 1 1-1.6-1.6 1.6 1.6 0 0 1 1.6 1.6z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;a href=&quot;#&quot; aria-label=&quot;TikTok&quot;&gt;&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.4-2.6 5.6-5.6 5.6a5.5 5.5 0 0 1-5.5-5.5c0-3.3 3-5.9 6.4-5.4v2.8c-.4-.1-.8-.2-1.2-.2a2.7 2.7 0 1 0 2.7 2.7V3h3Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;a href=&quot;#&quot; aria-label=&quot;WhatsApp&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot;&gt;&lt;path d=&quot;M12.04 2.5a9.5 9.5 0 0 0-8.1 14.42L2.5 21.5l4.7-1.4A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 6.6 11.95c-.2.32-.14.29-.6 2.02l-1.98-.52-.36.21a7.8 7.8 0 1 1-3.66-13.66Zm-3.2 3.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.2.87 2.35.99 2.51.12.16 1.7 2.72 4.19 3.71 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.34-.76-1.83-.2-.47-.4-.41-.55-.42h-.47Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;&lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;&lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;&lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Become Partner&lt;/a&gt;&lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;
+    &lt;span&gt;© 2026 Bumpy&lt;/span&gt;
+    &lt;div class=&quot;foot-legal&quot;&gt;&lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
 &lt;script&gt;
   // from:true → event has more than one ticket type (show &quot;From {price}&quot;)
   // cat → the event's category (production: event.categories[{id,name}]); the
@@ -4908,6 +5215,13 @@
   grid.addEventListener('keydown', e =&gt; { const c = e.target.closest('.card'); if (c &amp;&amp; (e.key==='Enter' || e.key===' ')){ e.preventDefault(); goEvent(); } });
 
   render('up');
+  // header/footer navigation (logo -&gt; home, login, footer links)
+  function PNAV(key){
+    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    var R={home:&quot;bumpy-home-mockup.html&quot;,event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;};
+    if(R[key]) window.location.href=R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
 &lt;/script&gt;
 "></iframe>
   <iframe class="pg" id="pg-partner" data-key="partner" title="Bumpy partner" srcdoc="&lt;title&gt;Bumpy — Become a Partner&lt;/title&gt;
@@ -5004,6 +5318,70 @@ section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
 .ctaband h2{margin:0 0 .8rem}
 .ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
 
+/* home hero */
+.home-hero{position:relative;min-height:calc(100vh - 64px);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:2rem 1rem}
+.home-hero .bgfx{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(60% 50% at 22% 18%, color-mix(in oklab,var(--accent) 22%, transparent), transparent 60%),
+    radial-gradient(55% 45% at 80% 30%, rgba(124,59,214,.4), transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(20,10,40,.9), transparent 70%),
+    linear-gradient(180deg,#0b0b14,#0a0a0c 60%);}
+.home-hero .grain{position:absolute;inset:0;z-index:0;opacity:.5;mix-blend-mode:overlay;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 38%),radial-gradient(circle at 72% 62%,rgba(255,255,255,.07),transparent 34%)}
+.home-hero .scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(10,10,12,.35),transparent 40%,var(--bg))}
+.home-hero .inner{position:relative;z-index:1;max-width:56rem}
+.home-hero h1{font-size:clamp(2.8rem,9vw,6rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin:0 0 1.2rem;text-wrap:balance}
+.home-hero h1 .dim{color:var(--ink-2)}
+.home-hero .sub{color:var(--ink);font-size:clamp(1.05rem,2.6vw,1.5rem);font-weight:300;margin:0 auto 2rem;opacity:.9}
+.home-hero .cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.scrollcue{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:1;color:var(--ink-3);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+@media (prefers-reduced-motion:reduce){.scrollcue{animation:none}}
+
+/* value props */
+.vprops{max-width:1080px;margin:0 auto;padding:clamp(3rem,7vw,5rem) clamp(1rem,4vw,3rem);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center}
+@media (max-width:720px){.vprops{grid-template-columns:1fr;gap:2.2rem}}
+.vprop .ic{width:3rem;height:3rem;margin:0 auto 1rem;color:var(--accent)}
+.vprop h3{font-size:1.15rem;font-weight:800;letter-spacing:-.01em;margin:0 0 .4rem}
+.vprop p{color:var(--ink-2);font-size:.92rem;margin:0}
+
+/* section heading */
+.sec{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1.4rem}
+.sec-head h2{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;letter-spacing:-.02em;margin:0}
+.sec-head a{color:var(--accent);text-decoration:none;font-size:.9rem;font-weight:600}
+
+/* event cards (poster-forward, like producer) */
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(1rem,2.5vw,1.5rem)}
+.ecard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;
+  transition:transform var(--dur) var(--ease),border-color var(--dur) ease;text-align:left}
+.ecard:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--ink) 16%,transparent)}
+.ecard .art{position:relative;aspect-ratio:1;overflow:hidden}
+.ecard .art svg{display:block;width:100%;height:100%}
+.ecard .chip{position:absolute;top:.7rem;left:.7rem;background:rgba(10,10,12,.7);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:.6rem;padding:.3rem .5rem;text-align:center;line-height:1}
+.ecard .chip .d{font-size:1.05rem;font-weight:800}
+.ecard .chip .m{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:.15rem}
+.ecard .body{padding:.9rem 1rem 1.1rem}
+.ecard .body h3{font-size:1rem;font-weight:700;margin:0 0 .2rem}
+.ecard .body .v{color:var(--ink-2);font-size:.82rem}
+.ecard .body .p{margin-top:.6rem;font-size:.86rem;font-weight:700}
+.ecard .body .p small{color:var(--ink-3);font-weight:500}
+
+/* partnership band */
+.partband{max-width:1180px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1rem,4vw,3rem)}
+.partband .in{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 10%, var(--well)),var(--well));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(2rem,5vw,3.5rem);
+  display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+@media (max-width:760px){.partband .in{grid-template-columns:1fr;gap:1.6rem}}
+.partband h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem}
+.partband .lead{color:var(--ink-2);margin:0 0 1.3rem}
+.partband ul{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.7rem}
+.partband li{display:flex;gap:.7rem;color:var(--ink-2);font-size:.95rem}
+.partband li svg{color:var(--accent);flex:none;margin-top:.15rem}
+
 /* footer (matches the event page) */
 footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
 .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
@@ -5025,7 +5403,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
 &lt;/style&gt;
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
-  &lt;button class=&quot;wordmark&quot; data-nav=&quot;event&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;home&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
   &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
 &lt;/div&gt;&lt;/header&gt;
 
@@ -5099,7 +5477,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   &lt;/div&gt;
 &lt;/footer&gt;
 &lt;script&gt;
-  const R = { event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
+  const R = { home:&quot;bumpy-home-mockup.html&quot;, event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
     partner:&quot;bumpy-partner-mockup.html&quot;, contact:&quot;bumpy-contact-mockup.html&quot;, about:&quot;bumpy-about-mockup.html&quot; };
   function NAV(key){
     try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
@@ -5203,6 +5581,70 @@ section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
 .ctaband h2{margin:0 0 .8rem}
 .ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
 
+/* home hero */
+.home-hero{position:relative;min-height:calc(100vh - 64px);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:2rem 1rem}
+.home-hero .bgfx{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(60% 50% at 22% 18%, color-mix(in oklab,var(--accent) 22%, transparent), transparent 60%),
+    radial-gradient(55% 45% at 80% 30%, rgba(124,59,214,.4), transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(20,10,40,.9), transparent 70%),
+    linear-gradient(180deg,#0b0b14,#0a0a0c 60%);}
+.home-hero .grain{position:absolute;inset:0;z-index:0;opacity:.5;mix-blend-mode:overlay;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 38%),radial-gradient(circle at 72% 62%,rgba(255,255,255,.07),transparent 34%)}
+.home-hero .scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(10,10,12,.35),transparent 40%,var(--bg))}
+.home-hero .inner{position:relative;z-index:1;max-width:56rem}
+.home-hero h1{font-size:clamp(2.8rem,9vw,6rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin:0 0 1.2rem;text-wrap:balance}
+.home-hero h1 .dim{color:var(--ink-2)}
+.home-hero .sub{color:var(--ink);font-size:clamp(1.05rem,2.6vw,1.5rem);font-weight:300;margin:0 auto 2rem;opacity:.9}
+.home-hero .cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.scrollcue{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:1;color:var(--ink-3);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+@media (prefers-reduced-motion:reduce){.scrollcue{animation:none}}
+
+/* value props */
+.vprops{max-width:1080px;margin:0 auto;padding:clamp(3rem,7vw,5rem) clamp(1rem,4vw,3rem);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center}
+@media (max-width:720px){.vprops{grid-template-columns:1fr;gap:2.2rem}}
+.vprop .ic{width:3rem;height:3rem;margin:0 auto 1rem;color:var(--accent)}
+.vprop h3{font-size:1.15rem;font-weight:800;letter-spacing:-.01em;margin:0 0 .4rem}
+.vprop p{color:var(--ink-2);font-size:.92rem;margin:0}
+
+/* section heading */
+.sec{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1.4rem}
+.sec-head h2{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;letter-spacing:-.02em;margin:0}
+.sec-head a{color:var(--accent);text-decoration:none;font-size:.9rem;font-weight:600}
+
+/* event cards (poster-forward, like producer) */
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(1rem,2.5vw,1.5rem)}
+.ecard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;
+  transition:transform var(--dur) var(--ease),border-color var(--dur) ease;text-align:left}
+.ecard:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--ink) 16%,transparent)}
+.ecard .art{position:relative;aspect-ratio:1;overflow:hidden}
+.ecard .art svg{display:block;width:100%;height:100%}
+.ecard .chip{position:absolute;top:.7rem;left:.7rem;background:rgba(10,10,12,.7);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:.6rem;padding:.3rem .5rem;text-align:center;line-height:1}
+.ecard .chip .d{font-size:1.05rem;font-weight:800}
+.ecard .chip .m{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:.15rem}
+.ecard .body{padding:.9rem 1rem 1.1rem}
+.ecard .body h3{font-size:1rem;font-weight:700;margin:0 0 .2rem}
+.ecard .body .v{color:var(--ink-2);font-size:.82rem}
+.ecard .body .p{margin-top:.6rem;font-size:.86rem;font-weight:700}
+.ecard .body .p small{color:var(--ink-3);font-weight:500}
+
+/* partnership band */
+.partband{max-width:1180px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1rem,4vw,3rem)}
+.partband .in{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 10%, var(--well)),var(--well));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(2rem,5vw,3.5rem);
+  display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+@media (max-width:760px){.partband .in{grid-template-columns:1fr;gap:1.6rem}}
+.partband h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem}
+.partband .lead{color:var(--ink-2);margin:0 0 1.3rem}
+.partband ul{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.7rem}
+.partband li{display:flex;gap:.7rem;color:var(--ink-2);font-size:.95rem}
+.partband li svg{color:var(--accent);flex:none;margin-top:.15rem}
+
 /* footer (matches the event page) */
 footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
 .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
@@ -5224,7 +5666,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
 &lt;/style&gt;
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
-  &lt;button class=&quot;wordmark&quot; data-nav=&quot;event&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;home&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
   &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
 &lt;/div&gt;&lt;/header&gt;
 
@@ -5267,7 +5709,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   &lt;/div&gt;
 &lt;/footer&gt;
 &lt;script&gt;
-  const R = { event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
+  const R = { home:&quot;bumpy-home-mockup.html&quot;, event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
     partner:&quot;bumpy-partner-mockup.html&quot;, contact:&quot;bumpy-contact-mockup.html&quot;, about:&quot;bumpy-about-mockup.html&quot; };
   function NAV(key){
     try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
@@ -5371,6 +5813,70 @@ section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
 .ctaband h2{margin:0 0 .8rem}
 .ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
 
+/* home hero */
+.home-hero{position:relative;min-height:calc(100vh - 64px);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:2rem 1rem}
+.home-hero .bgfx{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(60% 50% at 22% 18%, color-mix(in oklab,var(--accent) 22%, transparent), transparent 60%),
+    radial-gradient(55% 45% at 80% 30%, rgba(124,59,214,.4), transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(20,10,40,.9), transparent 70%),
+    linear-gradient(180deg,#0b0b14,#0a0a0c 60%);}
+.home-hero .grain{position:absolute;inset:0;z-index:0;opacity:.5;mix-blend-mode:overlay;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 38%),radial-gradient(circle at 72% 62%,rgba(255,255,255,.07),transparent 34%)}
+.home-hero .scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(10,10,12,.35),transparent 40%,var(--bg))}
+.home-hero .inner{position:relative;z-index:1;max-width:56rem}
+.home-hero h1{font-size:clamp(2.8rem,9vw,6rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin:0 0 1.2rem;text-wrap:balance}
+.home-hero h1 .dim{color:var(--ink-2)}
+.home-hero .sub{color:var(--ink);font-size:clamp(1.05rem,2.6vw,1.5rem);font-weight:300;margin:0 auto 2rem;opacity:.9}
+.home-hero .cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.scrollcue{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:1;color:var(--ink-3);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+@media (prefers-reduced-motion:reduce){.scrollcue{animation:none}}
+
+/* value props */
+.vprops{max-width:1080px;margin:0 auto;padding:clamp(3rem,7vw,5rem) clamp(1rem,4vw,3rem);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center}
+@media (max-width:720px){.vprops{grid-template-columns:1fr;gap:2.2rem}}
+.vprop .ic{width:3rem;height:3rem;margin:0 auto 1rem;color:var(--accent)}
+.vprop h3{font-size:1.15rem;font-weight:800;letter-spacing:-.01em;margin:0 0 .4rem}
+.vprop p{color:var(--ink-2);font-size:.92rem;margin:0}
+
+/* section heading */
+.sec{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1.4rem}
+.sec-head h2{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;letter-spacing:-.02em;margin:0}
+.sec-head a{color:var(--accent);text-decoration:none;font-size:.9rem;font-weight:600}
+
+/* event cards (poster-forward, like producer) */
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(1rem,2.5vw,1.5rem)}
+.ecard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;
+  transition:transform var(--dur) var(--ease),border-color var(--dur) ease;text-align:left}
+.ecard:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--ink) 16%,transparent)}
+.ecard .art{position:relative;aspect-ratio:1;overflow:hidden}
+.ecard .art svg{display:block;width:100%;height:100%}
+.ecard .chip{position:absolute;top:.7rem;left:.7rem;background:rgba(10,10,12,.7);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:.6rem;padding:.3rem .5rem;text-align:center;line-height:1}
+.ecard .chip .d{font-size:1.05rem;font-weight:800}
+.ecard .chip .m{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:.15rem}
+.ecard .body{padding:.9rem 1rem 1.1rem}
+.ecard .body h3{font-size:1rem;font-weight:700;margin:0 0 .2rem}
+.ecard .body .v{color:var(--ink-2);font-size:.82rem}
+.ecard .body .p{margin-top:.6rem;font-size:.86rem;font-weight:700}
+.ecard .body .p small{color:var(--ink-3);font-weight:500}
+
+/* partnership band */
+.partband{max-width:1180px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1rem,4vw,3rem)}
+.partband .in{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 10%, var(--well)),var(--well));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(2rem,5vw,3.5rem);
+  display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
+@media (max-width:760px){.partband .in{grid-template-columns:1fr;gap:1.6rem}}
+.partband h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem}
+.partband .lead{color:var(--ink-2);margin:0 0 1.3rem}
+.partband ul{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.7rem}
+.partband li{display:flex;gap:.7rem;color:var(--ink-2);font-size:.95rem}
+.partband li svg{color:var(--accent);flex:none;margin-top:.15rem}
+
 /* footer (matches the event page) */
 footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
 .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
@@ -5392,7 +5898,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
 &lt;/style&gt;
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
-  &lt;button class=&quot;wordmark&quot; data-nav=&quot;event&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;home&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
   &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
 &lt;/div&gt;&lt;/header&gt;
 
@@ -5450,7 +5956,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   &lt;/div&gt;
 &lt;/footer&gt;
 &lt;script&gt;
-  const R = { event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
+  const R = { home:&quot;bumpy-home-mockup.html&quot;, event:&quot;bumpy-event-page-mockup.html&quot;, login:&quot;bumpy-login-mockup.html&quot;,
     partner:&quot;bumpy-partner-mockup.html&quot;, contact:&quot;bumpy-contact-mockup.html&quot;, about:&quot;bumpy-about-mockup.html&quot; };
   function NAV(key){
     try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
@@ -5465,7 +5971,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 <button class="reset chip2" id="gatebtn" title="Preview a private (password-gated) event">🔒 Private event</button>
 
 <script>
-  const KEYS = ["event","select","checkout","confirm","login","gate","producer","partner","contact","about"];
+  const KEYS = ["home","event","select","checkout","confirm","login","gate","producer","partner","contact","about"];
   // the tickets chosen on "Choose Ticket", carried forward to Pay + Confirmation
   let lastOrder = null;
   let loggedIn = false;        // demo auth state that drives the checkout gate
