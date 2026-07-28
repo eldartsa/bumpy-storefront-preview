@@ -115,34 +115,49 @@ section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
 .ctaband h2{margin:0 0 .8rem}
 .ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
 
-/* home hero */
-.home-hero{position:relative;min-height:calc(100vh - 64px);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:2rem 1rem}
+/* home hero — poster-forward */
+.home-hero{position:relative;min-height:calc(100vh - 64px);display:flex;align-items:center;overflow:hidden;
+  padding:clamp(2rem,5vw,3rem) clamp(1rem,4vw,3rem)}
 .home-hero .bgfx{position:absolute;inset:0;z-index:0;
   background:
-    radial-gradient(60% 50% at 22% 18%, color-mix(in oklab,var(--accent) 22%, transparent), transparent 60%),
-    radial-gradient(55% 45% at 80% 30%, rgba(124,59,214,.4), transparent 60%),
-    radial-gradient(70% 60% at 50% 100%, rgba(20,10,40,.9), transparent 70%),
-    linear-gradient(180deg,#0b0b14,#0a0a0c 60%);}
+    radial-gradient(55% 45% at 12% 22%, color-mix(in oklab,var(--accent) 20%, transparent), transparent 60%),
+    radial-gradient(55% 48% at 88% 24%, rgba(124,59,214,.42), transparent 62%),
+    radial-gradient(75% 60% at 60% 105%, rgba(20,10,40,.85), transparent 72%),
+    linear-gradient(180deg,#0b0b14,#0a0a0c 65%)}
 .home-hero .grain{position:absolute;inset:0;z-index:0;opacity:.5;mix-blend-mode:overlay;
   background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 38%),radial-gradient(circle at 72% 62%,rgba(255,255,255,.07),transparent 34%)}
-.home-hero .scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(10,10,12,.35),transparent 40%,var(--bg))}
-.home-hero .inner{position:relative;z-index:1;max-width:56rem}
-.home-hero h1{font-size:clamp(2.8rem,9vw,6rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin:0 0 1.2rem;text-wrap:balance}
-.home-hero h1 .dim{color:var(--ink-2)}
-.home-hero .sub{color:var(--ink);font-size:clamp(1.05rem,2.6vw,1.5rem);font-weight:300;margin:0 auto 2rem;opacity:.9}
-.home-hero .cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.hero-grid{position:relative;z-index:1;max-width:1180px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:clamp(2rem,7vw,3rem);text-align:center}}
+.hero-copy h1{font-size:clamp(2.9rem,7vw,5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin:0 0 1.1rem;text-wrap:balance}
+.hero-copy h1 .acid{color:var(--accent)}
+.hero-copy .sub{color:var(--ink);font-size:clamp(1.05rem,2.3vw,1.3rem);font-weight:300;opacity:.9;margin:0 0 2rem;max-width:38ch}
+@media (max-width:860px){.hero-copy .sub{margin-left:auto;margin-right:auto}}
+.hero-copy .cta-row{display:flex;gap:.8rem;flex-wrap:wrap}
+@media (max-width:860px){.hero-copy .cta-row{justify-content:center}}
+
+/* fanned poster deck */
+.hero-posters{position:relative;height:min(62vh,470px)}
+@media (max-width:860px){.hero-posters{height:min(56vh,360px);margin-top:.5rem}}
+.hposter{position:absolute;top:50%;left:50%;width:min(50%,200px);border-radius:var(--r-lg);overflow:hidden;
+  border:1px solid var(--line);background:var(--well);box-shadow:0 34px 64px -26px rgba(0,0,0,.85);
+  animation:hfloat 6.5s var(--ease) infinite}
+.hposter .art{aspect-ratio:3/4;overflow:hidden}
+.hposter .art svg{display:block;width:100%;height:100%}
+.hposter figcaption{padding:.55rem .7rem .72rem}
+.hposter figcaption b{display:block;font-size:.82rem;font-weight:700;line-height:1.2}
+.hposter figcaption span{color:var(--ink-3);font-size:.7rem}
+.hp1{transform:translate(-92%,-58%) rotate(-9deg);z-index:1;animation-delay:0s}
+.hp2{transform:translate(-50%,-52%) rotate(3deg);z-index:3;animation-delay:.5s}
+.hp3{transform:translate(-8%,-44%) rotate(9deg);z-index:2;animation-delay:1s}
+@keyframes hfloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@media (prefers-reduced-motion:reduce){.hposter{animation:none}}
+
 .scrollcue{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:1;color:var(--ink-3);animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
 @media (prefers-reduced-motion:reduce){.scrollcue{animation:none}}
 
-/* value props */
-.vprops{max-width:1080px;margin:0 auto;padding:clamp(3rem,7vw,5rem) clamp(1rem,4vw,3rem);
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center}
-@media (max-width:720px){.vprops{grid-template-columns:1fr;gap:2.2rem}}
-.vprop .ic{width:3rem;height:3rem;margin:0 auto 1rem;color:var(--accent)}
-.vprop h3{font-size:1.15rem;font-weight:800;letter-spacing:-.01em;margin:0 0 .4rem}
-.vprop p{color:var(--ink-2);font-size:.92rem;margin:0}
+/* how-it-works + browse-by-destination styles land here in the next pass */
 
 /* section heading */
 .sec{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
@@ -167,17 +182,14 @@ section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
 .ecard .body .p{margin-top:.6rem;font-size:.86rem;font-weight:700}
 .ecard .body .p small{color:var(--ink-3);font-weight:500}
 
-/* partnership band */
-.partband{max-width:1180px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1rem,4vw,3rem)}
-.partband .in{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 10%, var(--well)),var(--well));
-  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(2rem,5vw,3.5rem);
-  display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
-@media (max-width:760px){.partband .in{grid-template-columns:1fr;gap:1.6rem}}
-.partband h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem}
-.partband .lead{color:var(--ink-2);margin:0 0 1.3rem}
-.partband ul{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.7rem}
-.partband li{display:flex;gap:.7rem;color:var(--ink-2);font-size:.95rem}
-.partband li svg{color:var(--accent);flex:none;margin-top:.15rem}
+/* slim organizer strip (customer page links across to the separate partner page) */
+.orgstrip{max-width:1180px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1rem,4vw,3rem)}
+.orgstrip-in{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 9%, var(--well)),var(--well));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.3rem,3vw,1.9rem) clamp(1.4rem,3.5vw,2.2rem);
+  display:flex;align-items:center;justify-content:space-between;gap:1.2rem 1.6rem;flex-wrap:wrap}
+.orgstrip-in .txt b{font-weight:700}
+.orgstrip-in .txt span{color:var(--ink-2);font-size:.95rem}
+.orgstrip-in .btn-ghost{flex:none}
 
 /* footer (matches the event page) */
 footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
@@ -205,54 +217,49 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 &lt;/div&gt;&lt;/header&gt;
 
 &lt;section class=&quot;home-hero&quot;&gt;
-  &lt;div class=&quot;bgfx&quot;&gt;&lt;/div&gt;&lt;div class=&quot;grain&quot;&gt;&lt;/div&gt;&lt;div class=&quot;scrim&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;inner&quot;&gt;
-    &lt;h1&gt;Bump Into&lt;br&gt;&lt;span class=&quot;dim&quot;&gt;Unforgettable Moments&lt;/span&gt;&lt;/h1&gt;
-    &lt;p class=&quot;sub&quot;&gt;Live events. Honest pricing. No hassle.&lt;/p&gt;
-    &lt;div class=&quot;cta-row&quot;&gt;
-      &lt;a class=&quot;btn-primary&quot; data-nav=&quot;event&quot; href=&quot;#&quot;&gt;Explore events&lt;/a&gt;
-      &lt;a class=&quot;btn-ghost&quot; data-nav=&quot;partner&quot; href=&quot;#&quot;&gt;For organizers&lt;/a&gt;
+  &lt;div class=&quot;bgfx&quot;&gt;&lt;/div&gt;&lt;div class=&quot;grain&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;hero-grid&quot;&gt;
+    &lt;div class=&quot;hero-copy&quot;&gt;
+      &lt;h1&gt;Bump into&lt;br&gt;&lt;span class=&quot;acid&quot;&gt;unforgettable&lt;/span&gt;&lt;br&gt;nights.&lt;/h1&gt;
+      &lt;p class=&quot;sub&quot;&gt;Live events, honest pricing, no hassle. Find your night, grab your spot, walk right in.&lt;/p&gt;
+      &lt;div class=&quot;cta-row&quot;&gt;
+        &lt;a class=&quot;btn-primary&quot; data-nav=&quot;event&quot; href=&quot;#&quot;&gt;Explore events&lt;/a&gt;
+        &lt;a class=&quot;btn-ghost&quot; data-nav=&quot;event&quot; href=&quot;#&quot;&gt;This weekend&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;hero-posters&quot; aria-hidden=&quot;true&quot;&gt;
+      &lt;figure class=&quot;hposter hp1&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;srSkyH&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#2a1a4a&quot;/&gt;&lt;stop offset=&quot;.45&quot; stop-color=&quot;#e85d2f&quot;/&gt;&lt;stop offset=&quot;.75&quot; stop-color=&quot;#ffb347&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffe08a&quot;/&gt;&lt;/linearGradient&gt;&lt;radialGradient id=&quot;srSunH&quot; cx=&quot;.5&quot; cy=&quot;1&quot; r=&quot;.7&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#fff6d6&quot;/&gt;&lt;stop offset=&quot;.4&quot; stop-color=&quot;#ffdf87&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffdf87&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#srSkyH)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;80&quot; r=&quot;42&quot; fill=&quot;url(#srSunH)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;80&quot; r=&quot;17&quot; fill=&quot;#fff2c2&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;figcaption&gt;&lt;b&gt;Sunrise Sessions&lt;/b&gt;&lt;span&gt;23 Aug · Koh Phangan&lt;/span&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+      &lt;figure class=&quot;hposter hp2&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;fmSkyH&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#0a0f2c&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#1b2a6b&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#3a5bb5&quot;/&gt;&lt;/linearGradient&gt;&lt;radialGradient id=&quot;fmMoonH&quot; cx=&quot;.5&quot; cy=&quot;.5&quot; r=&quot;.5&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#fdfbe8&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#f2eec6&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#f2eec6&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#fmSkyH)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;34&quot; r=&quot;27&quot; fill=&quot;url(#fmMoonH)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;34&quot; r=&quot;15&quot; fill=&quot;#fdfbe8&quot;/&gt;&lt;g fill=&quot;#cfe0ff&quot;&gt;&lt;rect x=&quot;37&quot; y=&quot;70&quot; width=&quot;26&quot; height=&quot;1.6&quot; rx=&quot;.8&quot; opacity=&quot;.55&quot;/&gt;&lt;rect x=&quot;41&quot; y=&quot;77&quot; width=&quot;18&quot; height=&quot;1.6&quot; rx=&quot;.8&quot; opacity=&quot;.45&quot;/&gt;&lt;rect x=&quot;45&quot; y=&quot;84&quot; width=&quot;10&quot; height=&quot;1.6&quot; rx=&quot;.8&quot; opacity=&quot;.35&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;&lt;figcaption&gt;&lt;b&gt;Afterlight Bangkok&lt;/b&gt;&lt;span&gt;09 Aug · Bangkok&lt;/span&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+      &lt;figure class=&quot;hposter hp3&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;jgSkyH&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#03170f&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#0c3d27&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#1a6b3f&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#jgSkyH)&quot;/&gt;&lt;path d=&quot;M0 0 Q24 18 9 42 Q-7 22 0 0Z&quot; fill=&quot;#0c3d27&quot; opacity=&quot;.85&quot;/&gt;&lt;path d=&quot;M100 0 Q76 20 91 46 Q107 22 100 0Z&quot; fill=&quot;#0c3d27&quot; opacity=&quot;.85&quot;/&gt;&lt;g fill=&quot;#c6f543&quot;&gt;&lt;rect x=&quot;21&quot; y=&quot;54&quot; width=&quot;6&quot; height=&quot;26&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;31&quot; y=&quot;42&quot; width=&quot;6&quot; height=&quot;38&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;41&quot; y=&quot;60&quot; width=&quot;6&quot; height=&quot;20&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;51&quot; y=&quot;36&quot; width=&quot;6&quot; height=&quot;44&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;61&quot; y=&quot;50&quot; width=&quot;6&quot; height=&quot;30&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;71&quot; y=&quot;46&quot; width=&quot;6&quot; height=&quot;34&quot; rx=&quot;2&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;&lt;figcaption&gt;&lt;b&gt;Jungle Frequency&lt;/b&gt;&lt;span&gt;16 Aug · Bali&lt;/span&gt;&lt;/figcaption&gt;&lt;/figure&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class=&quot;scrollcue&quot;&gt;&lt;svg width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M7 13l5 5 5-5M7 6l5 5 5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
 &lt;/section&gt;
 
-&lt;section class=&quot;vprops&quot;&gt;
-  &lt;div class=&quot;vprop&quot;&gt;&lt;div class=&quot;ic&quot;&gt;&lt;svg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path d=&quot;M7 7h.01&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
-    &lt;h3&gt;Bump Into Transparency&lt;/h3&gt;&lt;p&gt;Full price upfront. No surprises at checkout.&lt;/p&gt;&lt;/div&gt;
-  &lt;div class=&quot;vprop&quot;&gt;&lt;div class=&quot;ic&quot;&gt;&lt;svg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M22 11.08V12a10 10 0 1 1-5.93-9.14&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path d=&quot;M22 4 12 14.01l-3-3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
-    &lt;h3&gt;Bump Into Quality&lt;/h3&gt;&lt;p&gt;Events worth showing up for.&lt;/p&gt;&lt;/div&gt;
-  &lt;div class=&quot;vprop&quot;&gt;&lt;div class=&quot;ic&quot;&gt;&lt;svg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;5&quot; y=&quot;2&quot; width=&quot;14&quot; height=&quot;20&quot; rx=&quot;2.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot;/&gt;&lt;path d=&quot;M11 18h2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
-    &lt;h3&gt;Bump Into Ease&lt;/h3&gt;&lt;p&gt;Tickets on your phone. Walk right in.&lt;/p&gt;&lt;/div&gt;
-&lt;/section&gt;
+&lt;!-- how-it-works (with checkout peek) + browse-by-destination go here in the next pass --&gt;
+
 
 &lt;section class=&quot;sec&quot;&gt;
-  &lt;div class=&quot;sec-head&quot;&gt;&lt;h2&gt;Trending this week&lt;/h2&gt;&lt;a data-nav=&quot;event&quot; href=&quot;#&quot;&gt;See all →&lt;/a&gt;&lt;/div&gt;
+  &lt;div class=&quot;sec-head&quot;&gt;&lt;h2&gt;Where to be&lt;/h2&gt;&lt;a data-nav=&quot;event&quot; href=&quot;#&quot;&gt;See all →&lt;/a&gt;&lt;/div&gt;
   &lt;div class=&quot;egrid&quot;&gt;
-    &lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open The Wave 15/07&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk0&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#0e1f3a&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#2a63b8&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#7fd6ec&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk0)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#7fd6ec&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#0a1526&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#7fd6ec&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Jul&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;The Wave 15/07&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Zen Beach · Koh Phangan&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 500 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Deep End&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk1&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#2b1535&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#ff6b4a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffc46b&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk1)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#ffc46b&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#1a1030&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#ffc46b&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Jul&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Deep End&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Zen Beach · Koh Phangan&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;600 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Jungle Experiment&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk2&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#05140d&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#103d2a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#c6f543&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk2)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#c6f543&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#061a12&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#c6f543&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Jul&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Jungle Experiment&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Jungle Club · Bali&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 400 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Sundowner&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sk3&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#3a1508&quot;/&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#ff7a2f&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffd27f&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sk3)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;#ffd27f&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;#1c0f08&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;#ffd27f&quot; opacity=&quot;.5&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Aug&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Sundowner&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Papaya Playa · Tulum&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 500 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Afterlight Bangkok, 09 Aug, Warehouse 30, Bangkok&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;fmSky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#0a0f2c&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#1b2a6b&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#3a5bb5&quot;/&gt;&lt;/linearGradient&gt;&lt;radialGradient id=&quot;fmMoon&quot; cx=&quot;.5&quot; cy=&quot;.5&quot; r=&quot;.5&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#fdfbe8&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#f2eec6&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#f2eec6&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#fmSky)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;34&quot; r=&quot;27&quot; fill=&quot;url(#fmMoon)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;34&quot; r=&quot;15&quot; fill=&quot;#fdfbe8&quot;/&gt;&lt;g fill=&quot;#cfe0ff&quot;&gt;&lt;rect x=&quot;37&quot; y=&quot;70&quot; width=&quot;26&quot; height=&quot;1.6&quot; rx=&quot;.8&quot; opacity=&quot;.55&quot;/&gt;&lt;rect x=&quot;41&quot; y=&quot;77&quot; width=&quot;18&quot; height=&quot;1.6&quot; rx=&quot;.8&quot; opacity=&quot;.45&quot;/&gt;&lt;rect x=&quot;45&quot; y=&quot;84&quot; width=&quot;10&quot; height=&quot;1.6&quot; rx=&quot;.8&quot; opacity=&quot;.35&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;09&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Aug&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Afterlight Bangkok&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Warehouse 30 · Bangkok&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 600 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Jungle Frequency, 16 Aug, Jungle Club, Bali&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;jgSky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#03170f&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#0c3d27&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#1a6b3f&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#jgSky)&quot;/&gt;&lt;path d=&quot;M0 0 Q24 18 9 42 Q-7 22 0 0Z&quot; fill=&quot;#0c3d27&quot; opacity=&quot;.85&quot;/&gt;&lt;path d=&quot;M100 0 Q76 20 91 46 Q107 22 100 0Z&quot; fill=&quot;#0c3d27&quot; opacity=&quot;.85&quot;/&gt;&lt;g fill=&quot;#c6f543&quot;&gt;&lt;rect x=&quot;21&quot; y=&quot;54&quot; width=&quot;6&quot; height=&quot;26&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;31&quot; y=&quot;42&quot; width=&quot;6&quot; height=&quot;38&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;41&quot; y=&quot;60&quot; width=&quot;6&quot; height=&quot;20&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;51&quot; y=&quot;36&quot; width=&quot;6&quot; height=&quot;44&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;61&quot; y=&quot;50&quot; width=&quot;6&quot; height=&quot;30&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;71&quot; y=&quot;46&quot; width=&quot;6&quot; height=&quot;34&quot; rx=&quot;2&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Aug&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Jungle Frequency&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Jungle Club · Bali&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 400 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Sunrise Sessions, 23 Aug, Zen Beach, Koh Phangan&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;srSky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#2a1a4a&quot;/&gt;&lt;stop offset=&quot;.45&quot; stop-color=&quot;#e85d2f&quot;/&gt;&lt;stop offset=&quot;.75&quot; stop-color=&quot;#ffb347&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffe08a&quot;/&gt;&lt;/linearGradient&gt;&lt;radialGradient id=&quot;srSun&quot; cx=&quot;.5&quot; cy=&quot;1&quot; r=&quot;.7&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#fff6d6&quot;/&gt;&lt;stop offset=&quot;.4&quot; stop-color=&quot;#ffdf87&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffdf87&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#srSky)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;80&quot; r=&quot;42&quot; fill=&quot;url(#srSun)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;80&quot; r=&quot;17&quot; fill=&quot;#fff2c2&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Aug&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Sunrise Sessions&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Zen Beach · Koh Phangan&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 500 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;ecard&quot; data-nav=&quot;event&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open Salt &amp;amp; Bass, 30 Aug, Papaya Playa, Tulum&quot;&gt;&lt;div class=&quot;art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;sbSky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#012a33&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#046d75&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#39c9c0&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#sbSky)&quot;/&gt;&lt;circle cx=&quot;74&quot; cy=&quot;26&quot; r=&quot;10&quot; fill=&quot;#eafffb&quot; opacity=&quot;.9&quot;/&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#bff5ec&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;&gt;&lt;path d=&quot;M-5 44 Q15 34 35 44 T75 44 T115 44&quot; opacity=&quot;.7&quot;/&gt;&lt;path d=&quot;M-5 59 Q15 49 35 59 T75 59 T115 59&quot; opacity=&quot;.55&quot;/&gt;&lt;path d=&quot;M-5 74 Q15 64 35 74 T75 74 T115 74&quot; opacity=&quot;.4&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;chip&quot;&gt;&lt;div class=&quot;d&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Aug&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;body&quot;&gt;&lt;h3&gt;Salt &amp;amp; Bass&lt;/h3&gt;&lt;div class=&quot;v&quot;&gt;Papaya Playa · Tulum&lt;/div&gt;&lt;div class=&quot;p&quot;&gt;&lt;small&gt;From&lt;/small&gt; 700 &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+
   &lt;/div&gt;
 &lt;/section&gt;
 
-&lt;div class=&quot;partband&quot;&gt;
-  &lt;div class=&quot;in&quot;&gt;
-    &lt;div&gt;
-      &lt;h2&gt;Bring your events to Bumpy&lt;/h2&gt;
-      &lt;p class=&quot;lead&quot;&gt;Reach a growing audience, manage tickets with powerful tools, and enjoy transparent pricing.&lt;/p&gt;
-      &lt;ul&gt;
-        &lt;li&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20 6 9 17l-5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;Reach event lovers looking for their next experience.&lt;/li&gt;
-        &lt;li&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20 6 9 17l-5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;Tools to manage tickets, track sales, and know your audience.&lt;/li&gt;
-        &lt;li&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20 6 9 17l-5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;Transparent, fair pricing — no hidden fees.&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;a class=&quot;btn-primary&quot; data-nav=&quot;partner&quot; href=&quot;#&quot;&gt;Become a Partner&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div style=&quot;display:grid;place-items:center&quot;&gt;
-      &lt;div style=&quot;font-family:'Baloo 2',system-ui,sans-serif;font-weight:700;font-size:clamp(3rem,10vw,5rem);line-height:1;color:var(--ink);display:inline-flex;align-items:center;gap:.2em&quot;&gt;&lt;span style=&quot;width:.28em;height:.28em;border-radius:50%;background:var(--accent)&quot;&gt;&lt;/span&gt;bumpy&lt;/div&gt;
-    &lt;/div&gt;
+&lt;aside class=&quot;orgstrip&quot;&gt;
+  &lt;div class=&quot;orgstrip-in&quot;&gt;
+    &lt;div class=&quot;txt&quot;&gt;&lt;b&gt;Run events?&lt;/b&gt; &lt;span&gt;List them on Bumpy — powerful tools, honest pricing, a growing audience.&lt;/span&gt;&lt;/div&gt;
+    &lt;a class=&quot;btn-ghost&quot; data-nav=&quot;partner&quot; href=&quot;#&quot;&gt;Bumpy for organizers →&lt;/a&gt;
   &lt;/div&gt;
-&lt;/div&gt;
+&lt;/aside&gt;
 &lt;footer class=&quot;site&quot;&gt;
   &lt;div class=&quot;foot-in&quot;&gt;
     &lt;div class=&quot;foot-brand&quot;&gt;
@@ -1540,7 +1547,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     --glow: #f2ff7d;
     --accent-ink: #1a2300;
     /* Poster artwork — cool blue hero (accent stays orange above) */
-    --sky-a: #0e1f3a; --sky-b: #2a63b8; --sky-c: #7fd6ec; --sea: #0a1526;
+    --sky-a: #171033; --sky-b: #6d2b8f; --sky-c: #ff9e5a; --sea: #0c0820;
   }
   [data-event-theme=&quot;acid&quot;] {
     --accent: #c6f543; --glow: #59f0c6; --accent-ink: #101a02;
@@ -1867,6 +1874,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   }
   .don input::-webkit-outer-spin-button,
   .don input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .row[data-t=&quot;donation&quot;] { display: none; }  /* removed from the shareable flow */
 
   /* ============================================================ CATEGORY (flat accordion) */
   .cat-head {
@@ -2025,6 +2033,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 
   /* ============================================================ DEMO CONTROLS */
   .demo-bar {
+    display: none;
     position: fixed;
     bottom: 1rem;
     left: 1rem;
@@ -2130,7 +2139,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   &lt;!-- Event context: flat strip --&gt;
   &lt;div class=&quot;ev&quot;&gt;
     &lt;div class=&quot;ev-art&quot;&gt;
-      &lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;The Wave 15/07 artwork&quot;&gt;
+      &lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;Afterlight Bangkok artwork&quot;&gt;
         &lt;defs&gt;
           &lt;linearGradient id=&quot;sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
             &lt;stop offset=&quot;0&quot; style=&quot;stop-color:var(--sky-a)&quot;/&gt;
@@ -2146,64 +2155,76 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
       &lt;/svg&gt;
     &lt;/div&gt;
     &lt;div&gt;
-      &lt;p class=&quot;ev-t&quot;&gt;The Wave 15/07&lt;/p&gt;
-      &lt;p class=&quot;ev-s&quot;&gt;Wed, Jul 15 · 14:00 · The Wave Sunset, Koh Phangan&lt;/p&gt;
+      &lt;p class=&quot;ev-t&quot;&gt;Afterlight Bangkok&lt;/p&gt;
+      &lt;p class=&quot;ev-s&quot;&gt;Sat, Sep 12 · 23:00 · Sphere Hall, Bangkok&lt;/p&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;p class=&quot;lbl&quot;&gt;Tickets&lt;/p&gt;
 
   &lt;div class=&quot;list&quot;&gt;
-    &lt;!-- Real production ticket from the live event --&gt;
-    &lt;div class=&quot;row&quot; data-t=&quot;early&quot; data-price=&quot;500&quot;&gt;
+    &lt;!-- Early bird — earliest phase, sold out --&gt;
+    &lt;div class=&quot;row off&quot;&gt;
       &lt;div class=&quot;r-main&quot;&gt;
         &lt;div class=&quot;r-name&quot;&gt;Early bird&lt;/div&gt;
-        &lt;div class=&quot;r-desc&quot;&gt;Full entry, 14:00–22:00. Includes a welcome drink at the beach bar.&lt;/div&gt;
+        &lt;div class=&quot;r-desc&quot;&gt;First release — limited allocation, priority entry.&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;r-right&quot;&gt;
+        &lt;div class=&quot;r-priceline&quot;&gt;&lt;span class=&quot;r-price gone&quot;&gt;990&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;r-ctrl&quot;&gt;&lt;span class=&quot;pill&quot;&gt;Sold out&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- General admission --&gt;
+    &lt;div class=&quot;row&quot; data-t=&quot;ga&quot; data-price=&quot;1390&quot;&gt;
+      &lt;div class=&quot;r-main&quot;&gt;
+        &lt;div class=&quot;r-name&quot;&gt;General admission&lt;/div&gt;
+        &lt;div class=&quot;r-desc&quot;&gt;Entry from 23:00. Access to all areas, all night long.&lt;/div&gt;
         &lt;!-- sale_end_at is before the event ends → countdown shows, own row --&gt;
         &lt;p class=&quot;r-cd&quot; data-sale-end=&quot;+50h&quot;&gt;&lt;/p&gt;
       &lt;/div&gt;
       &lt;div class=&quot;r-right&quot;&gt;
         &lt;div class=&quot;r-priceline&quot;&gt;
-          &lt;span class=&quot;r-price&quot;&gt;500&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;
+          &lt;span class=&quot;r-price&quot;&gt;1,390&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;
         &lt;/div&gt;
         &lt;div class=&quot;r-ctrl&quot;&gt;
           &lt;div class=&quot;qty&quot;&gt;
-            &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one Early bird ticket&quot; disabled&gt;−&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one General admission ticket&quot; disabled&gt;−&lt;/button&gt;
             &lt;span aria-live=&quot;polite&quot;&gt;0&lt;/span&gt;
-            &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one Early bird ticket&quot;&gt;+&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one General admission ticket&quot;&gt;+&lt;/button&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 
-    &lt;!-- Demo: second tier --&gt;
-    &lt;div class=&quot;row&quot; data-t=&quot;regular&quot; data-price=&quot;700&quot;&gt;
+    &lt;!-- Late entry — later phase, coming soon --&gt;
+    &lt;div class=&quot;row off&quot;&gt;
       &lt;div class=&quot;r-main&quot;&gt;
-        &lt;div class=&quot;r-name&quot;&gt;Regular&lt;/div&gt;
-        &lt;div class=&quot;r-desc&quot;&gt;Full entry, 14:00–22:00. On sale until the doors close.&lt;/div&gt;
+        &lt;div class=&quot;r-name&quot;&gt;Late entry&lt;/div&gt;
+        &lt;div class=&quot;r-desc&quot;&gt;Entry from 03:00 — arrive for the peak-time sets. On sale from 23:00.&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;r-right&quot;&gt;
+        &lt;div class=&quot;r-priceline&quot;&gt;&lt;span class=&quot;r-price&quot;&gt;300&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;r-ctrl&quot;&gt;&lt;span class=&quot;pill&quot;&gt;Coming soon&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- VIP · table --&gt;
+    &lt;div class=&quot;row&quot; data-t=&quot;vip&quot; data-price=&quot;2800&quot;&gt;
+      &lt;div class=&quot;r-main&quot;&gt;
+        &lt;div class=&quot;r-name&quot;&gt;VIP · table&lt;/div&gt;
+        &lt;div class=&quot;r-desc&quot;&gt;Reserved table, priority entry, and a dedicated host for the night.&lt;/div&gt;
       &lt;/div&gt;
       &lt;!-- sale_end_at == event end → no countdown (production rule) --&gt;
       &lt;div class=&quot;r-right&quot;&gt;
-        &lt;div class=&quot;r-priceline&quot;&gt;&lt;span class=&quot;r-price&quot;&gt;700&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;r-priceline&quot;&gt;&lt;span class=&quot;r-price&quot;&gt;2,800&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
         &lt;div class=&quot;r-ctrl&quot;&gt;
           &lt;div class=&quot;qty&quot;&gt;
-            &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one Regular ticket&quot; disabled&gt;−&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one VIP table ticket&quot; disabled&gt;−&lt;/button&gt;
             &lt;span aria-live=&quot;polite&quot;&gt;0&lt;/span&gt;
-            &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one Regular ticket&quot;&gt;+&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one VIP table ticket&quot;&gt;+&lt;/button&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Demo: sold out state --&gt;
-    &lt;div class=&quot;row off&quot;&gt;
-      &lt;div class=&quot;r-main&quot;&gt;
-        &lt;div class=&quot;r-name&quot;&gt;Super early bird&lt;/div&gt;
-        &lt;div class=&quot;r-desc&quot;&gt;First 100 tickets. Welcome drink and a Wave Sunset towel.&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;r-right&quot;&gt;
-        &lt;div class=&quot;r-priceline&quot;&gt;&lt;span class=&quot;r-price gone&quot;&gt;400&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;div class=&quot;r-ctrl&quot;&gt;&lt;span class=&quot;pill&quot;&gt;Sold out&lt;/span&gt;&lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 
@@ -2217,7 +2238,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
           &lt;/svg&gt;
         &lt;/span&gt;
         &lt;span&gt;
-          &lt;span class=&quot;cat-name&quot;&gt;VIP Sunset Deck&lt;/span&gt;
+          &lt;span class=&quot;cat-name&quot;&gt;VIP Mezzanine&lt;/span&gt;
           &lt;span class=&quot;cat-meta&quot;&gt;2 ticket types · From 900 THB&lt;/span&gt;
         &lt;/span&gt;
       &lt;/span&gt;
@@ -2227,10 +2248,10 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     &lt;/button&gt;
     &lt;div class=&quot;cat-body&quot; id=&quot;cat-body&quot;&gt;
       &lt;div class=&quot;cat-well&quot;&gt;
-        &lt;div class=&quot;row&quot; data-t=&quot;vip1&quot; data-price=&quot;900&quot; data-cat=&quot;VIP Sunset Deck&quot;&gt;
+        &lt;div class=&quot;row&quot; data-t=&quot;vip1&quot; data-price=&quot;900&quot; data-cat=&quot;VIP Mezzanine&quot;&gt;
           &lt;div class=&quot;r-main&quot;&gt;
-            &lt;div class=&quot;r-name&quot;&gt;Deck entry&lt;/div&gt;
-            &lt;div class=&quot;r-desc&quot;&gt;Raised deck above the water, its own bar, sunset toast at 18:30.&lt;/div&gt;
+            &lt;div class=&quot;r-name&quot;&gt;Mezzanine entry&lt;/div&gt;
+            &lt;div class=&quot;r-desc&quot;&gt;Elevated mezzanine with its own bar and the best view of the main stage.&lt;/div&gt;
             &lt;p class=&quot;r-cd&quot; data-sale-end=&quot;+3h12m&quot;&gt;&lt;/p&gt;
           &lt;/div&gt;
           &lt;div class=&quot;r-right&quot;&gt;
@@ -2239,49 +2260,37 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
             &lt;/div&gt;
             &lt;div class=&quot;r-ctrl&quot;&gt;
               &lt;div class=&quot;qty&quot;&gt;
-                &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one Deck entry ticket&quot; disabled&gt;−&lt;/button&gt;
+                &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one Mezzanine entry ticket&quot; disabled&gt;−&lt;/button&gt;
                 &lt;span aria-live=&quot;polite&quot;&gt;0&lt;/span&gt;
-                &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one Deck entry ticket&quot;&gt;+&lt;/button&gt;
+                &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one Mezzanine entry ticket&quot;&gt;+&lt;/button&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;row&quot; data-t=&quot;vip2&quot; data-price=&quot;1600&quot; data-cat=&quot;VIP Sunset Deck&quot;&gt;
+        &lt;div class=&quot;row&quot; data-t=&quot;vip2&quot; data-price=&quot;1600&quot; data-cat=&quot;VIP Mezzanine&quot;&gt;
           &lt;div class=&quot;r-main&quot;&gt;
-            &lt;div class=&quot;r-name&quot;&gt;Deck table (4 people)&lt;/div&gt;
-            &lt;div class=&quot;r-desc&quot;&gt;Your own table on the deck for the night. Bottle service on request.&lt;/div&gt;
+            &lt;div class=&quot;r-name&quot;&gt;Mezzanine table (4)&lt;/div&gt;
+            &lt;div class=&quot;r-desc&quot;&gt;Your own table on the mezzanine for the night. Bottle service on request.&lt;/div&gt;
           &lt;/div&gt;
           &lt;div class=&quot;r-right&quot;&gt;
             &lt;div class=&quot;r-priceline&quot;&gt;&lt;span class=&quot;r-price&quot;&gt;1,600&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
             &lt;div class=&quot;r-ctrl&quot;&gt;
               &lt;div class=&quot;qty&quot;&gt;
-                &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one Deck table&quot; disabled&gt;−&lt;/button&gt;
+                &lt;button type=&quot;button&quot; class=&quot;minus&quot; aria-label=&quot;Remove one Mezzanine table&quot; disabled&gt;−&lt;/button&gt;
                 &lt;span aria-live=&quot;polite&quot;&gt;0&lt;/span&gt;
-                &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one Deck table&quot;&gt;+&lt;/button&gt;
+                &lt;button type=&quot;button&quot; class=&quot;plus&quot; aria-label=&quot;Add one Mezzanine table&quot;&gt;+&lt;/button&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- Demo: coming soon state --&gt;
-    &lt;div class=&quot;row off&quot;&gt;
-      &lt;div class=&quot;r-main&quot;&gt;
-        &lt;div class=&quot;r-name&quot;&gt;Late entry&lt;/div&gt;
-        &lt;div class=&quot;r-desc&quot;&gt;Doors from 20:00. Sunset is over, the party isn't. On sale from 16:00.&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;r-right&quot;&gt;
-        &lt;div class=&quot;r-priceline&quot;&gt;&lt;span class=&quot;r-price&quot;&gt;300&lt;small&gt;THB&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;div class=&quot;r-ctrl&quot;&gt;&lt;span class=&quot;pill&quot;&gt;Coming soon&lt;/span&gt;&lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 
     &lt;!-- Demo: donation ticket type --&gt;
     &lt;div class=&quot;row&quot; data-t=&quot;donation&quot; data-price=&quot;0&quot;&gt;
       &lt;div class=&quot;r-main&quot;&gt;
-        &lt;div class=&quot;r-name&quot;&gt;Support the beach clean-up&lt;/div&gt;
-        &lt;div class=&quot;r-desc&quot;&gt;Goes straight to the crew who clear Hin Kong beach every Monday.&lt;/div&gt;
+        &lt;div class=&quot;r-name&quot;&gt;Support the local scene&lt;/div&gt;
+        &lt;div class=&quot;r-desc&quot;&gt;A small add-on that goes straight to grassroots electronic events in Bangkok.&lt;/div&gt;
       &lt;/div&gt;
       &lt;div class=&quot;r-right&quot;&gt;
         &lt;!-- The price slot is free on donation rows, so the error sits there —
@@ -2511,7 +2520,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     const donInput = document.querySelector(&quot;.don input&quot;);
     const donation = Number((donInput.value || &quot;&quot;).trim());
     if (Number.isFinite(donation) &amp;&amp; donation &gt;= 100 &amp;&amp; donation &lt;= 5000) {
-      items.push({ name: &quot;Support the beach clean-up&quot;, category: null, qty: 1, unit: donation });
+      items.push({ name: &quot;Support the local scene&quot;, category: null, qty: 1, unit: donation });
     }
     return { items };
   }
@@ -2561,7 +2570,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     --accent: #e7ff1a;
     --glow: #f2ff7d;
     --accent-ink: #1a2300;
-    --sky-a: #0e1f3a; --sky-b: #2a63b8; --sky-c: #7fd6ec; --sea: #0a1526; /* blue poster; accent stays orange */
+    --sky-a: #171033; --sky-b: #6d2b8f; --sky-c: #ff9e5a; --sea: #0c0820; /* blue poster; accent stays orange */
   }
   [data-event-theme=&quot;acid&quot;] {
     --accent: #c6f543; --glow: #59f0c6; --accent-ink: #101a02;
@@ -2894,7 +2903,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   /* Demo */
   .demo-bar {
     position: fixed; bottom: 1rem; left: 1rem; z-index: 60;
-    display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+    display: none; align-items: center; gap: 0.4rem; flex-wrap: wrap;
     max-width: calc(100vw - 2rem);
     padding: 0.4rem 0.6rem; border-radius: var(--r-lg);
     background: rgba(18,18,21,0.92); border: 1px solid var(--line);
@@ -2962,7 +2971,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   &lt;div class=&quot;col-sticky&quot;&gt;
     &lt;div class=&quot;ev&quot;&gt;
       &lt;div class=&quot;ev-art&quot;&gt;
-        &lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;The Wave 15/07 artwork&quot;&gt;
+        &lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;Afterlight Bangkok artwork&quot;&gt;
           &lt;defs&gt;
             &lt;linearGradient id=&quot;sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
               &lt;stop offset=&quot;0&quot; style=&quot;stop-color:var(--sky-a)&quot;/&gt;
@@ -2977,8 +2986,8 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
         &lt;/svg&gt;
       &lt;/div&gt;
       &lt;div&gt;
-        &lt;p class=&quot;ev-t&quot;&gt;The Wave 15/07 &lt;span class=&quot;ev-age&quot;&gt;18+&lt;/span&gt;&lt;/p&gt;
-        &lt;p class=&quot;ev-s&quot;&gt;Wed, Jul 15 · 14:00 · The Wave Sunset, Koh Phangan&lt;/p&gt;
+        &lt;p class=&quot;ev-t&quot;&gt;Afterlight Bangkok &lt;span class=&quot;ev-age&quot;&gt;21+&lt;/span&gt;&lt;/p&gt;
+        &lt;p class=&quot;ev-s&quot;&gt;Sat, Sep 12 · 23:00 · Sphere Hall, Bangkok&lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 
@@ -2998,8 +3007,8 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
       &lt;svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
         &lt;path d=&quot;M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8 8a2 2 0 0 0 2.828 0l7.172-7.172a2 2 0 0 0 0-2.828l-8-8zM7 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
       &lt;/svg&gt;
-      &lt;span&gt;SUNSET20&lt;/span&gt;
-      &lt;button type=&quot;button&quot; id=&quot;code-remove&quot; aria-label=&quot;Remove coupon SUNSET20&quot;&gt;
+      &lt;span&gt;AFTER20&lt;/span&gt;
+      &lt;button type=&quot;button&quot; id=&quot;code-remove&quot; aria-label=&quot;Remove coupon AFTER20&quot;&gt;
         &lt;svg width=&quot;11&quot; height=&quot;11&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M18 6L6 18M6 6l12 12&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
       &lt;/button&gt;
     &lt;/div&gt;
@@ -3218,8 +3227,8 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
      its own (no order handed over), fall back to a representative order so
      it still reads as a complete page. */
   const DEFAULT_ORDER = { items: [
-    { name: &quot;Early bird&quot;, category: null, qty: 2, unit: 500 },
-    { name: &quot;Deck entry&quot;, category: &quot;VIP Sunset Deck&quot;, qty: 1, unit: 900 },
+    { name: &quot;General admission&quot;, category: null, qty: 2, unit: 1390 },
+    { name: &quot;Mezzanine entry&quot;, category: &quot;VIP Mezzanine&quot;, qty: 1, unit: 900 },
   ] };
   let ORDER = DEFAULT_ORDER;
   const orderCount = () =&gt; ORDER.items.reduce((s, i) =&gt; s + i.qty, 0);
@@ -3492,7 +3501,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
       const line = i.qty * i.unit;
       const row = `&lt;div class=&quot;ord-row item&quot;&gt;&lt;span class=&quot;n&quot;&gt;&lt;b&gt;${i.qty}&lt;/b&gt; ${itemLabel(i)}&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;${fmt(line)}&lt;/span&gt;&lt;/div&gt;`;
       const dl = showDisc
-        ? `&lt;div class=&quot;ord-line-disc&quot;&gt;&lt;span&gt;SUNSET20 - 20%&lt;/span&gt;&lt;span&gt;-${fmt(line * DISC_RATE)}&lt;/span&gt;&lt;/div&gt;`
+        ? `&lt;div class=&quot;ord-line-disc&quot;&gt;&lt;span&gt;AFTER20 - 20%&lt;/span&gt;&lt;span&gt;-${fmt(line * DISC_RATE)}&lt;/span&gt;&lt;/div&gt;`
         : &quot;&quot;;
       return row + dl;
     }).join(&quot;&quot;);
@@ -3677,7 +3686,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   function applyCode() {
     const v = codeEl.value.trim();
     if (!v) return;
-    if (v === &quot;SUNSET20&quot;) { coupon = true; codeEl.value = &quot;&quot;; $(&quot;code-apply&quot;).disabled = true; }
+    if (v === &quot;AFTER20&quot;) { coupon = true; codeEl.value = &quot;&quot;; $(&quot;code-apply&quot;).disabled = true; }
     else $(&quot;code-err&quot;).hidden = false;
     render();
   }
@@ -3747,7 +3756,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     --accent: #e7ff1a;
     --glow: #f2ff7d;
     --accent-ink: #1a2300;
-    --sky-a: #0e1f3a; --sky-b: #2a63b8; --sky-c: #7fd6ec; --sea: #0a1526; /* blue poster; accent stays orange */
+    --sky-a: #171033; --sky-b: #6d2b8f; --sky-c: #ff9e5a; --sea: #0c0820; /* blue poster; accent stays orange */
   }
   [data-event-theme=&quot;acid&quot;] {
     --accent: #c6f543; --glow: #59f0c6; --accent-ink: #101a02;
@@ -3962,7 +3971,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   /* Demo */
   .demo-bar {
     position: fixed; bottom: 1rem; left: 1rem; z-index: 60;
-    display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+    display: none; align-items: center; gap: 0.4rem; flex-wrap: wrap;
     padding: 0.4rem 0.6rem; border-radius: var(--r-lg);
     background: rgba(18,18,21,0.92); border: 1px solid var(--line);
     backdrop-filter: blur(12px); font-size: 0.7rem; color: var(--ink-3);
@@ -4025,7 +4034,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 &lt;main class=&quot;wrap&quot;&gt;
   &lt;div class=&quot;art-wrap&quot;&gt;
     &lt;div class=&quot;art&quot;&gt;
-    &lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;The Wave 15/07 artwork&quot;&gt;
+    &lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;Afterlight Bangkok artwork&quot;&gt;
       &lt;defs&gt;
         &lt;linearGradient id=&quot;sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
           &lt;stop offset=&quot;0&quot; style=&quot;stop-color:var(--sky-a)&quot;/&gt;
@@ -4049,7 +4058,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 
   &lt;h1 class=&quot;headline&quot; id=&quot;headline&quot;&gt;Order confirmed&lt;/h1&gt;
   &lt;p class=&quot;sub&quot; id=&quot;sub&quot;&gt;Your tickets have been sent to &lt;b&gt;eldar@example.com&lt;/b&gt;.&lt;/p&gt;
-  &lt;p class=&quot;ev-line&quot;&gt;&lt;b&gt;The Wave 15/07&lt;/b&gt; · Wed, Jul 15 · 14:00 · The Wave Sunset&lt;/p&gt;
+  &lt;p class=&quot;ev-line&quot;&gt;&lt;b&gt;Afterlight Bangkok&lt;/b&gt; · Sat, Sep 12 · 23:00 · Sphere Hall&lt;/p&gt;
 
   &lt;!-- Pending approval — production copy, incl. the 7-day hold release --&gt;
   &lt;p class=&quot;notice&quot; id=&quot;approval-note&quot; hidden&gt;
@@ -4147,8 +4156,8 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
      Each line: { name, category, qty, unit }. Standalone (no order handed
      over) falls back to a representative order so the page still reads whole. */
   const DEFAULT_ORDER = { items: [
-    { name: &quot;Early bird&quot;, category: null, qty: 2, unit: 500 },
-    { name: &quot;Deck entry&quot;, category: &quot;VIP Sunset Deck&quot;, qty: 1, unit: 900 },
+    { name: &quot;General admission&quot;, category: null, qty: 2, unit: 1390 },
+    { name: &quot;Mezzanine entry&quot;, category: &quot;VIP Mezzanine&quot;, qty: 1, unit: 900 },
   ] };
   let ORDER = DEFAULT_ORDER;
   const orderCount = () =&gt; ORDER.items.reduce((s, i) =&gt; s + i.qty, 0);
@@ -4185,7 +4194,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
               &lt;span class=&quot;t-price&quot;&gt;${fmt(i.unit)}&lt;/span&gt;
             &lt;/div&gt;
             &lt;p class=&quot;t-meta&quot;&gt;&lt;span&gt;${NAMES[idx % NAMES.length]}&lt;/span&gt;&lt;span class=&quot;t-no&quot;&gt;${ticketNo(idx)}&lt;/span&gt;&lt;/p&gt;
-            ${showDisc ? `&lt;div class=&quot;t-disc&quot;&gt;&lt;span&gt;SUNSET20 - 20%&lt;/span&gt;&lt;span&gt;-${fmt(i.unit * DISC_RATE)}&lt;/span&gt;&lt;/div&gt;` : &quot;&quot;}
+            ${showDisc ? `&lt;div class=&quot;t-disc&quot;&gt;&lt;span&gt;AFTER20 - 20%&lt;/span&gt;&lt;span&gt;-${fmt(i.unit * DISC_RATE)}&lt;/span&gt;&lt;/div&gt;` : &quot;&quot;}
           &lt;/div&gt;`
         );
       }
@@ -4453,8 +4462,9 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   .resend { display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
     margin: 1.25rem 0 1.4rem; }
   .resend-lbl { font-size: var(--label); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
-  /* Every channel is a bubble; each shows its own timer while it cools down,
-     so the channel your code was sent on reads just like the others. */
+  .resend-lbl .cd { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  /* Every channel is a bubble; one shared cooldown (shown in the label above)
+     holds them all until a new code can be requested. */
   .channels { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
   .alt {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -4473,7 +4483,6 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   .alt.wa .ico { color: var(--wa); }
   .alt.sms .ico { color: var(--sms); }
   .alt.email .ico { color: var(--ink-2); }
-  .alt-cd { color: var(--ink-3); font-variant-numeric: tabular-nums; }
 
   .toast {
     position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%) translateY(1rem);
@@ -4582,9 +4591,9 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
         &lt;p class=&quot;err&quot; id=&quot;otp-err&quot; role=&quot;alert&quot; style=&quot;justify-content:center&quot;&gt;&lt;/p&gt;
 
         &lt;div class=&quot;resend&quot;&gt;
-          &lt;span class=&quot;resend-lbl&quot;&gt;Resend via&lt;/span&gt;
-          &lt;!-- All channels as one row of bubbles; whichever a code was just sent
-               on shows its own countdown, the rest are ready to tap. --&gt;
+          &lt;!-- One shared countdown lives in this label (&quot;Resend in 0:47 via&quot;);
+               it holds every channel below until it runs out. --&gt;
+          &lt;span class=&quot;resend-lbl&quot; id=&quot;resend-lbl&quot;&gt;Resend via&lt;/span&gt;
           &lt;div class=&quot;channels&quot; id=&quot;channels&quot;&gt;&lt;/div&gt;
         &lt;/div&gt;
 
@@ -4775,9 +4784,9 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   }
 
   /* ---- Channel model ---------------------------------------------------
-     Every channel is shown as a bubble under &quot;Resend via&quot;. The one a code was
-     just sent on carries its own countdown (and reads as the current channel);
-     the rest are tappable. Email appears only when the account has one. */
+     Every channel is shown as a bubble under &quot;Resend in 0:47 via&quot;. A single
+     countdown in that label gates them all — no channel is tappable until it
+     runs out. Email appears only when the account has one. */
   const ICO_WA = '&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M12.04 2.5a9.5 9.5 0 0 0-8.1 14.42L2.5 21.5l4.7-1.4A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 6.6 11.95c-.2.32-.14.29-.6 2.02l-1.98-.52-.36.21a7.8 7.8 0 1 1-3.66-13.66Zm-3.2 3.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.2.87 2.35.99 2.51.12.16 1.7 2.72 4.19 3.71 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.34-.76-1.83-.2-.47-.4-.41-.55-.42h-.47Z&quot;/&gt;&lt;/svg&gt;';
   const ICO_SMS = '&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 16.5H9l-4.5 3v-3H4A1.5 1.5 0 0 1 2.5 15V7A1.5 1.5 0 0 1 4 5.5Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.7&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path d=&quot;M7.5 10.5h.01M12 10.5h.01M16.5 10.5h.01&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;';
   const ICO_MAIL = '&lt;svg width=&quot;17&quot; height=&quot;17&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3&quot; y=&quot;5.5&quot; width=&quot;18&quot; height=&quot;13&quot; rx=&quot;2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.7&quot;/&gt;&lt;path d=&quot;M4 7l8 6 8-6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.7&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;';
@@ -4815,54 +4824,59 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     renderChannels();
   }
 
-  /* ---- Per-channel cooldowns --------------------------------------------
-     Each channel remembers its own timer, so bouncing WhatsApp → SMS →
-     WhatsApp can't reset the wait: a channel stays blocked until ITS timer
-     runs out, whether it's the one counting down above or an alternative. */
+  /* ---- Shared resend cooldown -------------------------------------------
+     One timer for the whole step: sending a code on any channel blocks every
+     channel until it runs out, so you can't dodge the wait by hopping from
+     WhatsApp to SMS. It counts down in the &quot;Resend in 0:47 via&quot; label. */
   const COOLDOWN = 60;
-  const cooldowns = { whatsapp: 0, sms: 0, email: 0 };
+  let cooldown = 0;
   let ticker = null;
   function fmtCd(s) { const m = Math.floor(s / 60), ss = s % 60; return `${m}:${String(ss).padStart(2, &quot;0&quot;)}`; }
 
   function startTicker() {
     if (ticker) return;
     ticker = setInterval(() =&gt; {
-      let any = false;
-      Object.keys(cooldowns).forEach((k) =&gt; { if (cooldowns[k] &gt; 0) { cooldowns[k]--; any = true; } });
+      if (cooldown &gt; 0) cooldown--;
       paintChannels();
-      if (!any) { clearInterval(ticker); ticker = null; }
+      if (cooldown &lt;= 0) { clearInterval(ticker); ticker = null; }
     }, 1000);
   }
 
   /* One bubble per available channel. Built when the channel set/current changes;
-     the per-channel countdown + disabled state refresh each tick. */
+     the countdown label + disabled state refresh each tick. */
   const channelsEl = $(&quot;channels&quot;);
   function renderChannels() {
     channelsEl.innerHTML = availableChannels().map((c) =&gt; {
       const info = CHANNELS[c];
-      return `&lt;button type=&quot;button&quot; class=&quot;alt ${info.cls}&quot; data-ch=&quot;${c}&quot;&gt;&lt;span class=&quot;ico&quot;&gt;${info.ico}&lt;/span&gt;&lt;span class=&quot;alt-label&quot;&gt;${info.label()}&lt;/span&gt;&lt;span class=&quot;alt-cd&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;`;
+      return `&lt;button type=&quot;button&quot; class=&quot;alt ${info.cls}&quot; data-ch=&quot;${c}&quot;&gt;&lt;span class=&quot;ico&quot;&gt;${info.ico}&lt;/span&gt;&lt;span class=&quot;alt-label&quot;&gt;${info.label()}&lt;/span&gt;&lt;/button&gt;`;
     }).join(&quot;&quot;);
     channelsEl.querySelectorAll(&quot;.alt&quot;).forEach((b) =&gt;
-      b.addEventListener(&quot;click&quot;, () =&gt; { if ((cooldowns[b.dataset.ch] || 0) &lt;= 0) send(b.dataset.ch, true); }));
+      b.addEventListener(&quot;click&quot;, () =&gt; { if (cooldown &lt;= 0) send(b.dataset.ch, true); }));
     paintChannels();
   }
   function paintChannels() {
+    const blocked = cooldown &gt; 0;
+    $(&quot;resend-lbl&quot;).innerHTML = blocked
+      ? `Resend in &lt;span class=&quot;cd&quot;&gt;${fmtCd(cooldown)}&lt;/span&gt; via`
+      : &quot;Resend via&quot;;
+    $(&quot;resend-lbl&quot;).setAttribute(&quot;aria-label&quot;, blocked
+      ? `Resend available in ${cooldown} seconds`
+      : &quot;Resend via&quot;);
     channelsEl.querySelectorAll(&quot;.alt&quot;).forEach((b) =&gt; {
-      const c = b.dataset.ch, rem = cooldowns[c] || 0, blocked = rem &gt; 0;
+      const c = b.dataset.ch;
       b.disabled = blocked;
       b.classList.toggle(&quot;current&quot;, c === channel);
-      b.querySelector(&quot;.alt-cd&quot;).textContent = blocked ? ` · ${fmtCd(rem)}` : &quot;&quot;;
       b.setAttribute(&quot;aria-label&quot;, blocked
-        ? `Resend via ${CHANNELS[c].label()} available in ${rem} seconds`
+        ? `Resend via ${CHANNELS[c].label()} available in ${cooldown} seconds`
         : `Resend via ${CHANNELS[c].label()}`);
       if (c === channel) b.setAttribute(&quot;aria-current&quot;, &quot;true&quot;); else b.removeAttribute(&quot;aria-current&quot;);
     });
   }
 
-  /* Send (or resend) a code on a channel; starts that channel's own cooldown. */
+  /* Send (or resend) a code on a channel; restarts the shared cooldown. */
   function send(ch, announce) {
     channel = ch;
-    cooldowns[ch] = COOLDOWN;
+    cooldown = COOLDOWN;
     paintOtp();
     resetOtp();
     startTicker();
@@ -5224,10 +5238,11 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
   document.querySelectorAll('[data-nav]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
 &lt;/script&gt;
 "></iframe>
-  <iframe class="pg" id="pg-partner" data-key="partner" title="Bumpy partner" srcdoc="&lt;title&gt;Bumpy — Become a Partner&lt;/title&gt;
+  <iframe class="pg" id="pg-partner" data-key="partner" title="Bumpy partner" srcdoc="&lt;title&gt;Bumpy for organizers — sell more tickets, keep more of the money&lt;/title&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 &lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;!-- PLACEHOLDER DATA: fee % (4%), stat-strip numbers, and the testimonial are placeholders — swap for real figures. --&gt;
 &lt;style&gt;
 @font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
 :root{
@@ -5243,148 +5258,224 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
   line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;overflow-x:hidden}
 a{color:inherit}
+.acid{color:var(--accent)}
 
 /* header */
-.hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.72);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line-soft)}
+.hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
 .hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between}
 .wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
   font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);cursor:pointer;background:none;border:none}
-.wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
-  transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+.wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
 @keyframes bumppulse{0%,100%{transform:scale(.5)}50%{transform:scale(1.5)}}
 @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+.hdr-nav{display:flex;align-items:center;gap:1.1rem}
 .navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;transition:opacity .18s;background:none;border:none;cursor:pointer}
 .navlink:hover{opacity:.7}
-@media (min-width:1024px){.hdr-in{padding-top:1.2rem;padding-bottom:1.2rem}.wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+.hdr-cta{padding:.62rem 1.15rem;font-size:.9rem}
+@media (max-width:560px){.hdr-nav .navlink{display:none}}
+@media (min-width:1024px){.hdr-in{padding-top:1.1rem;padding-bottom:1.1rem}.wordmark{font-size:1.6rem}}
 
-/* page shell */
-.wrap{max-width:1080px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem) 4rem}
-.wrap.narrow{max-width:640px}
-.hero{text-align:center;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.035em;margin:0 0 1rem;text-wrap:balance}
-.hero .lead{color:var(--ink-2);font-size:clamp(1rem,2.5vw,1.2rem);margin:0 auto;max-width:46ch;line-height:1.55}
+/* buttons */
+.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.95rem;padding:.9rem 1.7rem;cursor:pointer;
+  background:linear-gradient(135deg,var(--glow),var(--accent));color:var(--accent-ink);
+  box-shadow:0 12px 30px -10px color-mix(in oklab,var(--accent) 55%,transparent);text-decoration:none;display:inline-block;transition:filter .18s,transform .18s var(--ease)}
+.btn-primary:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
+  font-weight:700;font-size:.92rem;padding:.85rem 1.5rem;cursor:pointer;text-decoration:none;display:inline-block;transition:background .18s,border-color .18s}
+.btn-ghost:hover{background:var(--glass-2);border-color:color-mix(in oklab,var(--ink) 18%,transparent)}
+
+/* shared eyebrow (used once, in hero) */
 .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label-sm);font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 1.1rem}
 .eyebrow .d{width:.42em;height:.42em;border-radius:50%;background:var(--accent)}
 
-.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.95rem;padding:.9rem 1.7rem;cursor:pointer;
-  background:linear-gradient(135deg,var(--glow),var(--accent));color:var(--accent-ink);
-  box-shadow:0 12px 30px -10px color-mix(in oklab,var(--accent) 55%,transparent);text-decoration:none;display:inline-block}
-.btn-primary:hover{filter:brightness(1.03)}
-.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
-  font-weight:700;font-size:.92rem;padding:.85rem 1.5rem;cursor:pointer;text-decoration:none;display:inline-block}
+/* section shell */
+.wrap2{max-width:1120px;margin:0 auto;padding:clamp(3rem,7vw,5.5rem) clamp(1rem,4vw,3rem) 0}
+.wrap2.narrow2{max-width:720px}
+.sec-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem;text-wrap:balance}
+.sec-sub{color:var(--ink-2);font-size:clamp(1rem,2.2vw,1.12rem);margin:0 0 2rem;max-width:56ch}
 
-/* sections */
-.lbl{font-size:var(--label);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 1.2rem}
-section.blk{margin-top:clamp(2.5rem,5vw,3.5rem)}
-section.blk h2{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:800;letter-spacing:-.02em;margin:0 0 1rem}
-section.blk p{color:var(--ink-2);margin:0 0 1rem;max-width:64ch}
+/* HERO */
+.phero{position:relative;overflow:hidden;padding:clamp(2.5rem,6vw,5rem) clamp(1rem,4vw,3rem) clamp(1rem,3vw,2rem)}
+.phero .bgfx{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(50% 45% at 12% 10%, color-mix(in oklab,var(--accent) 16%, transparent), transparent 60%),
+    radial-gradient(55% 50% at 92% 20%, rgba(124,59,214,.36), transparent 62%),
+    linear-gradient(180deg,#0b0b14,#0a0a0c 55%)}
+.phero-grid{position:relative;z-index:1;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,3.5rem);align-items:center}
+@media (max-width:880px){.phero-grid{grid-template-columns:1fr;gap:2.4rem}}
+.phero-copy h1{font-size:clamp(2.6rem,6.4vw,4.4rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin:0 0 1.1rem;text-wrap:balance}
+.phero .lead{color:var(--ink-2);font-size:clamp(1.05rem,2.2vw,1.25rem);margin:0 0 1.8rem;max-width:46ch;text-wrap:pretty}
+.phero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.phero-trust{margin:1.4rem 0 0;color:var(--ink-3);font-size:.86rem}
 
-/* benefits */
-.benefits{display:grid;gap:1rem;margin:0}
-.benefit{display:flex;gap:.9rem;align-items:flex-start;background:var(--well);border:1px solid var(--line);
-  border-radius:var(--r-lg);padding:1.2rem 1.3rem}
-.benefit .ic{flex:none;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;
-  background:color-mix(in oklab,var(--accent) 16%,transparent);color:var(--accent)}
-.benefit b{display:block;font-size:1rem;margin-bottom:.2rem}
-.benefit span{color:var(--ink-2);font-size:.92rem}
+/* dashboard preview card */
+.dash{background:linear-gradient(180deg,color-mix(in oklab,var(--accent) 6%,var(--well)),var(--well));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.3rem,3vw,1.7rem);box-shadow:0 44px 90px -46px rgba(0,0,0,.9)}
+.dash-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.3rem}
+.dash-ev{font-weight:700;font-size:1.05rem;line-height:1.25}
+.dash-ev small{display:block;color:var(--ink-3);font-weight:500;font-size:.8rem;margin-top:.2rem}
+.live{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--label-sm);font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--pos);border:1px solid color-mix(in oklab,var(--pos) 40%,transparent);border-radius:var(--r-pill);padding:.28rem .6rem}
+.live i{width:.45rem;height:.45rem;border-radius:50%;background:var(--pos);box-shadow:0 0 0 0 color-mix(in oklab,var(--pos) 60%,transparent);animation:ping 1.8s var(--ease) infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--pos) 55%,transparent)}70%,100%{box-shadow:0 0 0 .5rem transparent}}
+@media (prefers-reduced-motion:reduce){.live i{animation:none}}
+.dash-sold{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;line-height:1}
+.dash-sold span{font-size:.9rem;font-weight:600;color:var(--ink-3);letter-spacing:0}
+.bar{height:.55rem;border-radius:var(--r-pill);background:var(--glass-2);margin:.7rem 0 1.3rem;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:var(--r-pill);background:linear-gradient(90deg,var(--accent),var(--glow))}
+.dash-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1.3rem}
+.dash-kpi{background:var(--bg);border:1px solid var(--line);border-radius:.9rem;padding:.7rem .8rem}
+.dash-kpi b{display:block;font-size:1.05rem;font-weight:800;letter-spacing:-.01em}
+.dash-kpi span{color:var(--ink-3);font-size:.72rem}
+.dash-chart{background:var(--bg);border:1px solid var(--line);border-radius:.9rem;padding:.85rem .9rem}
+.dash-chart .spark{display:block;width:100%;height:56px}
+.dash-chart small{display:block;color:var(--ink-3);font-size:.72rem;margin-top:.5rem}
 
-/* value cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
-.vcard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem}
-.vcard h3{font-size:1.02rem;font-weight:700;margin:0 0 .5rem}
-.vcard p{color:var(--ink-2);font-size:.9rem;margin:0}
+/* STATS strip */
+.stats{max-width:1120px;margin:clamp(2.5rem,5vw,3.5rem) auto 0;padding:clamp(1.4rem,3vw,1.8rem) clamp(1rem,4vw,3rem);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;text-align:center}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr);gap:1.8rem 1rem}}
+.stat b{display:block;font-size:clamp(1.7rem,4vw,2.3rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+.stat span{color:var(--ink-3);font-size:.82rem}
 
-/* forms */
+/* BENTO */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media (max-width:820px){.bento{grid-template-columns:1fr}}
+.cell{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.4rem 1.45rem;
+  display:flex;flex-direction:column;gap:.55rem;transition:border-color var(--dur) ease}
+.cell:hover{border-color:color-mix(in oklab,var(--ink) 15%,transparent)}
+.cell .ic{width:2.1rem;height:2.1rem;border-radius:50%;display:grid;place-items:center;color:var(--accent);
+  background:color-mix(in oklab,var(--accent) 15%,transparent);margin-bottom:.2rem}
+.cell h3{font-size:1.05rem;font-weight:700;margin:0}
+.cell p{color:var(--ink-2);font-size:.9rem;margin:0}
+@media (min-width:821px){.cell.wide2{grid-column:span 2}.cell.wide3{grid-column:span 3}}
+.cell.feature{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 9%,var(--well)),var(--well));flex-direction:row;gap:1.3rem;align-items:center}
+@media (max-width:520px){.cell.feature{flex-direction:column;align-items:flex-start}}
+.cell.feature .mini{flex:none;width:112px;border-radius:.8rem;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 30px -18px rgba(0,0,0,.8)}
+.cell.feature .mini svg{display:block;width:100%;aspect-ratio:3/4}
+.cell.feature .mini figcaption{padding:.4rem .5rem .5rem;background:var(--well);font-size:.62rem;font-weight:700;line-height:1.2}
+.cell.feature .mini figcaption span{display:block;color:var(--ink-3);font-weight:500;font-size:.56rem}
+.cell.wide3{flex-direction:row;align-items:center;gap:1.1rem}
+.cell.wide3 .grow{flex:1}
+.cell.wide3 .arrow{flex:none;color:var(--accent)}
+
+/* STEPS */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;counter-reset:s}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.steps li{position:relative;background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem 1.4rem}
+.step-n{display:inline-grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;font-weight:800;
+  color:var(--accent-ink);background:linear-gradient(135deg,var(--glow),var(--accent));margin-bottom:.9rem}
+.steps b{display:block;font-size:1.1rem;margin-bottom:.35rem}
+.steps p{color:var(--ink-2);font-size:.92rem;margin:0}
+
+/* PLATFORM SCREENS — faithful to the real Mercur/Medusa vendor panel:
+   light neutral surfaces, blue chart lines, real metric labels, THB. */
+.screens{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:1.1rem;align-items:end}
+@media (max-width:900px){.screens{grid-template-columns:1fr 1fr}.scard.browser{grid-column:1/-1}}
+@media (max-width:560px){.screens{grid-template-columns:1fr}}
+.scard{display:flex;flex-direction:column;gap:.7rem}
+.scard figcaption{color:var(--ink-3);font-size:.78rem;font-weight:600;text-align:center}
+.screen{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:0 44px 84px -48px rgba(0,0,0,.9);display:flex;flex-direction:column}
+/* scoped light theme = the actual panel */
+.ui{--u-bg:#fff;--u-bg2:#f4f4f5;--u-fg:#18181b;--u-sub:#52525b;--u-mut:#a1a1aa;--u-line:#e4e4e7;
+  --u-blue:#2563eb;--u-blue2:#60a5fa;--u-green:#059669;--u-greenbg:#d1fae5;--u-red:#dc2626;
+  background:var(--u-bg);color:var(--u-fg);font-size:.78rem;line-height:1.42}
+/* browser chrome (light) */
+.br-bar{display:flex;align-items:center;gap:.55rem;padding:.5rem .7rem;border-bottom:1px solid var(--u-line);background:var(--u-bg2)}
+.br-dots{display:flex;gap:.32rem}
+.br-dots i{width:.5rem;height:.5rem;border-radius:50%;background:#d4d4d8}
+.br-url{flex:1;background:#fff;border:1px solid var(--u-line);border-radius:var(--r-pill);padding:.26rem .7rem;color:var(--u-mut);font-size:.63rem;text-align:center}
+.scr{padding:.95rem 1rem;flex:1}
+.scr-h{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.scr-h b{font-size:.92rem;font-weight:600}
+.badge-live{font-size:.56rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--u-green);background:var(--u-greenbg);border-radius:var(--r-pill);padding:.14rem .5rem}
+.scr-h .rng{margin-left:auto;font-size:.62rem;color:var(--u-sub);border:1px solid var(--u-line);border-radius:.5rem;padding:.2rem .55rem}
+.tabs{display:flex;gap:1.1rem;border-bottom:1px solid var(--u-line);margin-bottom:.85rem}
+.tabs span{font-size:.72rem;color:var(--u-mut);padding-bottom:.5rem}
+.tabs span.on{color:var(--u-fg);font-weight:600;box-shadow:inset 0 -2px 0 var(--u-fg)}
+.mcards{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem;margin-bottom:.85rem}
+.mcard{border:1px solid var(--u-line);border-radius:.7rem;padding:.55rem .7rem}
+.mcard .l{color:var(--u-sub);font-size:.6rem}
+.mcard .v{font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+.mcard .t{font-size:.58rem}
+.mcard .t.up{color:var(--u-green)}.mcard .t.dn{color:var(--u-red)}.mcard .t.mut{color:var(--u-mut)}
+.uchart{border:1px solid var(--u-line);border-radius:.7rem;padding:.55rem .6rem}
+.uchart svg{display:block;width:100%;height:40px}
+.uchart .lgnd{display:flex;gap:.9rem;margin-top:.45rem}
+.uchart .lgnd i{display:inline-flex;align-items:center;gap:.3rem;font-size:.58rem;color:var(--u-sub)}
+.uchart .lgnd i::before{content:&quot;&quot;;width:.55rem;height:.15rem;border-radius:2px;background:currentColor}
+/* phone (light inner) */
+.screen.phone{background:#09090b;border-radius:1.5rem;padding:.42rem;max-width:300px;margin-inline:auto;width:100%}
+.ph{position:relative;border-radius:1.18rem;overflow:hidden;flex:1;min-height:352px;display:flex;flex-direction:column}
+.ph-notch{position:absolute;top:.5rem;left:50%;transform:translateX(-50%);width:30%;height:.32rem;border-radius:var(--r-pill);background:#000;opacity:.14;z-index:3}
+.ph-top{padding:1.15rem .8rem .55rem;border-bottom:1px solid var(--u-line)}
+.ph-top b{font-size:.82rem;font-weight:600}
+.ph-top span{display:block;color:var(--u-mut);font-size:.62rem;margin-top:.05rem}
+/* events list */
+.elist{background:var(--u-bg2);padding:.6rem;display:grid;gap:.55rem;flex:1}
+.ecardm{border:1px solid var(--u-line);border-radius:.7rem;overflow:hidden;background:#fff}
+.ecardm .eimg{aspect-ratio:16/7;overflow:hidden}
+.ecardm .eimg svg{width:100%;height:100%;display:block}
+.ecardm .eb{padding:.5rem .6rem}
+.ecardm .et{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
+.ecardm .et b{font-size:.72rem}
+.badge{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:.1rem .4rem;border-radius:var(--r-pill)}
+.badge.live{color:var(--u-green);background:var(--u-greenbg)}
+.badge.draft{color:var(--u-sub);background:var(--u-bg2)}
+.ecardm .est{display:flex;gap:1.1rem;margin-top:.4rem}
+.ecardm .est .l{font-size:.55rem;color:var(--u-mut)}
+.ecardm .est b{display:block;font-size:.72rem;color:var(--u-fg)}
+/* scanning */
+.scan{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45rem;text-align:center;padding:1.1rem;background:var(--u-bg)}
+.scan .chk{width:3.3rem;height:3.3rem;border-radius:50%;display:grid;place-items:center;color:#fff;background:var(--u-green);box-shadow:0 0 0 .45rem var(--u-greenbg)}
+.scan .ok{font-weight:700;font-size:.95rem;color:var(--u-green)}
+.scan .who{font-weight:600;font-size:.82rem}
+.scan .who span{display:block;color:var(--u-mut);font-weight:500;font-size:.65rem;margin-top:.12rem}
+.scan .cnt{margin-top:.35rem;font-size:.63rem;color:var(--u-sub);background:var(--u-bg2);border-radius:var(--r-pill);padding:.28rem .7rem}
+
+/* TESTIMONIAL */
+.quote{margin:0;background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 8%,var(--well)),var(--well));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.8rem,5vw,3.2rem)}
+.quote blockquote{margin:0 0 1.4rem;font-size:clamp(1.25rem,3vw,1.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.32;text-wrap:balance}
+.quote figcaption{display:flex;align-items:center;gap:.85rem}
+.q-av{flex:none;width:2.6rem;height:2.6rem;border-radius:50%;background:linear-gradient(135deg,#7c3bd6,#e85d2f)}
+.quote figcaption b{display:block;font-size:.95rem}
+.quote figcaption span{color:var(--ink-3);font-size:.85rem}
+
+/* FAQ */
+.faq{display:grid;gap:.7rem}
+.faq details{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);padding:0 1.3rem;transition:border-color .2s}
+.faq details[open]{border-color:color-mix(in oklab,var(--ink) 14%,transparent)}
+.faq summary{list-style:none;cursor:pointer;font-weight:700;font-size:1rem;padding:1.1rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:&quot;&quot;;flex:none;width:1.1rem;height:1.1rem;
+  background:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23a8a29e' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;) center/contain no-repeat;transition:transform .22s var(--ease)}
+.faq details[open] summary::after{transform:rotate(180deg)}
+.faq p{color:var(--ink-2);font-size:.94rem;margin:0;padding:0 0 1.2rem;max-width:62ch}
+
+/* APPLY / form */
+.apply-head{text-align:center;margin-bottom:1.8rem}
+.apply-head h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem}
+.apply-head p{color:var(--ink-2);margin:0 auto;max-width:44ch}
 .form{background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.4rem,3vw,2rem);display:grid;gap:1.1rem}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
 @media (max-width:560px){.frow{grid-template-columns:1fr}}
-.field label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-bottom:.45rem;letter-spacing:.01em}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-bottom:.45rem}
 .field input,.field textarea,.field select{width:100%;background:var(--bg);border:1px solid var(--line);
   border-radius:.9rem;padding:.8rem .95rem;color:var(--ink);font:inherit;font-size:.95rem;transition:border-color .18s}
-.field textarea{min-height:7rem;resize:vertical}
+.field textarea{min-height:6rem;resize:vertical}
 .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent)}
 .field input::placeholder,.field textarea::placeholder{color:var(--ink-3)}
 .field select{appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8481' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 1rem center}
 .form-foot{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.4rem}
 .form-note{color:var(--ink-3);font-size:.8rem}
-.contact-alt{text-align:center;color:var(--ink-2);font-size:.9rem;margin-top:1.6rem}
-.contact-alt a{color:var(--accent);text-decoration:none}
 
-/* CTA band */
-.ctaband{text-align:center;background:var(--well);border:1px solid var(--line);border-radius:var(--r-xl);
-  padding:clamp(2rem,5vw,3rem);margin-top:clamp(2.5rem,5vw,3.5rem)}
-.ctaband h2{margin:0 0 .8rem}
-.ctaband p{color:var(--ink-2);margin:0 auto 1.6rem;max-width:44ch}
-
-/* home hero */
-.home-hero{position:relative;min-height:calc(100vh - 64px);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:2rem 1rem}
-.home-hero .bgfx{position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(60% 50% at 22% 18%, color-mix(in oklab,var(--accent) 22%, transparent), transparent 60%),
-    radial-gradient(55% 45% at 80% 30%, rgba(124,59,214,.4), transparent 60%),
-    radial-gradient(70% 60% at 50% 100%, rgba(20,10,40,.9), transparent 70%),
-    linear-gradient(180deg,#0b0b14,#0a0a0c 60%);}
-.home-hero .grain{position:absolute;inset:0;z-index:0;opacity:.5;mix-blend-mode:overlay;
-  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 38%),radial-gradient(circle at 72% 62%,rgba(255,255,255,.07),transparent 34%)}
-.home-hero .scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(10,10,12,.35),transparent 40%,var(--bg))}
-.home-hero .inner{position:relative;z-index:1;max-width:56rem}
-.home-hero h1{font-size:clamp(2.8rem,9vw,6rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin:0 0 1.2rem;text-wrap:balance}
-.home-hero h1 .dim{color:var(--ink-2)}
-.home-hero .sub{color:var(--ink);font-size:clamp(1.05rem,2.6vw,1.5rem);font-weight:300;margin:0 auto 2rem;opacity:.9}
-.home-hero .cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
-.scrollcue{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:1;color:var(--ink-3);animation:bob 1.8s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
-@media (prefers-reduced-motion:reduce){.scrollcue{animation:none}}
-
-/* value props */
-.vprops{max-width:1080px;margin:0 auto;padding:clamp(3rem,7vw,5rem) clamp(1rem,4vw,3rem);
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center}
-@media (max-width:720px){.vprops{grid-template-columns:1fr;gap:2.2rem}}
-.vprop .ic{width:3rem;height:3rem;margin:0 auto 1rem;color:var(--accent)}
-.vprop h3{font-size:1.15rem;font-weight:800;letter-spacing:-.01em;margin:0 0 .4rem}
-.vprop p{color:var(--ink-2);font-size:.92rem;margin:0}
-
-/* section heading */
-.sec{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1.4rem}
-.sec-head h2{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;letter-spacing:-.02em;margin:0}
-.sec-head a{color:var(--accent);text-decoration:none;font-size:.9rem;font-weight:600}
-
-/* event cards (poster-forward, like producer) */
-.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(1rem,2.5vw,1.5rem)}
-.ecard{background:var(--well);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;
-  transition:transform var(--dur) var(--ease),border-color var(--dur) ease;text-align:left}
-.ecard:hover{transform:translateY(-3px);border-color:color-mix(in oklab,var(--ink) 16%,transparent)}
-.ecard .art{position:relative;aspect-ratio:1;overflow:hidden}
-.ecard .art svg{display:block;width:100%;height:100%}
-.ecard .chip{position:absolute;top:.7rem;left:.7rem;background:rgba(10,10,12,.7);backdrop-filter:blur(8px);
-  border:1px solid var(--line);border-radius:.6rem;padding:.3rem .5rem;text-align:center;line-height:1}
-.ecard .chip .d{font-size:1.05rem;font-weight:800}
-.ecard .chip .m{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:.15rem}
-.ecard .body{padding:.9rem 1rem 1.1rem}
-.ecard .body h3{font-size:1rem;font-weight:700;margin:0 0 .2rem}
-.ecard .body .v{color:var(--ink-2);font-size:.82rem}
-.ecard .body .p{margin-top:.6rem;font-size:.86rem;font-weight:700}
-.ecard .body .p small{color:var(--ink-3);font-weight:500}
-
-/* partnership band */
-.partband{max-width:1180px;margin:clamp(3rem,7vw,5rem) auto 0;padding:0 clamp(1rem,4vw,3rem)}
-.partband .in{background:linear-gradient(150deg,color-mix(in oklab,var(--accent) 10%, var(--well)),var(--well));
-  border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(2rem,5vw,3.5rem);
-  display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center}
-@media (max-width:760px){.partband .in{grid-template-columns:1fr;gap:1.6rem}}
-.partband h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .6rem}
-.partband .lead{color:var(--ink-2);margin:0 0 1.3rem}
-.partband ul{list-style:none;margin:0 0 1.6rem;padding:0;display:grid;gap:.7rem}
-.partband li{display:flex;gap:.7rem;color:var(--ink-2);font-size:.95rem}
-.partband li svg{color:var(--accent);flex:none;margin-top:.15rem}
-
-/* footer (matches the event page) */
-footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
-.foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+/* footer */
+footer.site{border-top:1px solid var(--line);margin-top:clamp(3.5rem,7vw,6rem);background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
+.foot-in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
 .foot-brand .wordmark{font-size:1.5rem}
 .foot-tag{color:var(--ink-2);font-size:.9rem;line-height:1.55;margin:1rem 0 1.3rem;max-width:30ch}
 .foot-social{display:flex;gap:.5rem}
@@ -5395,62 +5486,234 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 .foot-h{font-size:var(--label-sm);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
 .foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;transition:color .2s;cursor:pointer}
 .foot-col a:hover{color:var(--ink)}
-.foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+.foot-bottom{max-width:1120px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
   display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
 .foot-legal{display:flex;gap:1.3rem;flex-wrap:wrap}
 .foot-legal a{color:var(--ink-3);text-decoration:none}
 .foot-legal a:hover{color:var(--ink-2)}
 @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}.foot-cols{grid-template-columns:repeat(2,1fr)}}
 &lt;/style&gt;
+
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
   &lt;button class=&quot;wordmark&quot; data-nav=&quot;home&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
-  &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
+  &lt;nav class=&quot;hdr-nav&quot;&gt;
+    &lt;button class=&quot;navlink&quot; data-nav=&quot;home&quot;&gt;For fans&lt;/button&gt;
+    &lt;a class=&quot;btn-primary hdr-cta&quot; href=&quot;#apply&quot;&gt;Become a partner&lt;/a&gt;
+  &lt;/nav&gt;
 &lt;/div&gt;&lt;/header&gt;
 
-&lt;div class=&quot;wrap&quot;&gt;
-  &lt;div class=&quot;hero&quot;&gt;
-    &lt;p class=&quot;eyebrow&quot;&gt;&lt;span class=&quot;d&quot;&gt;&lt;/span&gt;Partners&lt;/p&gt;
-    &lt;h1&gt;Become a Partner&lt;/h1&gt;
-    &lt;p class=&quot;lead&quot;&gt;Ready to bring your events to Bumpy? Tell us about your production and we'll get back to you shortly.&lt;/p&gt;
-    &lt;div style=&quot;margin-top:1.6rem&quot;&gt;&lt;a class=&quot;btn-primary&quot; href=&quot;#apply&quot;&gt;Apply now&lt;/a&gt;&lt;/div&gt;
+&lt;!-- HERO --&gt;
+&lt;section class=&quot;phero&quot;&gt;
+  &lt;div class=&quot;bgfx&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;phero-grid&quot;&gt;
+    &lt;div class=&quot;phero-copy&quot;&gt;
+      &lt;p class=&quot;eyebrow&quot;&gt;&lt;span class=&quot;d&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;Bumpy for organizers&lt;/p&gt;
+      &lt;h1&gt;Sell more tickets.&lt;br&gt;Keep more of the &lt;span class=&quot;acid&quot;&gt;money&lt;/span&gt;.&lt;/h1&gt;
+      &lt;p class=&quot;lead&quot;&gt;Bumpy puts your events in front of a growing crowd, hands you the tools to run the night, and charges one honest fee — no nasty surprises for you or your fans.&lt;/p&gt;
+      &lt;div class=&quot;phero-cta&quot;&gt;
+        &lt;a class=&quot;btn-primary&quot; href=&quot;#apply&quot;&gt;Become a partner&lt;/a&gt;
+        &lt;a class=&quot;btn-ghost&quot; href=&quot;#how&quot;&gt;See how it works&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;p class=&quot;phero-trust&quot;&gt;Trusted by producers across Koh&amp;nbsp;Phangan, Bali &amp;amp; Tulum.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;phero-visual&quot;&gt;
+      &lt;div class=&quot;dash&quot; role=&quot;img&quot; aria-label=&quot;Organizer dashboard preview: Afterlight Bangkok, 842 of 1,000 tickets sold, revenue 505,200 baht.&quot;&gt;
+        &lt;div class=&quot;dash-top&quot;&gt;
+          &lt;div class=&quot;dash-ev&quot;&gt;Afterlight Bangkok&lt;small&gt;Warehouse 30 · 09 Aug&lt;/small&gt;&lt;/div&gt;
+          &lt;span class=&quot;live&quot;&gt;&lt;i&gt;&lt;/i&gt;Live&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;dash-sold&quot;&gt;842 &lt;span&gt;/ 1,000 sold&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;bar&quot;&gt;&lt;span style=&quot;width:84%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;dash-kpis&quot;&gt;
+          &lt;div class=&quot;dash-kpi&quot;&gt;&lt;b&gt;฿505,200&lt;/b&gt;&lt;span&gt;Revenue&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;dash-kpi&quot;&gt;&lt;b&gt;4.9k&lt;/b&gt;&lt;span&gt;Page views&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;dash-kpi&quot;&gt;&lt;b&gt;84%&lt;/b&gt;&lt;span&gt;Capacity sold&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;dash-chart&quot;&gt;
+          &lt;svg class=&quot;spark&quot; viewBox=&quot;0 0 140 56&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;#c6f543&quot;&gt;&lt;rect x=&quot;4&quot; y=&quot;40&quot; width=&quot;12&quot; height=&quot;16&quot; rx=&quot;2&quot; opacity=&quot;.32&quot;/&gt;&lt;rect x=&quot;24&quot; y=&quot;34&quot; width=&quot;12&quot; height=&quot;22&quot; rx=&quot;2&quot; opacity=&quot;.4&quot;/&gt;&lt;rect x=&quot;44&quot; y=&quot;36&quot; width=&quot;12&quot; height=&quot;20&quot; rx=&quot;2&quot; opacity=&quot;.48&quot;/&gt;&lt;rect x=&quot;64&quot; y=&quot;26&quot; width=&quot;12&quot; height=&quot;30&quot; rx=&quot;2&quot; opacity=&quot;.58&quot;/&gt;&lt;rect x=&quot;84&quot; y=&quot;22&quot; width=&quot;12&quot; height=&quot;34&quot; rx=&quot;2&quot; opacity=&quot;.72&quot;/&gt;&lt;rect x=&quot;104&quot; y=&quot;27&quot; width=&quot;12&quot; height=&quot;29&quot; rx=&quot;2&quot; opacity=&quot;.84&quot;/&gt;&lt;rect x=&quot;124&quot; y=&quot;10&quot; width=&quot;12&quot; height=&quot;46&quot; rx=&quot;2&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;
+          &lt;small&gt;Daily sales · last 7 days&lt;/small&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
+&lt;/section&gt;
 
-  &lt;div class=&quot;benefits&quot; style=&quot;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))&quot;&gt;
-    &lt;div class=&quot;benefit&quot;&gt;&lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
-      &lt;div&gt;&lt;b&gt;Reach the right crowd&lt;/b&gt;&lt;span&gt;Reach a growing audience of event lovers actively looking for their next experience.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div class=&quot;benefit&quot;&gt;&lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M3 3v18h18M7 14l3-3 3 3 5-6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
-      &lt;div&gt;&lt;b&gt;Powerful tools&lt;/b&gt;&lt;span&gt;Manage tickets, track sales, and understand your audience — all in one place.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;div class=&quot;benefit&quot;&gt;&lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
-      &lt;div&gt;&lt;b&gt;Fair, transparent pricing&lt;/b&gt;&lt;span&gt;No hidden fees — for you or your attendees. You always know what you pay.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;!-- STATS --&gt;
+&lt;section class=&quot;stats&quot; aria-label=&quot;Bumpy at a glance&quot;&gt;
+  &lt;div class=&quot;stat&quot;&gt;&lt;b&gt;120&lt;span class=&quot;acid&quot;&gt;+&lt;/span&gt;&lt;/b&gt;&lt;span&gt;events launched&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;stat&quot;&gt;&lt;b&gt;68k&lt;/b&gt;&lt;span&gt;tickets sold&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;stat&quot;&gt;&lt;b class=&quot;acid&quot;&gt;฿0&lt;/b&gt;&lt;span&gt;hidden fees&lt;/span&gt;&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- WHAT YOU GET --&gt;
+&lt;section class=&quot;wrap2&quot; id=&quot;why&quot;&gt;
+  &lt;h2 class=&quot;sec-title&quot;&gt;Everything you need to run the night&lt;/h2&gt;
+  &lt;p class=&quot;sec-sub&quot;&gt;From the first ticket to the final scan at the door — it's all in one place, and it all looks like &lt;em style=&quot;font-style:normal;color:var(--ink)&quot;&gt;you&lt;/em&gt;.&lt;/p&gt;
+  &lt;div class=&quot;bento&quot;&gt;
+    &lt;div class=&quot;cell feature wide2&quot;&gt;
+      &lt;figure class=&quot;mini&quot;&gt;
+        &lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;fmSkyP&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#0a0f2c&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#1b2a6b&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#3a5bb5&quot;/&gt;&lt;/linearGradient&gt;&lt;radialGradient id=&quot;fmMoonP&quot; cx=&quot;.5&quot; cy=&quot;.5&quot; r=&quot;.5&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#fdfbe8&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#f2eec6&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#f2eec6&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#fmSkyP)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;34&quot; r=&quot;27&quot; fill=&quot;url(#fmMoonP)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;34&quot; r=&quot;15&quot; fill=&quot;#fdfbe8&quot;/&gt;&lt;/svg&gt;
+        &lt;figcaption&gt;Afterlight Bangkok&lt;span&gt;09 Aug · Bangkok&lt;/span&gt;&lt;/figcaption&gt;
+      &lt;/figure&gt;
+      &lt;div&gt;
+        &lt;h3&gt;Your brand, front and center&lt;/h3&gt;
+        &lt;p&gt;Upload your poster and the event page themes itself around your artwork. Every night on Bumpy looks like yours — not like a template.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cell&quot;&gt;
+      &lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;19&quot; height=&quot;19&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M3 3v18h18M7 14l3-3 3 3 5-6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;h3&gt;Real-time dashboard&lt;/h3&gt;
+      &lt;p&gt;Sales, views and ticket tiers updating live as the night fills up.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cell&quot;&gt;
+      &lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;19&quot; height=&quot;19&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;7&quot; height=&quot;7&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;3&quot; width=&quot;7&quot; height=&quot;7&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;rect x=&quot;3&quot; y=&quot;14&quot; width=&quot;7&quot; height=&quot;7&quot; rx=&quot;1.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;path d=&quot;M14 14h3v3M20 20h.01M17 20v.01M20 17v.01&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;h3&gt;Scan at the door&lt;/h3&gt;
+      &lt;p&gt;Check guests in from any phone. No printouts, no clipboard, no queue.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cell&quot;&gt;
+      &lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;19&quot; height=&quot;19&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;h3&gt;Know your audience&lt;/h3&gt;
+      &lt;p&gt;See who's coming and where they're travelling from — and bring them back.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cell&quot;&gt;
+      &lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;19&quot; height=&quot;19&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M13 2 3 14h9l-1 8 10-12h-9l1-8Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;h3&gt;Straightforward payouts&lt;/h3&gt;
+      &lt;p&gt;Get paid out after your event — no invoices, no chasing.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;cell wide3&quot;&gt;
+      &lt;span class=&quot;ic&quot;&gt;&lt;svg width=&quot;19&quot; height=&quot;19&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;circle cx=&quot;9&quot; cy=&quot;7&quot; r=&quot;4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot;/&gt;&lt;path d=&quot;M17 11a4 4 0 1 0-2-7.5M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M17 21v-2a4 4 0 0 0-1.5-3.1&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;div class=&quot;grow&quot;&gt;
+        &lt;h3&gt;A crowd that's already looking&lt;/h3&gt;
+        &lt;p&gt;List your event and it lands in front of Bumpy's growing audience of people hunting their next night out — not just your own followers.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;svg class=&quot;arrow&quot; width=&quot;26&quot; height=&quot;26&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 12h14M13 6l6 6-6 6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
+&lt;/section&gt;
 
-  &lt;section class=&quot;blk&quot; id=&quot;apply&quot;&gt;
-    &lt;p class=&quot;lbl&quot;&gt;Apply to partner&lt;/p&gt;
-    &lt;form class=&quot;form&quot;&gt;
-      &lt;div class=&quot;frow&quot;&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Full name *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Your full name&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Email *&lt;/label&gt;&lt;input type=&quot;email&quot; placeholder=&quot;your@email.com&quot;&gt;&lt;/div&gt;
+&lt;!-- HOW IT WORKS --&gt;
+&lt;section class=&quot;wrap2&quot; id=&quot;how&quot;&gt;
+  &lt;h2 class=&quot;sec-title&quot;&gt;Live in three steps&lt;/h2&gt;
+  &lt;p class=&quot;sec-sub&quot;&gt;Most partners are selling tickets within a week of applying.&lt;/p&gt;
+  &lt;ol class=&quot;steps&quot;&gt;
+    &lt;li&gt;&lt;span class=&quot;step-n&quot;&gt;1&lt;/span&gt;&lt;b&gt;Apply&lt;/b&gt;&lt;p&gt;Tell us about your production. We review and reply within a couple of business days.&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span class=&quot;step-n&quot;&gt;2&lt;/span&gt;&lt;b&gt;Build your event&lt;/b&gt;&lt;p&gt;Upload your poster, set ticket tiers and prices. Your page themes itself and goes live in minutes.&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span class=&quot;step-n&quot;&gt;3&lt;/span&gt;&lt;b&gt;Go live &amp;amp; get paid&lt;/b&gt;&lt;p&gt;Share the link, sell tickets, scan guests in at the door — and get paid out fast.&lt;/p&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/section&gt;
+
+&lt;!-- PLATFORM SCREENS --&gt;
+&lt;section class=&quot;wrap2&quot; id=&quot;screens&quot;&gt;
+  &lt;h2 class=&quot;sec-title&quot;&gt;A look inside the platform&lt;/h2&gt;
+  &lt;p class=&quot;sec-sub&quot;&gt;The same tools your team runs the night with — from the dashboard to the door.&lt;/p&gt;
+  &lt;div class=&quot;screens&quot;&gt;
+
+    &lt;figure class=&quot;scard browser&quot;&gt;
+      &lt;div class=&quot;screen ui&quot;&gt;
+        &lt;div class=&quot;br-bar&quot;&gt;&lt;div class=&quot;br-dots&quot; aria-hidden=&quot;true&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;br-url&quot;&gt;app.bumpy.fm/events/afterlight-bangkok/analytics&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;scr&quot;&gt;
+          &lt;div class=&quot;scr-h&quot;&gt;&lt;b&gt;Afterlight Bangkok&lt;/b&gt;&lt;span class=&quot;badge-live&quot;&gt;Live&lt;/span&gt;&lt;span class=&quot;rng&quot;&gt;Last 7 days&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;tabs&quot;&gt;&lt;span class=&quot;on&quot;&gt;Overview&lt;/span&gt;&lt;span&gt;Sales&lt;/span&gt;&lt;span&gt;Tickets&lt;/span&gt;&lt;span&gt;Traffic&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;mcards&quot;&gt;
+            &lt;div class=&quot;mcard&quot;&gt;&lt;div class=&quot;l&quot;&gt;Tickets Sold&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;842&lt;/div&gt;&lt;div class=&quot;t mut&quot;&gt;of 1,000 capacity&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;mcard&quot;&gt;&lt;div class=&quot;l&quot;&gt;Net Revenue&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;฿505,200&lt;/div&gt;&lt;div class=&quot;t up&quot;&gt;↑ 8.2%&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;mcard&quot;&gt;&lt;div class=&quot;l&quot;&gt;Capacity Filled&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;84%&lt;/div&gt;&lt;div class=&quot;t up&quot;&gt;↑ 12.5%&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;mcard&quot;&gt;&lt;div class=&quot;l&quot;&gt;Conversion Rate&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;6.1%&lt;/div&gt;&lt;div class=&quot;t mut&quot;&gt;Visitors who purchased&lt;/div&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;uchart&quot;&gt;
+            &lt;svg viewBox=&quot;0 0 240 40&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;polyline fill=&quot;none&quot; stroke=&quot;#60a5fa&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; points=&quot;0,31 34,29 68,30 102,23 136,25 170,19 205,17 240,13&quot;/&gt;&lt;polyline fill=&quot;none&quot; stroke=&quot;#2563eb&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; points=&quot;0,35 34,32 68,31 102,26 136,22 170,17 205,12 240,6&quot;/&gt;&lt;/svg&gt;
+            &lt;div class=&quot;lgnd&quot;&gt;&lt;i style=&quot;color:#2563eb&quot;&gt;Orders&lt;/i&gt;&lt;i style=&quot;color:#60a5fa&quot;&gt;Visitors&lt;/i&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;frow&quot;&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Phone number *&lt;/label&gt;&lt;input type=&quot;tel&quot; placeholder=&quot;+66 00 000 0000&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Production / brand name *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Your production company or brand&quot;&gt;&lt;/div&gt;
+      &lt;figcaption&gt;Event analytics&lt;/figcaption&gt;
+    &lt;/figure&gt;
+
+    &lt;figure class=&quot;scard&quot;&gt;
+      &lt;div class=&quot;screen phone&quot;&gt;
+        &lt;div class=&quot;ph ui&quot;&gt;
+          &lt;div class=&quot;ph-notch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;ph-top&quot;&gt;&lt;b&gt;Events&lt;/b&gt;&lt;span&gt;Afterlight&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;elist&quot;&gt;
+            &lt;div class=&quot;ecardm&quot;&gt;
+              &lt;div class=&quot;eimg&quot;&gt;&lt;svg viewBox=&quot;0 0 100 44&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;fmSkyE&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#0a0f2c&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#1b2a6b&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#3a5bb5&quot;/&gt;&lt;/linearGradient&gt;&lt;radialGradient id=&quot;fmMoonE&quot; cx=&quot;.5&quot; cy=&quot;.45&quot; r=&quot;.5&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#fdfbe8&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#f2eec6&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#f2eec6&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;44&quot; fill=&quot;url(#fmSkyE)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;20&quot; r=&quot;16&quot; fill=&quot;url(#fmMoonE)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;20&quot; r=&quot;8&quot; fill=&quot;#fdfbe8&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+              &lt;div class=&quot;eb&quot;&gt;
+                &lt;div class=&quot;et&quot;&gt;&lt;b&gt;Afterlight Bangkok&lt;/b&gt;&lt;span class=&quot;badge live&quot;&gt;Live&lt;/span&gt;&lt;/div&gt;
+                &lt;div class=&quot;est&quot;&gt;&lt;div&gt;&lt;span class=&quot;l&quot;&gt;Sold&lt;/span&gt;&lt;b&gt;842/1,000&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span class=&quot;l&quot;&gt;Revenue&lt;/span&gt;&lt;b&gt;฿505K&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;ecardm&quot;&gt;
+              &lt;div class=&quot;eimg&quot;&gt;&lt;svg viewBox=&quot;0 0 100 44&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;&lt;linearGradient id=&quot;jgSkyE&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0&quot; stop-color=&quot;#03170f&quot;/&gt;&lt;stop offset=&quot;.6&quot; stop-color=&quot;#0c3d27&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#1a6b3f&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;rect width=&quot;100&quot; height=&quot;44&quot; fill=&quot;url(#jgSkyE)&quot;/&gt;&lt;g fill=&quot;#c6f543&quot;&gt;&lt;rect x=&quot;30&quot; y=&quot;24&quot; width=&quot;5&quot; height=&quot;14&quot; rx=&quot;1.5&quot;/&gt;&lt;rect x=&quot;40&quot; y=&quot;16&quot; width=&quot;5&quot; height=&quot;22&quot; rx=&quot;1.5&quot;/&gt;&lt;rect x=&quot;50&quot; y=&quot;27&quot; width=&quot;5&quot; height=&quot;11&quot; rx=&quot;1.5&quot;/&gt;&lt;rect x=&quot;60&quot; y=&quot;12&quot; width=&quot;5&quot; height=&quot;26&quot; rx=&quot;1.5&quot;/&gt;&lt;rect x=&quot;70&quot; y=&quot;20&quot; width=&quot;5&quot; height=&quot;18&quot; rx=&quot;1.5&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;
+              &lt;div class=&quot;eb&quot;&gt;
+                &lt;div class=&quot;et&quot;&gt;&lt;b&gt;Jungle Frequency&lt;/b&gt;&lt;span class=&quot;badge draft&quot;&gt;Draft&lt;/span&gt;&lt;/div&gt;
+                &lt;div class=&quot;est&quot;&gt;&lt;div&gt;&lt;span class=&quot;l&quot;&gt;Sold&lt;/span&gt;&lt;b&gt;—&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span class=&quot;l&quot;&gt;On sale&lt;/span&gt;&lt;b&gt;16 Aug&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Website / social link *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;https://yoursite.com or @handle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;What kind of events do you produce?&lt;/label&gt;
-        &lt;textarea placeholder=&quot;What genres, venues, and audience sizes?&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
-      &lt;div class=&quot;frow&quot;&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Typical monthly attendees&lt;/label&gt;
-          &lt;select&gt;&lt;option&gt;Select an estimate&lt;/option&gt;&lt;option&gt;Under 200&lt;/option&gt;&lt;option&gt;200–1,000&lt;/option&gt;&lt;option&gt;1,000–5,000&lt;/option&gt;&lt;option&gt;5,000+&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Country / primary market&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;e.g. Thailand, Israel, UK&quot;&gt;&lt;/div&gt;
+      &lt;figcaption&gt;Your events&lt;/figcaption&gt;
+    &lt;/figure&gt;
+
+    &lt;figure class=&quot;scard&quot;&gt;
+      &lt;div class=&quot;screen phone&quot;&gt;
+        &lt;div class=&quot;ph ui&quot;&gt;
+          &lt;div class=&quot;ph-notch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;ph-top&quot;&gt;&lt;b&gt;Scanning&lt;/b&gt;&lt;span&gt;Afterlight Bangkok · Main gate&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;scan&quot;&gt;
+            &lt;div class=&quot;chk&quot;&gt;&lt;svg width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M20 6 9 17l-5-5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+            &lt;div class=&quot;ok&quot;&gt;Valid ticket&lt;/div&gt;
+            &lt;div class=&quot;who&quot;&gt;Nara C.&lt;span&gt;General admission · 1 guest&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;cnt&quot;&gt;842 / 1,000 checked in&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Additional notes&lt;/label&gt;&lt;textarea placeholder=&quot;Anything else we should know?&quot; style=&quot;min-height:5rem&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
-      &lt;div class=&quot;form-foot&quot;&gt;
-        &lt;button class=&quot;btn-primary&quot; type=&quot;submit&quot;&gt;Send application&lt;/button&gt;
-        &lt;span class=&quot;form-note&quot;&gt;We usually reply within a couple of business days.&lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/form&gt;
-  &lt;/section&gt;
-&lt;/div&gt;
+      &lt;figcaption&gt;Door check-in&lt;/figcaption&gt;
+    &lt;/figure&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- FAQ --&gt;
+&lt;section class=&quot;wrap2 narrow2&quot; id=&quot;faq&quot;&gt;
+  &lt;h2 class=&quot;sec-title&quot;&gt;Questions, answered&lt;/h2&gt;
+  &lt;div class=&quot;faq&quot;&gt;
+    &lt;details open&gt;&lt;summary&gt;Can I sell different ticket tiers?&lt;/summary&gt;&lt;p&gt;Yes — set up as many tiers as you need: early bird, general admission, VIP tables, group passes. Each has its own price, limit and on-sale time.&lt;/p&gt;&lt;/details&gt;    &lt;details&gt;&lt;summary&gt;Do my fans pay booking fees on top?&lt;/summary&gt;&lt;p&gt;No. The price you set is the price they pay — honest pricing, for them and for you.&lt;/p&gt;&lt;/details&gt;
+    &lt;details&gt;&lt;summary&gt;How do people get in at the door?&lt;/summary&gt;&lt;p&gt;Scan tickets with the Bumpy check-in app on any phone. Guests show a QR code, you tap, they walk in. No printouts or guest lists.&lt;/p&gt;&lt;/details&gt;
+    &lt;details&gt;&lt;summary&gt;What kind of events can I list?&lt;/summary&gt;&lt;p&gt;Club nights, beach and jungle parties, festivals, one-offs and residencies. Apply with your production and we'll take it from there.&lt;/p&gt;&lt;/details&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- APPLY --&gt;
+&lt;section class=&quot;wrap2 narrow2&quot; id=&quot;apply&quot;&gt;
+  &lt;div class=&quot;apply-head&quot;&gt;
+    &lt;h2&gt;Bring your events to Bumpy&lt;/h2&gt;
+    &lt;p&gt;Tell us about your production and we'll get you set up.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;form class=&quot;form&quot;&gt;
+    &lt;div class=&quot;frow&quot;&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Full name *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Your full name&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Email *&lt;/label&gt;&lt;input type=&quot;email&quot; placeholder=&quot;your@email.com&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;frow&quot;&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Phone number *&lt;/label&gt;&lt;input type=&quot;tel&quot; placeholder=&quot;+66 00 000 0000&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Production / brand name *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Your production company or brand&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Website / social link *&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;https://yoursite.com or @handle&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;field&quot;&gt;&lt;label&gt;What kind of events do you produce?&lt;/label&gt;
+      &lt;textarea placeholder=&quot;What genres, venues, and audience sizes?&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+    &lt;div class=&quot;frow&quot;&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Typical monthly attendees&lt;/label&gt;
+        &lt;select&gt;&lt;option&gt;Select an estimate&lt;/option&gt;&lt;option&gt;Under 200&lt;/option&gt;&lt;option&gt;200–1,000&lt;/option&gt;&lt;option&gt;1,000–5,000&lt;/option&gt;&lt;option&gt;5,000+&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Country / primary market&lt;/label&gt;&lt;input type=&quot;text&quot; placeholder=&quot;e.g. Thailand, Israel, UK&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-foot&quot;&gt;
+      &lt;button class=&quot;btn-primary&quot; type=&quot;submit&quot;&gt;Send application&lt;/button&gt;
+      &lt;span class=&quot;form-note&quot;&gt;We usually reply within a couple of business days.&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/section&gt;
+
 &lt;footer class=&quot;site&quot;&gt;
   &lt;div class=&quot;foot-in&quot;&gt;
     &lt;div class=&quot;foot-brand&quot;&gt;
@@ -5463,12 +5726,12 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;nav class=&quot;foot-cols&quot; aria-label=&quot;Footer&quot;&gt;
-      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Support&lt;/p&gt;
-        &lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;For fans&lt;/p&gt;
+        &lt;a data-nav=&quot;home&quot;&gt;Explore events&lt;/a&gt;&lt;a data-nav=&quot;login&quot;&gt;Log in&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;For organizers&lt;/p&gt;
+        &lt;a href=&quot;#apply&quot;&gt;Become a partner&lt;/a&gt;&lt;a href=&quot;#screens&quot;&gt;The platform&lt;/a&gt;&lt;a href=&quot;#faq&quot;&gt;FAQ&lt;/a&gt;&lt;/div&gt;
       &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
-        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Blog&lt;/a&gt;&lt;/div&gt;
-      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
-        &lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Become Partner&lt;/a&gt;&lt;/div&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
     &lt;/nav&gt;
   &lt;/div&gt;
   &lt;div class=&quot;foot-bottom&quot;&gt;
@@ -5484,6 +5747,9 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     if(R[key]) window.location.href = R[key];
   }
   document.querySelectorAll('[data-nav]').forEach(el=&gt;el.addEventListener('click',e=&gt;{e.preventDefault();NAV(el.dataset.nav);}));
+  document.querySelectorAll('a[href^=&quot;#&quot;]').forEach(a=&gt;a.addEventListener('click',e=&gt;{
+    const t=document.querySelector(a.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  }));
   document.querySelectorAll('form').forEach(f=&gt;f.addEventListener('submit',e=&gt;e.preventDefault()));
 &lt;/script&gt;
 "></iframe>
