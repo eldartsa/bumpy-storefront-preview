@@ -134,10 +134,8 @@
     position: fixed;
     inset: 0;
     z-index: -1;
-    background:
-      radial-gradient(58vw 58vw at 28% 8%, color-mix(in oklab, var(--accent) 26%, transparent), transparent 68%),
-      radial-gradient(42vw 42vw at 78% 2%, color-mix(in oklab, var(--glow) 14%, transparent), transparent 70%),
-      var(--bg);
+    /* No accent wash — the artwork supplies the colour, the page stays neutral. */
+    background: var(--bg);
     mask-image: linear-gradient(to bottom, #000 0%, #000 38%, transparent 82%);
     transition: background 600ms var(--ease);
   }
@@ -205,12 +203,44 @@
     border-radius: var(--r-xl);
     overflow: hidden;
     aspect-ratio: 1;
-    box-shadow:
-      0 30px 90px -18px color-mix(in oklab, var(--accent) 55%, transparent),
-      0 8px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 24px 70px -30px rgba(0, 0, 0, 0.7);
     transition: box-shadow 600ms var(--ease);
   }
-  .poster svg { display: block; width: 100%; height: 100%; }
+  .poster svg, .poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---- Poster reflection -------------------------------------------------
+     A mirrored copy of the artwork under the poster, faded out and blurred so
+     it reads as the artwork sitting on a dark surface rather than a second
+     image. aria-hidden + inert: it's decoration, never content. */
+  .poster-reflect {
+    position: relative;
+    width: 100%;
+    /* height derived from the width, so it tracks the square poster above */
+    aspect-ratio: 100 / 34;
+    margin-top: 3px;
+    overflow: hidden;
+    border-radius: 0 0 var(--r-xl) var(--r-xl);
+    opacity: 0.3;
+    filter: blur(2px) saturate(0.9);
+    /* strongest where it meets the poster, gone before it ends */
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
+    pointer-events: none;
+  }
+  /* The artwork itself is flipped (not the box), so the poster's BOTTOM edge
+     is what sits against the poster; the box just crops the rest away. */
+  .poster-reflect &gt; * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    height: auto;
+    object-fit: cover;
+    transform: scaleY(-1);
+  }
+  @media (prefers-reduced-motion: reduce) { .poster-reflect { filter: none; } }
   .share {
     position: absolute;
     bottom: 0.8rem;
@@ -840,6 +870,9 @@
         &lt;/svg&gt;
       &lt;/button&gt;
     &lt;/div&gt;
+    &lt;!-- Mirrored artwork; filled from the poster at runtime so it tracks
+         whatever the poster is (SVG stand-in today, uploaded image later). --&gt;
+    &lt;div class=&quot;poster-reflect&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
   &lt;/div&gt;
 
   &lt;!-- ================= DETAILS COLUMN ================= --&gt;
@@ -1221,6 +1254,33 @@
     (entries) =&gt; bar.classList.toggle(&quot;hide&quot;, entries[0].isIntersecting),
     { threshold: 0.4 }
   ).observe(document.getElementById(&quot;pricing&quot;));
+
+  // Poster reflection — mirror whatever artwork the poster holds. Cloned rather
+  // than duplicated in markup so swapping the stand-in for a real image needs
+  // no second edit; the clone is stripped of ids/labels so it can't be
+  // announced or collide with the original's gradient ids.
+  (() =&gt; {
+    const art = document.querySelector(&quot;.poster &gt; svg, .poster &gt; img&quot;);
+    const slot = document.querySelector(&quot;.poster-reflect&quot;);
+    if (!art || !slot) return;
+    const copy = art.cloneNode(true);
+    copy.removeAttribute(&quot;id&quot;);
+    copy.removeAttribute(&quot;role&quot;);
+    copy.removeAttribute(&quot;aria-label&quot;);
+    copy.setAttribute(&quot;aria-hidden&quot;, &quot;true&quot;);
+    // SVG gradients are referenced by id; re-point the clone's to unique ones
+    // so it can't steal the original's paint when both are in the document.
+    if (copy.tagName.toLowerCase() === &quot;svg&quot;) {
+      const ids = [...copy.querySelectorAll(&quot;[id]&quot;)].map((n) =&gt; n.id);
+      let markup = copy.innerHTML;
+      ids.forEach((old) =&gt; {
+        markup = markup.split(`id=&quot;${old}&quot;`).join(`id=&quot;${old}-rfl&quot;`);
+        markup = markup.split(`url(#${old})`).join(`url(#${old}-rfl)`);
+      });
+      copy.innerHTML = markup;
+    }
+    slot.appendChild(copy);
+  })();
 &lt;/script&gt;
 "></iframe>
   <iframe class="pg" id="pg-select" data-key="select" title="Bumpy select" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
