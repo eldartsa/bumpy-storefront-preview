@@ -1940,12 +1940,6 @@
   .tgl:hover { color: var(--ink-2); }
   .tgl.on { color: var(--ink); border-color: #fff; }
   .tgl:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-  @media (max-width: 880px) {
-    .demo-bar { bottom: auto; top: 4.1rem; left: 50%; transform: translateX(-50%); padding: 0.35rem; }
-    .demo-bar b { display: none; }
-    /* keep the demo control clear of the event strip */
-    .wrap { padding-top: 4.6rem; }
-  }
 
   .toast {
     position: fixed;
@@ -2716,9 +2710,6 @@
   .tgl:hover { color: var(--ink-2); }
   .tgl.on { color: var(--ink); border-color: #fff; }
   @media (max-width: 860px) {
-    .demo-bar { bottom: auto; top: 4.1rem; left: 50%; transform: translateX(-50%); }
-    .demo-bar b { display: none; }
-    .wrap { padding-top: 5rem; }
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -2959,7 +2950,8 @@
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;demo-bar&quot;&gt;
+&lt;!-- preview toggles hidden for clean review — machinery kept --&gt;
+&lt;div class=&quot;demo-bar&quot; style=&quot;display:none&quot;&gt;
   &lt;b&gt;Mode&lt;/b&gt;
   &lt;button class=&quot;tgl on&quot; id=&quot;m-group&quot; data-mode=&quot;group&quot;&gt;Group&lt;/button&gt;
   &lt;button class=&quot;tgl&quot; id=&quot;m-individual&quot; data-mode=&quot;individual&quot;&gt;Individual&lt;/button&gt;
@@ -3770,9 +3762,6 @@
   .tgl:hover { color: var(--ink-2); }
   .tgl.on { color: var(--ink); border-color: #fff; }
   @media (max-width: 700px) {
-    .demo-bar { bottom: auto; top: 4.1rem; left: 50%; transform: translateX(-50%); }
-    .demo-bar b { display: none; }
-    .wrap { padding-top: 5rem; }
   }
 
   /* One earned moment: the artwork settles and the stamp lands. */
@@ -3877,7 +3866,8 @@
 
 &lt;div class=&quot;toast&quot; id=&quot;toast&quot; role=&quot;status&quot;&gt;&lt;/div&gt;
 
-&lt;div class=&quot;demo-bar&quot;&gt;
+&lt;!-- preview toggles hidden for clean review — machinery kept --&gt;
+&lt;div class=&quot;demo-bar&quot; style=&quot;display:none&quot;&gt;
   &lt;button class=&quot;tgl&quot; id=&quot;t-fees&quot; aria-pressed=&quot;false&quot;&gt;Fees&lt;/button&gt;
   &lt;button class=&quot;tgl&quot; id=&quot;t-disc&quot; aria-pressed=&quot;false&quot;&gt;Discount&lt;/button&gt;
   &lt;button class=&quot;tgl&quot; id=&quot;t-free&quot; aria-pressed=&quot;false&quot;&gt;Free&lt;/button&gt;
