@@ -5176,7 +5176,11 @@ a{color:inherit}
 @media (min-width:1024px){.hdr-in{padding-top:1.1rem;padding-bottom:1.1rem}.wordmark{font-size:1.6rem}}
 
 /* buttons */
-.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.9rem;padding:.58rem 1.5rem;cursor:pointer;
+/* line-height and font-family are pinned so a &lt;button&gt; and an &lt;a&gt; render the
+   same height — buttons default to line-height:normal and the UA font, so
+   the submit was ~7px shorter than the header and hero CTAs. */
+.btn-primary{border:none;border-radius:var(--r-pill);font-weight:800;font-size:.9rem;
+  font-family:inherit;line-height:1.6;padding:.58rem 1.5rem;cursor:pointer;
   background:linear-gradient(135deg,var(--glow),var(--accent));color:var(--accent-ink);
   box-shadow:0 12px 30px -10px color-mix(in oklab,var(--accent) 55%,transparent);text-decoration:none;display:inline-block;transition:filter .18s,transform .18s var(--ease)}
 .btn-primary:hover{filter:brightness(1.04);transform:translateY(-1px)}
@@ -5215,10 +5219,6 @@ a{color:inherit}
 .diffs li{color:var(--ink-2);font-size:clamp(1rem,2.2vw,1.12rem);
   font-weight:400;letter-spacing:0;line-height:1.55}
 
-/* sub-items inside a vertical section — a step down from the section headline */
-.sec-body .block + .block{margin-top:clamp(2.5rem,5vw,4rem)}
-.sub-h{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin:0 0 .4rem}
-.sub-p{color:var(--ink-2);font-size:.96rem;margin:0 0 1.4rem;max-width:60ch}
 
 /* ===== TEMPLATE B — vertical: header on top, full-width visual below =====
    Used by the analytics section, How it works, FAQ and Apply. The header keeps
@@ -5254,11 +5254,6 @@ a{color:inherit}
    size and overflow:hidden just clips it, which reads as a zoomed screenshot. */
 .shot-phone img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
 
-/* a sub-block that pairs copy with a screen — same column rhythm as Template A */
-.block-row{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,5vw,3.5rem);align-items:center}
-@media (max-width:880px){.block-row{grid-template-columns:1fr;gap:2rem;justify-items:center}
-  .block-row .block-copy{justify-self:start}}
-.block-copy .sub-p{margin-bottom:0}
 
 /* ---- Bumpy Access screens (values from scankit/apps/mobile) ---- */
 .phone.access{margin:0 auto}
@@ -5530,16 +5525,13 @@ footer.site{border-top:1px solid var(--line);margin-top:clamp(3.5rem,7vw,6rem);b
 &lt;/section&gt;
 
 &lt;!-- SECTION 3 — inside the platform: the numbers, then the door --&gt;
+&lt;!-- SECTION 3 — inside the platform --&gt;
 &lt;section class=&quot;wrap2&quot; id=&quot;tools&quot;&gt;
   &lt;div class=&quot;sec-head&quot;&gt;
     &lt;h2 class=&quot;sec-title&quot;&gt;An inside look.&lt;/h2&gt;
-    &lt;p class=&quot;sec-sub&quot;&gt;The side your team works in — the numbers while a night sells, and the door on the night itself.&lt;/p&gt;
+    &lt;p class=&quot;sec-sub&quot;&gt;The numbers while a night sells — revenue, tickets, capacity and where the traffic came from, updating as it goes.&lt;/p&gt;
   &lt;/div&gt;
   &lt;div class=&quot;sec-body&quot;&gt;
-
-    &lt;div class=&quot;block&quot;&gt;
-      &lt;h3 class=&quot;sub-h&quot;&gt;Live numbers while it sells&lt;/h3&gt;
-      &lt;p class=&quot;sub-p&quot;&gt;Revenue, tickets, capacity and where the traffic came from — updating as the night sells, on any phone or laptop.&lt;/p&gt;
 &lt;figure class=&quot;panel&quot;&gt;
     &lt;div class=&quot;pn-bar&quot;&gt;&lt;span class=&quot;pn-t on&quot;&gt;Overview&lt;/span&gt;&lt;span class=&quot;pn-t&quot;&gt;Tickets&lt;/span&gt;&lt;span class=&quot;pn-t&quot;&gt;Sales&lt;/span&gt;&lt;span class=&quot;pn-t&quot;&gt;Traffic&lt;/span&gt;&lt;span class=&quot;pn-range&quot;&gt;Last 30 days&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;pn-kpis&quot;&gt;
@@ -5559,18 +5551,16 @@ footer.site{border-top:1px solid var(--line);margin-top:clamp(3.5rem,7vw,6rem);b
       &lt;div class=&quot;pn-k&quot;&gt;&lt;span&gt;Checkout Abandonment&lt;/span&gt;&lt;b&gt;18%&lt;/b&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/figure&gt;
-    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
 
-    &lt;div class=&quot;block block-row&quot;&gt;
-      &lt;div class=&quot;block-copy&quot;&gt;
-        &lt;h3 class=&quot;sub-h&quot;&gt;A door that doesn't stall&lt;/h3&gt;
-        &lt;p class=&quot;sub-p&quot;&gt;Bumpy Access is our own scanning app. The guest list syncs to the phone before doors, so scans keep working with no signal. Green means in; yellow means that ticket already came through, and when.&lt;/p&gt;
-      &lt;/div&gt;
-&lt;!-- Bumpy Access, rebuilt from scankit/apps/mobile: dark palette
-           (#0b1220 / #111827 / #1f2937), the EventScannerBar strip, the
-           Lookup/Scan/Stats/Settings tabs, and ScanResultOverlay's own copy and
-           colours (#22c55e / #eab308 / #ef4444, white 800 lines + 90% white
-           status line). Type is scaled to this screen width, not 1:1 pt. --&gt;
+&lt;!-- SECTION 4 — the scanner, its own section on Template A --&gt;
+&lt;section class=&quot;wrap2&quot; id=&quot;access&quot;&gt;
+  &lt;div class=&quot;split&quot;&gt;
+    &lt;div class=&quot;split-copy&quot;&gt;
+      &lt;h2 class=&quot;sec-title&quot;&gt;The door, handled.&lt;/h2&gt;
+      &lt;p class=&quot;sec-sub&quot;&gt;Bumpy Access is our own app, built for the gate rather than the office. The guest list sits on the phone, so the queue keeps moving when the signal doesn't — and every result is readable at arm's length.&lt;/p&gt;
+    &lt;/div&gt;
       &lt;div class=&quot;phone access&quot; role=&quot;img&quot; aria-label=&quot;Bumpy Access: the attendee list, the camera, then a valid, an already-scanned and a rejected ticket.&quot;&gt;
         &lt;div class=&quot;frames&quot;&gt;
 
@@ -5676,9 +5666,6 @@ footer.site{border-top:1px solid var(--line);margin-top:clamp(3.5rem,7vw,6rem);b
         &lt;/div&gt;
         &lt;ol class=&quot;fr-dots&quot; aria-hidden=&quot;true&quot;&gt;&lt;li class=&quot;on&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ol&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;/div&gt;
-
   &lt;/div&gt;
 &lt;/section&gt;
 
