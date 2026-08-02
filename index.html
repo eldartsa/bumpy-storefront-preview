@@ -4062,6 +4062,9 @@
     font-family: system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
     line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden;
     display: grid; place-items: center; padding: 5.5rem 1.1rem 3rem;
+    /* Cap the auto track at the padding box. Without this the card's
+       min-content sizes the column, so it overhangs the right gutter. */
+    grid-template-columns: minmax(0, 1fr);
   }
   /* Login is Bumpy chrome, not an event — the ambient stays neutral, no accent.
      A cool, faint light from the top, nothing that competes with an event's art. */
@@ -4073,7 +4076,7 @@
     mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 82%);
   }
 
-  .shell { width: 100%; max-width: 25.5rem; }
+  .shell { width: 100%; max-width: 25.5rem; min-width: 0; }
 
 
   .card-wrap { position: relative; }
