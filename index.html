@@ -900,6 +900,16 @@
     .foot-in { grid-template-columns: 1fr; gap: 2.2rem; }
     .foot-cols { grid-template-columns: repeat(2, 1fr); }
   }
+
+  /* ===== MOBILE TYPE FLOOR ==================================================
+     Phones are read at arm's length, and iOS zooms the page whenever a field
+     under 16px takes focus. Raise the small tier and the inputs only — the
+     headings and body copy already measure well and stay untouched. */
+  @media (max-width: 860px) {
+    :root { --label: 0.78rem; --label-sm: 0.72rem; }
+    .tier-desc, .price-detail { font-size: 0.89rem; }
+    .where-cue { font-size: 0.72rem; }   /* tappable cues sat below the floor */
+  }
 &lt;/style&gt;
 
 &lt;div class=&quot;ambient&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
@@ -1967,6 +1977,15 @@
       to { opacity: 1; transform: translateY(0); }
     }
   }
+
+  /* ===== MOBILE TYPE FLOOR ==================================================
+     Phones are read at arm's length, and iOS zooms the page whenever a field
+     under 16px takes focus. Raise the small tier and the inputs only — the
+     headings and body copy already measure well and stay untouched. */
+  @media (max-width: 860px) {
+    :root { --label: 0.78rem; --label-sm: 0.72rem; }
+    .r-desc, .ev-s, .cat-meta { font-size: 0.89rem; }
+  }
 &lt;/style&gt;
 
 &lt;div class=&quot;ambient&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
@@ -2715,6 +2734,17 @@
   @media (prefers-reduced-motion: no-preference) {
     .view { animation: rise 300ms var(--ease) both; }
     @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  }
+
+  /* ===== MOBILE TYPE FLOOR ==================================================
+     Phones are read at arm's length, and iOS zooms the page whenever a field
+     under 16px takes focus. Raise the small tier and the inputs only — the
+     headings and body copy already measure well and stay untouched. */
+  @media (max-width: 860px) {
+    :root { --label: 0.78rem; --label-sm: 0.72rem; }
+    .coupon input, .field input, .field select { font-size: 1rem; }
+    .view-sub, .notice, .stripe-note, .ev-s { font-size: 0.89rem; }
+    .ev-age { font-size: 0.72rem; }
   }
 &lt;/style&gt;
 
@@ -3773,6 +3803,15 @@
     @keyframes stamp { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   }
+
+  /* ===== MOBILE TYPE FLOOR ==================================================
+     Phones are read at arm's length, and iOS zooms the page whenever a field
+     under 16px takes focus. Raise the small tier and the inputs only — the
+     headings and body copy already measure well and stay untouched. */
+  @media (max-width: 860px) {
+    :root { --label: 0.78rem; --label-sm: 0.72rem; }
+    .t-meta { font-size: 0.89rem; }
+  }
 &lt;/style&gt;
 
 &lt;div class=&quot;ambient&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
@@ -4251,6 +4290,15 @@
   @media (prefers-reduced-motion: no-preference) {
     .card { animation: rise 420ms var(--ease) both; }
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+
+  /* ===== MOBILE TYPE FLOOR ==================================================
+     Phones are read at arm's length, and iOS zooms the page whenever a field
+     under 16px takes focus. Raise the small tier and the inputs only — the
+     headings and body copy already measure well and stay untouched. */
+  @media (max-width: 860px) {
+    :root { --label: 0.78rem; --label-sm: 0.72rem; }
+    .num, .cc select { font-size: 1rem; }
   }
 &lt;/style&gt;
 
