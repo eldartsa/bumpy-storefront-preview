@@ -4781,7 +4781,7 @@
     --bg:#0a0a0c; --well:#050507; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
     --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
     --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
-    --pos:#34d399;
+    --pos:#34d399; --warn:#ffc46b;
     --accent:#e7ff1a; --glow:#f2ff7d; --accent-ink:#1a2300;
     --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px; --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
   }
@@ -4862,6 +4862,30 @@
   .card.past .art{filter:saturate(.7) brightness(.7)}
   .card.past{opacity:.86}
 
+  /* store grid — a product is a photograph, not a poster, so the cell is 4:3
+     rather than the events grid's square. Same card chrome otherwise, so a
+     producer selling both reads as one business. */
+  .pcard .art{aspect-ratio:4/3}
+  .pcard .type{position:absolute;top:.7rem;left:.7rem;font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    padding:.26rem .5rem;border-radius:var(--r-pill);background:rgba(10,10,12,.72);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink-2)}
+  /* Dates are optional on a store item, so the slot is always filled: a real
+     date when there is one, &quot;Any date&quot; when there isn't. Without this the grid
+     goes ragged and an undated item reads as missing data rather than as an
+     item you can buy whenever. */
+  .pcard .when{position:absolute;top:.7rem;right:.7rem;display:inline-flex;align-items:center;gap:.3rem;
+    font-size:.62rem;font-weight:700;letter-spacing:.03em;padding:.26rem .5rem;border-radius:var(--r-pill);
+    background:rgba(10,10,12,.72);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink)}
+  .pcard .when.any{color:var(--ink-3);font-weight:600}
+  .pcard .body .d{color:var(--ink-2);font-size:.82rem;margin-top:.05rem}
+  .pcard .body .p{margin-top:.7rem}
+  .pcard .body .left{color:var(--warn);font-weight:600}
+  .pcard.soldout{opacity:.55}
+  .pcard.soldout .art{filter:saturate(.55) brightness(.65)}
+
+  /* empty state for a producer with no store items yet */
+  .empty{border:1px dashed var(--line);border-radius:var(--r-lg);padding:2.6rem 1.4rem;text-align:center;color:var(--ink-3)}
+  .empty b{display:block;color:var(--ink-2);font-weight:600;margin-bottom:.3rem}
+
   .sectionlbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:2.4rem .3rem 1.1rem}
   /* footer */
   footer.site{border-top:1px solid var(--line);margin-top:0;background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 3rem}
@@ -4884,6 +4908,65 @@
 
 &lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot;&gt;&lt;defs&gt;
   &lt;g id=&quot;poster&quot;&gt;&lt;rect width=&quot;100&quot; height=&quot;66&quot; fill=&quot;url(#sky)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;62&quot; r=&quot;14&quot; fill=&quot;var(--c)&quot;/&gt;&lt;rect y=&quot;66&quot; width=&quot;100&quot; height=&quot;34&quot; fill=&quot;var(--sea)&quot;/&gt;&lt;rect x=&quot;33&quot; y=&quot;74&quot; width=&quot;34&quot; height=&quot;2.4&quot; rx=&quot;1.2&quot; fill=&quot;var(--c)&quot; opacity=&quot;.5&quot;/&gt;&lt;/g&gt;
+
+  &lt;!-- Store item artwork. Placeholder scenes, not proposed photography: a real
+       store item carries a vendor-uploaded photo. They exist so the grid can be
+       judged with four visually distinct cells. 100x75 = the 4:3 card. --&gt;
+  &lt;linearGradient id=&quot;g-isl&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#1d1030&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#8a3f52&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffa25c&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;linearGradient id=&quot;g-isl-sea&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#12324a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#07131f&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;g id=&quot;sc-island&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;75&quot; fill=&quot;url(#g-isl)&quot;/&gt;
+    &lt;circle cx=&quot;66&quot; cy=&quot;43&quot; r=&quot;9&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.95&quot;/&gt;
+    &lt;path d=&quot;M0 47 q14 -9 26 -1 q9 6 18 1 q10 -6 20 1 q8 5 16 -1 v9 H0 Z&quot; fill=&quot;#2a1430&quot; opacity=&quot;.85&quot;/&gt;
+    &lt;rect y=&quot;52&quot; width=&quot;100&quot; height=&quot;23&quot; fill=&quot;url(#g-isl-sea)&quot;/&gt;
+    &lt;rect x=&quot;60&quot; y=&quot;55&quot; width=&quot;12&quot; height=&quot;1.6&quot; rx=&quot;.8&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.45&quot;/&gt;
+    &lt;rect x=&quot;63&quot; y=&quot;60&quot; width=&quot;6&quot; height=&quot;1.2&quot; rx=&quot;.6&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.28&quot;/&gt;
+  &lt;/g&gt;
+
+  &lt;linearGradient id=&quot;g-boat&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#2b0f3d&quot;/&gt;&lt;stop offset=&quot;.5&quot; stop-color=&quot;#c14a3e&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffb066&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;g id=&quot;sc-boat&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;75&quot; fill=&quot;url(#g-boat)&quot;/&gt;
+    &lt;circle cx=&quot;50&quot; cy=&quot;49&quot; r=&quot;11&quot; fill=&quot;#ffe3b0&quot; opacity=&quot;.9&quot;/&gt;
+    &lt;rect y=&quot;50&quot; width=&quot;100&quot; height=&quot;25&quot; fill=&quot;#170b26&quot; opacity=&quot;.72&quot;/&gt;
+    &lt;rect x=&quot;44&quot; y=&quot;53&quot; width=&quot;12&quot; height=&quot;1.5&quot; rx=&quot;.7&quot; fill=&quot;#ffe3b0&quot; opacity=&quot;.5&quot;/&gt;
+    &lt;rect x=&quot;46&quot; y=&quot;58&quot; width=&quot;8&quot; height=&quot;1.2&quot; rx=&quot;.6&quot; fill=&quot;#ffe3b0&quot; opacity=&quot;.3&quot;/&gt;
+    &lt;path d=&quot;M30 50 h34 l-5 6 H35 Z&quot; fill=&quot;#0c0614&quot;/&gt;
+    &lt;rect x=&quot;45&quot; y=&quot;38&quot; width=&quot;1.4&quot; height=&quot;12&quot; fill=&quot;#0c0614&quot;/&gt;
+    &lt;path d=&quot;M47 38 l9 11 h-9 Z&quot; fill=&quot;#0c0614&quot;/&gt;
+  &lt;/g&gt;
+
+  &lt;g id=&quot;sc-tee&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;75&quot; fill=&quot;#141416&quot;/&gt;
+    &lt;ellipse cx=&quot;50&quot; cy=&quot;66&quot; rx=&quot;34&quot; ry=&quot;5&quot; fill=&quot;#000&quot; opacity=&quot;.45&quot;/&gt;
+    &lt;path d=&quot;M35 22 l8 -4 h14 l8 4 l7 6 -6 7 -3 -2 v25 q0 2 -2 2 H36 q-2 0 -2 -2 V33 l-3 2 -6 -7 Z&quot; fill=&quot;#232327&quot;/&gt;
+    &lt;path d=&quot;M43 18 q7 6 14 0&quot; fill=&quot;none&quot; stroke=&quot;#141416&quot; stroke-width=&quot;1.6&quot;/&gt;
+    &lt;circle cx=&quot;50&quot; cy=&quot;40&quot; r=&quot;7&quot; fill=&quot;none&quot; stroke=&quot;#ff8a3d&quot; stroke-width=&quot;2.2&quot;/&gt;
+    &lt;circle cx=&quot;50&quot; cy=&quot;40&quot; r=&quot;4.6&quot; fill=&quot;#232327&quot;/&gt;
+  &lt;/g&gt;
+
+  &lt;linearGradient id=&quot;g-road&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#0a1226&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#141a2e&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;g id=&quot;sc-transfer&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;75&quot; fill=&quot;url(#g-road)&quot;/&gt;
+    &lt;circle cx=&quot;24&quot; cy=&quot;20&quot; r=&quot;1.1&quot; fill=&quot;#dfe6ff&quot; opacity=&quot;.5&quot;/&gt;
+    &lt;circle cx=&quot;72&quot; cy=&quot;14&quot; r=&quot;0.9&quot; fill=&quot;#dfe6ff&quot; opacity=&quot;.4&quot;/&gt;
+    &lt;circle cx=&quot;55&quot; cy=&quot;24&quot; r=&quot;0.7&quot; fill=&quot;#dfe6ff&quot; opacity=&quot;.3&quot;/&gt;
+    &lt;path d=&quot;M42 34 h16 l26 41 H16 Z&quot; fill=&quot;#1d2440&quot;/&gt;
+    &lt;rect x=&quot;49&quot; y=&quot;38&quot; width=&quot;2&quot; height=&quot;6&quot; rx=&quot;1&quot; fill=&quot;#8fa0d8&quot; opacity=&quot;.55&quot;/&gt;
+    &lt;rect x=&quot;48.4&quot; y=&quot;49&quot; width=&quot;3.2&quot; height=&quot;8&quot; rx=&quot;1.2&quot; fill=&quot;#8fa0d8&quot; opacity=&quot;.45&quot;/&gt;
+    &lt;rect x=&quot;47.4&quot; y=&quot;62&quot; width=&quot;5.2&quot; height=&quot;10&quot; rx=&quot;1.6&quot; fill=&quot;#8fa0d8&quot; opacity=&quot;.35&quot;/&gt;
+    &lt;circle cx=&quot;36&quot; cy=&quot;36&quot; r=&quot;5&quot; fill=&quot;#ffd98a&quot; opacity=&quot;.55&quot;/&gt;
+    &lt;circle cx=&quot;64&quot; cy=&quot;36&quot; r=&quot;5&quot; fill=&quot;#ffd98a&quot; opacity=&quot;.55&quot;/&gt;
+    &lt;circle cx=&quot;36&quot; cy=&quot;36&quot; r=&quot;1.8&quot; fill=&quot;#fff4d6&quot;/&gt;
+    &lt;circle cx=&quot;64&quot; cy=&quot;36&quot; r=&quot;1.8&quot; fill=&quot;#fff4d6&quot;/&gt;
+  &lt;/g&gt;
 &lt;/defs&gt;&lt;/svg&gt;
 
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
@@ -4959,6 +5042,7 @@
   &lt;div class=&quot;tabs&quot;&gt;
     &lt;button class=&quot;tab on&quot; data-tab=&quot;up&quot;&gt;Upcoming &lt;span class=&quot;c&quot;&gt;1&lt;/span&gt;&lt;/button&gt;
     &lt;button class=&quot;tab&quot; data-tab=&quot;past&quot;&gt;Past &lt;span class=&quot;c&quot;&gt;4&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;tab&quot; data-tab=&quot;store&quot;&gt;Store &lt;span class=&quot;c&quot;&gt;4&lt;/span&gt;&lt;/button&gt;
   &lt;/div&gt;
 
   &lt;div class=&quot;grid&quot; id=&quot;grid&quot;&gt;&lt;/div&gt;
@@ -4998,6 +5082,17 @@
     {t:&quot;Afterlight · Nightfall&quot;, v:&quot;Sphere Hall&quot;, loc:&quot;Bangkok · Thailand&quot;, cat:&quot;Beach&quot;, d:&quot;18&quot;, m:&quot;Nov&quot;, p:&quot;990&quot;, from:true, img:&quot;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&quot;},
   ];
 
+  // Store items — seller-owned, sit beside events rather than inside one.
+  // Deliberately a mixed bag (trip / attraction / merch / transfer) because the
+  // model is generic: a store item is a product with a price, some details and
+  // OPTIONAL dates. `d`/`m` absent =&gt; undated, sells any time.
+  const STORE = [
+    {t:&quot;Island Day Trip — Koh Larn&quot;, k:&quot;Trip&quot;,      sc:&quot;sc-island&quot;,   d:&quot;04&quot;, m:&quot;Sep&quot;, desc:&quot;Boat, lunch, two beaches&quot;, p:&quot;2,400&quot;, from:true, left:3},
+    {t:&quot;Sunset Boat Party&quot;,          k:&quot;Trip&quot;,      sc:&quot;sc-boat&quot;,     d:&quot;12&quot;, m:&quot;Sep&quot;, desc:&quot;3 hours · open deck · resident DJ&quot;, p:&quot;1,800&quot;},
+    {t:&quot;Afterlight Tee — Eclipse&quot;,   k:&quot;Merch&quot;,     sc:&quot;sc-tee&quot;,                       desc:&quot;Heavyweight cotton · S–XXL&quot;, p:&quot;890&quot;, from:true},
+    {t:&quot;Airport Transfer BKK ⇄ Sukhumvit&quot;, k:&quot;Transfer&quot;, sc:&quot;sc-transfer&quot;,             desc:&quot;Private car · up to 3 bags&quot;, p:&quot;650&quot;}
+  ];
+
   // Producer descriptor = the top 1–2 categories across all their events. No genre
   // to write, no AI to guess — it stays correct as they post events, and matches
   // however the producer's events are actually categorised (community, food, …).
@@ -5026,23 +5121,51 @@
       &lt;/div&gt;
     &lt;/div&gt;`;
 
-  // tabs — Upcoming / Past both clickable, swap the single grid
+  const pcard = (i)=&gt;`
+    &lt;div class=&quot;card pcard&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Open ${i.t}&quot;&gt;
+      &lt;div class=&quot;art&quot;&gt;
+        &lt;svg viewBox=&quot;0 0 100 75&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;
+             style=&quot;display:block;width:100%;height:100%&quot;&gt;&lt;use href=&quot;#${i.sc}&quot;/&gt;&lt;/svg&gt;
+        &lt;div class=&quot;type&quot;&gt;${i.k}&lt;/div&gt;
+        ${i.d
+          ? `&lt;div class=&quot;when&quot;&gt;${i.d} ${i.m}&lt;/div&gt;`
+          : `&lt;div class=&quot;when any&quot;&gt;Any date&lt;/div&gt;`}
+      &lt;/div&gt;
+      &lt;div class=&quot;body&quot;&gt;
+        &lt;h3&gt;${i.t}&lt;/h3&gt;
+        &lt;div class=&quot;d&quot;&gt;${i.desc}&lt;/div&gt;
+        ${i.left ? `&lt;div class=&quot;loc left&quot;&gt;Only ${i.left} left&lt;/div&gt;` : ''}
+        &lt;div class=&quot;p&quot;&gt;${i.from?'&lt;small&gt;From&lt;/small&gt; ':''}${i.p} &lt;small&gt;THB&lt;/small&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;`;
+
+  // tabs — Upcoming / Past / Store all clickable, swap the single grid
   const grid = document.getElementById('grid');
   const tabs = [...document.querySelectorAll('.tab')];
+  let current = 'up';
   function render(which){
-    const list = which === 'past' ? PAST : UP;
-    grid.innerHTML = list.map(e =&gt; card(e, which === 'past')).join('');
+    current = which;
+    if (which === 'store') {
+      grid.innerHTML = STORE.length
+        ? STORE.map(pcard).join('')
+        : `&lt;div class=&quot;empty&quot; style=&quot;grid-column:1/-1&quot;&gt;&lt;b&gt;Nothing in the store yet&lt;/b&gt;Trips, add-ons and merch this producer sells will show up here.&lt;/div&gt;`;
+    } else {
+      const list = which === 'past' ? PAST : UP;
+      grid.innerHTML = list.map(e =&gt; card(e, which === 'past')).join('');
+    }
     tabs.forEach(t =&gt; t.classList.toggle('on', t.dataset.tab === which));
   }
   tabs.forEach(t =&gt; t.addEventListener('click', () =&gt; render(t.dataset.tab)));
 
-  // whole card is the click target → the event page (same full-cell affordance as WHERE)
-  function goEvent(){
-    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:'event'},'*'); return; } }catch(e){}
-    window.location.href = 'bumpy-event-page-mockup.html';
+  // whole card is the click target → the event page (same full-cell affordance as WHERE),
+  // or the product page when the Store tab is showing
+  function goCard(){
+    const dest = current === 'store' ? 'product' : 'event';
+    try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:dest},'*'); return; } }catch(e){}
+    window.location.href = dest === 'product' ? 'bumpy-product-mockup.html' : 'bumpy-event-page-mockup.html';
   }
-  grid.addEventListener('click', e =&gt; { if (e.target.closest('.card')) goEvent(); });
-  grid.addEventListener('keydown', e =&gt; { const c = e.target.closest('.card'); if (c &amp;&amp; (e.key==='Enter' || e.key===' ')){ e.preventDefault(); goEvent(); } });
+  grid.addEventListener('click', e =&gt; { if (e.target.closest('.card')) goCard(); });
+  grid.addEventListener('keydown', e =&gt; { const c = e.target.closest('.card'); if (c &amp;&amp; (e.key==='Enter' || e.key===' ')){ e.preventDefault(); goCard(); } });
 
   render('up');
   // header/footer navigation (logo -&gt; home, login, footer links)
@@ -5052,6 +5175,1187 @@
     if(R[key]) window.location.href=R[key];
   }
   document.querySelectorAll('[data-nav]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
+&lt;/script&gt;
+"></iframe>
+  <iframe class="pg" id="pg-product" data-key="product" title="Bumpy product" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Bumpy — Store Item&lt;/title&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;style&gt;
+  :root{
+    --bg:#0a0a0c; --well:#050507;
+    --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+    --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+    --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+    --pos:#34d399; --pos-soft:rgba(52,211,153,.8); --warn:#ffc46b; --danger:#ff8a8a;
+    --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px;
+    --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+    --label:.72rem; --label-sm:.64rem; --cta-size:.92rem;
+    /* extracted from the item's own artwork (the Koh Larn dawn) */
+    --accent:#ff9e5a; --glow:#ffd18f; --accent-ink:#2a1206;
+  }
+
+  *{box-sizing:border-box} [hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+    font-variant-numeric:tabular-nums;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* header chrome — monochrome, never the item accent */
+  .hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.86);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+  .hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .hdr-in.funnel{max-width:640px;margin:0 auto;padding:.7rem clamp(.8rem,3vw,1.5rem)}
+  @font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+  .wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+    font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);
+    background:none;border:none;cursor:pointer;padding:0}
+  .wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+    transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+  @keyframes bumppulse{0%,100%{transform:scale(.5)}50%{transform:scale(1.5)}}
+  @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+  .navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;background:none;border:none;cursor:pointer}
+  .navlink:hover{opacity:.7}
+  @media (min-width:1024px){.hdr-in:not(.funnel){padding-top:1.2rem;padding-bottom:1.2rem}
+    .wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+  .icon-btn{width:2.3rem;height:2.3rem;border-radius:50%;border:none;background:transparent;color:var(--ink-2);
+    display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:background var(--dur) ease,color var(--dur) ease}
+  .icon-btn:hover{background:var(--glass);color:var(--ink)}
+  .icon-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* funnel step rail */
+  .steps{display:flex;align-items:center;gap:.5rem;min-width:0}
+  .step{display:flex;align-items:center;gap:.42rem;min-width:0}
+  .step .dot{width:.42rem;height:.42rem;border-radius:50%;background:var(--ink-3);flex-shrink:0}
+  .step.now .dot{background:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+  .step span{font-size:var(--label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-3);white-space:nowrap}
+  .step.now span{color:var(--ink)} .step.done span{color:var(--ink-2)}
+  .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
+  @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
+
+  .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
+    color:var(--ink-2);margin:0 0 .85rem}
+  .lbl.mt{margin-top:2rem}
+
+  .cta{border:none;cursor:pointer;font-weight:800;font-size:var(--cta-size);letter-spacing:.01em;
+    padding:.8rem 1.2rem;border-radius:var(--r-pill);color:var(--accent-ink);
+    background:linear-gradient(135deg,var(--glow),var(--accent));
+    box-shadow:0 8px 30px -8px color-mix(in oklab,var(--accent) 70%,transparent);
+    transition:transform 140ms var(--ease)}
+  .cta:hover:not(:disabled){transform:translateY(-1px)}
+  .cta:active:not(:disabled){transform:scale(.99)}
+  .cta:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .cta:disabled{background:var(--glass-2);color:var(--ink-3);box-shadow:none;cursor:not-allowed}
+  .cta.full{width:100%;margin-top:1.4rem;padding:.95rem 1.5rem}
+
+  .field{margin-top:.85rem}
+  .field label{display:block;font-size:var(--label-sm);font-weight:700;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-2);margin-bottom:.3rem}
+  .field input,.field select{width:100%;height:2.6rem;padding:0 .85rem;border-radius:.7rem;
+    border:1px solid var(--line);background:var(--glass);color:var(--ink);font:inherit;font-size:.9rem;
+    outline:none;transition:border-color var(--dur) ease}
+  .field input::placeholder{color:var(--ink-3)}
+  .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
+  .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
+
+  /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
+    justify-content:space-between;gap:1rem;padding:1.05rem clamp(1rem,4vw,1.5rem);
+    padding-bottom:calc(1.05rem + env(safe-area-inset-bottom,0px));
+    background:rgba(14,14,16,.92);border-top:1px solid var(--line);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 -10px 28px -8px rgba(0,0,0,.7)}
+  @media (min-width:881px){.bar{left:50%;right:auto;bottom:1.25rem;transform:translateX(-50%);
+    width:min(560px,calc(100vw - 3rem));padding:.8rem .8rem .8rem 1.35rem;border:1px solid var(--line);
+    border-radius:var(--r-pill);box-shadow:0 18px 50px -18px rgba(0,0,0,.75)}}
+  .bar .sum{line-height:1.25;min-width:0;flex:1;padding-right:.5rem}
+  .bar .sum b{font-size:1.02rem;white-space:nowrap}
+  .bar .sum small{display:block;margin-top:.22rem;color:var(--ink-2);font-size:.76rem;white-space:nowrap}
+  .bar .cta{padding:.78rem 1.35rem;font-size:.88rem}
+
+  /* footer — two columns (Blog dropped, Contact folded into Company) */
+  footer.site{border-top:1px solid var(--line);background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 6.5rem}
+  .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+  .foot-brand .wordmark{font-size:1.5rem}
+  .foot-tag{color:var(--ink-2);font-size:.9rem;margin:1rem 0 1.3rem;max-width:30ch}
+  .foot-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem}
+  .foot-h{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+  .foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;cursor:pointer}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+    display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+  @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}}
+
+  /* Backdrop: the item's artwork blurred, same three-layer stack the event page
+     uses. All three layers are absolute inside .shell so nothing bleeds past the
+     content into the footer. */
+  .shell{position:relative}
+  .bd{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;height:700px;overflow:hidden;z-index:-2}
+  .bd svg{width:100%;height:100%;filter:blur(34px);transform:scale(1.15);opacity:.55}
+  .bd-fade{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;height:700px;z-index:-1;
+    background:linear-gradient(to bottom,rgba(10,10,12,.25) 0%,rgba(10,10,12,.7) 52%,var(--bg) 100%)}
+  .bd-under{position:absolute;top:700px;bottom:0;left:50%;transform:translateX(-50%);width:100vw;background:var(--bg);z-index:-1}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:2.4rem clamp(1rem,4vw,2rem) 3rem;
+    display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:clamp(1.6rem,4vw,3.2rem);align-items:start}
+  @media (max-width:900px){.wrap{grid-template-columns:1fr;gap:1.6rem;padding-top:1.4rem}}
+  .art-col{position:sticky;top:5.2rem}
+  @media (max-width:900px){.art-col{position:static}}
+  .art-main{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:1;
+    box-shadow:0 30px 80px -30px color-mix(in oklab,var(--accent) 55%,transparent)}
+  .art-main svg{display:block;width:100%;height:100%}
+  .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem}
+  .thumbs button{aspect-ratio:1;border-radius:.7rem;overflow:hidden;border:1px solid var(--line);
+    background:var(--well);cursor:pointer;padding:0;opacity:.55;transition:opacity var(--dur) ease,border-color var(--dur) ease}
+  .thumbs button.on,.thumbs button:hover{opacity:1;border-color:color-mix(in oklab,var(--ink) 22%,transparent)}
+  .thumbs svg{display:block;width:100%;height:100%}
+
+  .kind{display:inline-block;font-size:var(--label-sm);font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--accent);border:1px solid color-mix(in oklab,var(--accent) 40%,transparent);
+    border-radius:var(--r-pill);padding:.24rem .6rem}
+  h1.title{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:.9rem 0 0}
+
+  /* PRESENTED BY — the producer's own mark, never set on the Bumpy accent */
+  .org{display:flex;align-items:center;gap:.7rem;margin-top:1.3rem;padding:.75rem .9rem;
+    border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);cursor:pointer;width:100%;
+    text-align:left;color:inherit;font:inherit;transition:background var(--dur) ease}
+  .org:hover{background:var(--glass-2)}
+  .org .mark{width:2.4rem;height:2.4rem;border-radius:50%;overflow:hidden;flex-shrink:0}
+  .org .mark svg{display:block;width:100%;height:100%}
+  .org .k{font-size:var(--label-sm);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .org .n{font-weight:700;font-size:.95rem}
+  .org .chev{margin-left:auto;color:var(--ink-3);flex-shrink:0}
+
+  /* WHEN / WHERE. An undated store item still fills the WHEN cell — &quot;Any date&quot;
+     is a real answer, not missing data, and it is what makes optional dates
+     legible to a buyer. */
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.4rem}
+  @media (max-width:460px){.info{grid-template-columns:1fr}}
+  .cell{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);padding:.85rem .95rem}
+  .cell .k{font-size:var(--label-sm);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .cell .v{font-weight:700;font-size:.95rem;margin-top:.2rem}
+  .cell .s{color:var(--ink-2);font-size:.82rem;margin-top:.1rem}
+
+  section.blk{margin-top:2.4rem}
+  section.blk h2{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
+    color:var(--ink-2);margin:0 0 .85rem}
+  .prose{color:var(--ink-2);font-size:.97rem;max-width:62ch;margin:0}
+  .prose+.prose{margin-top:.8rem}
+
+  /* Included / not included — the single most-asked question on anything sold
+     in advance, so it gets its own block rather than living inside prose. */
+  .incl{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  @media (max-width:620px){.incl{grid-template-columns:1fr}}
+  .incl ul{list-style:none;margin:0;padding:0}
+  .incl li{display:flex;gap:.5rem;align-items:flex-start;font-size:.9rem;padding:.3rem 0;color:var(--ink-2)}
+  .incl li svg{flex-shrink:0;margin-top:.28rem}
+  .incl .yes li svg{color:var(--pos)} .incl .no li svg{color:var(--ink-3)}
+  .incl .h{font-size:var(--label-sm);font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-3);margin:0 0 .45rem}
+
+  .note{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);
+    padding:.9rem 1rem;color:var(--ink-2);font-size:.88rem}
+  .note b{color:var(--ink)}
+
+&lt;/style&gt;
+
+&lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;
+  &lt;linearGradient id=&quot;p-sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#1d1030&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#8a3f52&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffa25c&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;linearGradient id=&quot;p-sea&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#12324a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#07131f&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;g id=&quot;p-art&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#p-sky)&quot;/&gt;
+    &lt;circle cx=&quot;66&quot; cy=&quot;52&quot; r=&quot;11&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.95&quot;/&gt;
+    &lt;path d=&quot;M0 60 q14 -11 26 -1 q9 7 18 1 q10 -7 20 1 q8 6 16 -1 v10 H0 Z&quot; fill=&quot;#2a1430&quot; opacity=&quot;.85&quot;/&gt;
+    &lt;rect y=&quot;67&quot; width=&quot;100&quot; height=&quot;33&quot; fill=&quot;url(#p-sea)&quot;/&gt;
+    &lt;rect x=&quot;59&quot; y=&quot;71&quot; width=&quot;14&quot; height=&quot;1.8&quot; rx=&quot;.9&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.45&quot;/&gt;
+    &lt;rect x=&quot;62&quot; y=&quot;77&quot; width=&quot;8&quot; height=&quot;1.4&quot; rx=&quot;.7&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.28&quot;/&gt;
+    &lt;rect x=&quot;64&quot; y=&quot;83&quot; width=&quot;4&quot; height=&quot;1.1&quot; rx=&quot;.55&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.18&quot;/&gt;
+  &lt;/g&gt;
+&lt;/defs&gt;&lt;/svg&gt;
+
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in&quot;&gt;
+  &lt;button class=&quot;wordmark&quot; data-nav=&quot;event&quot; aria-label=&quot;Bumpy home&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/button&gt;
+  &lt;button class=&quot;navlink&quot; data-nav=&quot;login&quot;&gt;Log in / Sign up&lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;div class=&quot;shell&quot;&gt;
+  &lt;div class=&quot;bd&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; preserveAspectRatio=&quot;xMidYMid slice&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+  &lt;div class=&quot;bd-fade&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;bd-under&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+
+  &lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;art-col&quot;&gt;
+      &lt;div class=&quot;art-main&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; aria-label=&quot;Island Day Trip artwork&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
+      &lt;div class=&quot;thumbs&quot;&gt;
+        &lt;button class=&quot;on&quot; aria-label=&quot;Photo 1&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+        &lt;button aria-label=&quot;Photo 2&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+        &lt;button aria-label=&quot;Photo 3&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+        &lt;button aria-label=&quot;Photo 4&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;info-col&quot;&gt;
+      &lt;span class=&quot;kind&quot;&gt;Trip&lt;/span&gt;
+      &lt;h1 class=&quot;title&quot;&gt;Island Day Trip — Koh Larn&lt;/h1&gt;
+
+      &lt;button class=&quot;org&quot; data-nav=&quot;producer&quot;&gt;
+        &lt;span class=&quot;mark&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;Afterlight&quot;&gt;&lt;defs&gt;&lt;clipPath id=&quot;org-c&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;50&quot;/&gt;&lt;/clipPath&gt;&lt;radialGradient id=&quot;org-g&quot; cx=&quot;50%&quot; cy=&quot;50%&quot; r=&quot;50%&quot;&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#ff8a3d&quot; stop-opacity=&quot;0&quot;/&gt;&lt;stop offset=&quot;.78&quot; stop-color=&quot;#ff8a3d&quot; stop-opacity=&quot;.55&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ff8a3d&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;g clip-path=&quot;url(#org-c)&quot;&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;#1b0f0c&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;46&quot; fill=&quot;url(#org-g)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;30&quot; fill=&quot;none&quot; stroke=&quot;#ff8a3d&quot; stroke-width=&quot;5.5&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;27&quot; fill=&quot;#120a08&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;span class=&quot;k&quot;&gt;Presented by&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;n&quot;&gt;Afterlight&lt;/span&gt;&lt;/span&gt;
+        &lt;svg class=&quot;chev&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M9 5l7 7-7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+
+      &lt;div class=&quot;info&quot;&gt;
+        &lt;div class=&quot;cell&quot;&gt;&lt;div class=&quot;k&quot;&gt;When&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;Thu, Sep 4&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;07:30 — 18:00 · ICT&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;cell&quot;&gt;&lt;div class=&quot;k&quot;&gt;Departs&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;Bali Hai Pier&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;Pattaya, Thailand&lt;/div&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;section class=&quot;blk&quot;&gt;
+        &lt;h2&gt;About&lt;/h2&gt;
+        &lt;p class=&quot;prose&quot;&gt;A full day off the mainland with the Afterlight crew. Speedboat out at first light,
+          two beaches before the day-trip boats arrive, lunch on the sand, and back in time for the evening set.&lt;/p&gt;
+        &lt;p class=&quot;prose&quot;&gt;Group size is capped at 24 so the boat stays quick and the beaches stay quiet.&lt;/p&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;blk&quot;&gt;
+        &lt;h2&gt;What's included&lt;/h2&gt;
+        &lt;div class=&quot;incl&quot;&gt;
+          &lt;div&gt;&lt;p class=&quot;h&quot;&gt;Included&lt;/p&gt;&lt;ul class=&quot;yes&quot;&gt;
+            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Return speedboat transfer&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Lunch and soft drinks&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Snorkel gear and life vests&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;English / Thai guide&lt;/span&gt;&lt;/li&gt;
+          &lt;/ul&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;p class=&quot;h&quot;&gt;Not included&lt;/p&gt;&lt;ul class=&quot;no&quot;&gt;
+            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Hotel pickup&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Alcoholic drinks&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Travel insurance&lt;/span&gt;&lt;/li&gt;
+          &lt;/ul&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;blk&quot;&gt;
+        &lt;h2&gt;Good to know&lt;/h2&gt;
+        &lt;p class=&quot;note&quot;&gt;Sold by &lt;b&gt;Afterlight&lt;/b&gt;, who run the trip. Bumpy handles the payment and your voucher.
+          Bring the voucher QR — the crew scans it at the pier.&lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;foot-cols&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a data-nav=&quot;login&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Apply to Bumpy&lt;/a&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;&lt;span&gt;© 2026 Bumpy&lt;/span&gt;&lt;/div&gt;
+&lt;/footer&gt;
+
+
+&lt;div class=&quot;bar&quot;&gt;
+  &lt;div class=&quot;sum&quot;&gt;&lt;b&gt;From 2,400 THB&lt;/b&gt;&lt;small&gt;Thu, Sep 4 · 3 spots left&lt;/small&gt;&lt;/div&gt;
+  &lt;button class=&quot;cta&quot; data-nav=&quot;pselect&quot;&gt;Buy now&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  
+  function PNAV(key, order){
+    try{ if(window.parent &amp;&amp; window.parent!==window){
+      window.parent.postMessage(order?{bumpyNav:key,order:order}:{bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
+      partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
+      producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
+      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
+    if(R[key]) window.location.href=R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(function(el){
+    el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
+
+  var tb = document.querySelectorAll('.thumbs button');
+  tb.forEach(function(b){ b.addEventListener('click', function(){
+    tb.forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on'); }); });
+&lt;/script&gt;
+"></iframe>
+  <iframe class="pg" id="pg-pselect" data-key="pselect" title="Bumpy pselect" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Bumpy — Choose Options&lt;/title&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;style&gt;
+  :root{
+    --bg:#0a0a0c; --well:#050507;
+    --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+    --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+    --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+    --pos:#34d399; --pos-soft:rgba(52,211,153,.8); --warn:#ffc46b; --danger:#ff8a8a;
+    --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px;
+    --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+    --label:.72rem; --label-sm:.64rem; --cta-size:.92rem;
+    /* extracted from the item's own artwork (the Koh Larn dawn) */
+    --accent:#ff9e5a; --glow:#ffd18f; --accent-ink:#2a1206;
+  }
+
+  *{box-sizing:border-box} [hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+    font-variant-numeric:tabular-nums;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* header chrome — monochrome, never the item accent */
+  .hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.86);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+  .hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .hdr-in.funnel{max-width:640px;margin:0 auto;padding:.7rem clamp(.8rem,3vw,1.5rem)}
+  @font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+  .wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+    font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);
+    background:none;border:none;cursor:pointer;padding:0}
+  .wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+    transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+  @keyframes bumppulse{0%,100%{transform:scale(.5)}50%{transform:scale(1.5)}}
+  @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+  .navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;background:none;border:none;cursor:pointer}
+  .navlink:hover{opacity:.7}
+  @media (min-width:1024px){.hdr-in:not(.funnel){padding-top:1.2rem;padding-bottom:1.2rem}
+    .wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+  .icon-btn{width:2.3rem;height:2.3rem;border-radius:50%;border:none;background:transparent;color:var(--ink-2);
+    display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:background var(--dur) ease,color var(--dur) ease}
+  .icon-btn:hover{background:var(--glass);color:var(--ink)}
+  .icon-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* funnel step rail */
+  .steps{display:flex;align-items:center;gap:.5rem;min-width:0}
+  .step{display:flex;align-items:center;gap:.42rem;min-width:0}
+  .step .dot{width:.42rem;height:.42rem;border-radius:50%;background:var(--ink-3);flex-shrink:0}
+  .step.now .dot{background:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+  .step span{font-size:var(--label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-3);white-space:nowrap}
+  .step.now span{color:var(--ink)} .step.done span{color:var(--ink-2)}
+  .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
+  @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
+
+  .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
+    color:var(--ink-2);margin:0 0 .85rem}
+  .lbl.mt{margin-top:2rem}
+
+  .cta{border:none;cursor:pointer;font-weight:800;font-size:var(--cta-size);letter-spacing:.01em;
+    padding:.8rem 1.2rem;border-radius:var(--r-pill);color:var(--accent-ink);
+    background:linear-gradient(135deg,var(--glow),var(--accent));
+    box-shadow:0 8px 30px -8px color-mix(in oklab,var(--accent) 70%,transparent);
+    transition:transform 140ms var(--ease)}
+  .cta:hover:not(:disabled){transform:translateY(-1px)}
+  .cta:active:not(:disabled){transform:scale(.99)}
+  .cta:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .cta:disabled{background:var(--glass-2);color:var(--ink-3);box-shadow:none;cursor:not-allowed}
+  .cta.full{width:100%;margin-top:1.4rem;padding:.95rem 1.5rem}
+
+  .field{margin-top:.85rem}
+  .field label{display:block;font-size:var(--label-sm);font-weight:700;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-2);margin-bottom:.3rem}
+  .field input,.field select{width:100%;height:2.6rem;padding:0 .85rem;border-radius:.7rem;
+    border:1px solid var(--line);background:var(--glass);color:var(--ink);font:inherit;font-size:.9rem;
+    outline:none;transition:border-color var(--dur) ease}
+  .field input::placeholder{color:var(--ink-3)}
+  .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
+  .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
+
+  /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
+    justify-content:space-between;gap:1rem;padding:1.05rem clamp(1rem,4vw,1.5rem);
+    padding-bottom:calc(1.05rem + env(safe-area-inset-bottom,0px));
+    background:rgba(14,14,16,.92);border-top:1px solid var(--line);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 -10px 28px -8px rgba(0,0,0,.7)}
+  @media (min-width:881px){.bar{left:50%;right:auto;bottom:1.25rem;transform:translateX(-50%);
+    width:min(560px,calc(100vw - 3rem));padding:.8rem .8rem .8rem 1.35rem;border:1px solid var(--line);
+    border-radius:var(--r-pill);box-shadow:0 18px 50px -18px rgba(0,0,0,.75)}}
+  .bar .sum{line-height:1.25;min-width:0;flex:1;padding-right:.5rem}
+  .bar .sum b{font-size:1.02rem;white-space:nowrap}
+  .bar .sum small{display:block;margin-top:.22rem;color:var(--ink-2);font-size:.76rem;white-space:nowrap}
+  .bar .cta{padding:.78rem 1.35rem;font-size:.88rem}
+
+  /* footer — two columns (Blog dropped, Contact folded into Company) */
+  footer.site{border-top:1px solid var(--line);background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 6.5rem}
+  .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+  .foot-brand .wordmark{font-size:1.5rem}
+  .foot-tag{color:var(--ink-2);font-size:.9rem;margin:1rem 0 1.3rem;max-width:30ch}
+  .foot-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem}
+  .foot-h{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+  .foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;cursor:pointer}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+    display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+  @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}}
+
+  .fwrap{max-width:640px;margin:0 auto;padding:1.8rem clamp(.9rem,3vw,1.5rem) 9rem}
+  .item{display:flex;align-items:center;gap:.9rem;padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
+  .item .th{width:3.4rem;height:3.4rem;border-radius:.7rem;overflow:hidden;flex-shrink:0;
+    box-shadow:0 8px 26px -6px color-mix(in oklab,var(--accent) 45%,transparent)}
+  .item .th svg{display:block;width:100%;height:100%}
+  .item .t{font-weight:700;font-size:.98rem;letter-spacing:-.01em;margin:0}
+  .item .s{color:var(--ink-2);font-size:.8rem;margin:.1rem 0 0}
+
+  /* departure picker — only rendered when the item is dated */
+  .dates{display:flex;gap:.5rem;flex-wrap:wrap}
+  .dchip{border:1px solid var(--line);background:var(--glass);color:var(--ink-2);border-radius:var(--r-lg);
+    padding:.55rem .8rem;cursor:pointer;font:inherit;text-align:center;line-height:1.2;min-width:4.6rem;
+    transition:border-color var(--dur) ease,background var(--dur) ease,color var(--dur) ease}
+  .dchip b{display:block;font-size:.98rem;font-weight:800;color:var(--ink)}
+  .dchip small{font-size:.66rem;letter-spacing:.06em;text-transform:uppercase}
+  .dchip.on{border-color:var(--accent);background:color-mix(in oklab,var(--accent) 12%,transparent);color:var(--ink)}
+  .dchip:disabled{opacity:.4;cursor:not-allowed}
+
+  /* Two-line option rows with a fixed action column, same shape as ticket
+     selection so the funnel reads identically whichever thing you're buying. */
+  .row{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--glass);
+    border-radius:var(--r-lg);padding:.85rem 1rem;margin-top:.7rem;transition:border-color var(--dur) ease,background var(--dur) ease}
+  .row.on{border-color:color-mix(in oklab,var(--ink) 20%,transparent);background:var(--glass-2)}
+  .row-top{display:flex;align-items:center;gap:.9rem}
+  .row .n{flex:1;min-width:0}
+  .row .n b{display:block;font-weight:700;font-size:.95rem}
+  .row .n small{display:block;color:var(--ink-3);font-size:.8rem;margin-top:.1rem}
+  .qty{display:flex;align-items:center;gap:.2rem;flex-shrink:0;width:6.6rem;justify-content:flex-end}
+  .qty button{width:2rem;height:2rem;border-radius:50%;border:1px solid var(--line);background:var(--glass);
+    color:var(--ink);font:inherit;font-size:1rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+  .qty button:hover:not(:disabled){background:var(--glass-2)}
+  .qty button:disabled{opacity:.35;cursor:not-allowed}
+  .qty span{min-width:1.6rem;text-align:center;font-weight:800}
+  .row .pr{padding-top:.6rem;margin-top:.6rem;border-top:1px solid var(--line-soft);font-weight:700;font-size:.94rem}
+  .row .pr small{color:var(--ink-3);font-weight:500;font-size:.72rem}
+
+  .hint{color:var(--ink-3);font-size:.8rem;margin:.9rem 0 0}
+&lt;/style&gt;
+
+&lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;
+  &lt;linearGradient id=&quot;p-sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#1d1030&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#8a3f52&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffa25c&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;linearGradient id=&quot;p-sea&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#12324a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#07131f&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;g id=&quot;p-art&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#p-sky)&quot;/&gt;
+    &lt;circle cx=&quot;66&quot; cy=&quot;52&quot; r=&quot;11&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.95&quot;/&gt;
+    &lt;path d=&quot;M0 60 q14 -11 26 -1 q9 7 18 1 q10 -7 20 1 q8 6 16 -1 v10 H0 Z&quot; fill=&quot;#2a1430&quot; opacity=&quot;.85&quot;/&gt;
+    &lt;rect y=&quot;67&quot; width=&quot;100&quot; height=&quot;33&quot; fill=&quot;url(#p-sea)&quot;/&gt;
+    &lt;rect x=&quot;59&quot; y=&quot;71&quot; width=&quot;14&quot; height=&quot;1.8&quot; rx=&quot;.9&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.45&quot;/&gt;
+    &lt;rect x=&quot;62&quot; y=&quot;77&quot; width=&quot;8&quot; height=&quot;1.4&quot; rx=&quot;.7&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.28&quot;/&gt;
+    &lt;rect x=&quot;64&quot; y=&quot;83&quot; width=&quot;4&quot; height=&quot;1.1&quot; rx=&quot;.55&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.18&quot;/&gt;
+  &lt;/g&gt;
+&lt;/defs&gt;&lt;/svg&gt;
+
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in funnel&quot;&gt;
+  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;product&quot; aria-label=&quot;Back&quot;&gt;
+    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M15 5l-7 7 7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Choose&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step &quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step &quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
+  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;producer&quot; aria-label=&quot;Close&quot;&gt;
+    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;div class=&quot;fwrap&quot;&gt;
+  &lt;div class=&quot;item&quot;&gt;
+    &lt;span class=&quot;th&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+    &lt;span&gt;&lt;p class=&quot;t&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;s&quot;&gt;Afterlight · Bali Hai Pier, Pattaya&lt;/p&gt;&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;p class=&quot;lbl mt&quot;&gt;Departure&lt;/p&gt;
+  &lt;div class=&quot;dates&quot; id=&quot;dates&quot;&gt;
+    &lt;button class=&quot;dchip on&quot; data-d=&quot;Thu, Sep 4&quot;&gt;&lt;b&gt;4&lt;/b&gt;&lt;small&gt;Sep&lt;/small&gt;&lt;/button&gt;
+    &lt;button class=&quot;dchip&quot; data-d=&quot;Sun, Sep 7&quot;&gt;&lt;b&gt;7&lt;/b&gt;&lt;small&gt;Sep&lt;/small&gt;&lt;/button&gt;
+    &lt;button class=&quot;dchip&quot; data-d=&quot;Thu, Sep 11&quot;&gt;&lt;b&gt;11&lt;/b&gt;&lt;small&gt;Sep&lt;/small&gt;&lt;/button&gt;
+    &lt;button class=&quot;dchip&quot; disabled title=&quot;Sold out&quot;&gt;&lt;b&gt;14&lt;/b&gt;&lt;small&gt;Sold&lt;/small&gt;&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;p class=&quot;lbl mt&quot;&gt;Options&lt;/p&gt;
+  &lt;div id=&quot;rows&quot;&gt;&lt;/div&gt;
+
+  &lt;p class=&quot;hint&quot;&gt;One item per order — buying a second thing is a second checkout.&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;foot-cols&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a data-nav=&quot;login&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Apply to Bumpy&lt;/a&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;&lt;span&gt;© 2026 Bumpy&lt;/span&gt;&lt;/div&gt;
+&lt;/footer&gt;
+
+
+&lt;div class=&quot;bar&quot;&gt;
+  &lt;div class=&quot;sum&quot;&gt;&lt;b id=&quot;bar-total&quot;&gt;Select an option&lt;/b&gt;&lt;small id=&quot;bar-sub&quot;&gt;Thu, Sep 4&lt;/small&gt;&lt;/div&gt;
+  &lt;button class=&quot;cta&quot; id=&quot;go&quot; disabled&gt;Continue&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  
+  function PNAV(key, order){
+    try{ if(window.parent &amp;&amp; window.parent!==window){
+      window.parent.postMessage(order?{bumpyNav:key,order:order}:{bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
+      partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
+      producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
+      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
+    if(R[key]) window.location.href=R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(function(el){
+    el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
+
+  var OPTS = [
+    {id:&quot;adult&quot;, n:&quot;Adult&quot;,  s:&quot;13 and over&quot;, p:2400, max:6},
+    {id:&quot;child&quot;, n:&quot;Child&quot;,  s:&quot;4–12 · under 4 free&quot;, p:1400, max:6},
+    {id:&quot;speed&quot;, n:&quot;Private speedboat upgrade&quot;, s:&quot;Whole boat, departs on your time&quot;, p:9800, max:1}
+  ];
+  var qty = {}, date = &quot;Thu, Sep 4&quot;;
+  var rows = document.getElementById(&quot;rows&quot;);
+
+  function fmt(n){ return n.toLocaleString(&quot;en-US&quot;) + &quot; THB&quot;; }
+  function render(){
+    rows.innerHTML = OPTS.map(function(o){
+      var q = qty[o.id] || 0;
+      return '&lt;div class=&quot;row ' + (q ? 'on' : '') + '&quot;&gt;' +
+        '&lt;div class=&quot;row-top&quot;&gt;&lt;span class=&quot;n&quot;&gt;&lt;b&gt;' + o.n + '&lt;/b&gt;&lt;small&gt;' + o.s + '&lt;/small&gt;&lt;/span&gt;' +
+        '&lt;span class=&quot;qty&quot;&gt;' +
+          '&lt;button data-op=&quot;-&quot; data-id=&quot;' + o.id + '&quot; aria-label=&quot;Remove one ' + o.n + '&quot;' + (q ? '' : ' disabled') + '&gt;−&lt;/button&gt;' +
+          '&lt;span aria-live=&quot;polite&quot;&gt;' + q + '&lt;/span&gt;' +
+          '&lt;button data-op=&quot;+&quot; data-id=&quot;' + o.id + '&quot; aria-label=&quot;Add one ' + o.n + '&quot;' + (q &gt;= o.max ? ' disabled' : '') + '&gt;+&lt;/button&gt;' +
+        '&lt;/span&gt;&lt;/div&gt;' +
+        '&lt;div class=&quot;pr&quot;&gt;' + fmt(o.p) + ' &lt;small&gt;each&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;';
+    }).join(&quot;&quot;);
+    var total = OPTS.reduce(function(s, o){ return s + (qty[o.id] || 0) * o.p; }, 0);
+    var count = OPTS.reduce(function(s, o){ return s + (qty[o.id] || 0); }, 0);
+    document.getElementById(&quot;bar-total&quot;).textContent = count ? fmt(total) : &quot;Select an option&quot;;
+    document.getElementById(&quot;bar-sub&quot;).textContent = count
+      ? date + &quot; · &quot; + count + (count === 1 ? &quot; spot&quot; : &quot; spots&quot;)
+      : date;
+    document.getElementById(&quot;go&quot;).disabled = !count;
+  }
+  rows.addEventListener(&quot;click&quot;, function(e){
+    var b = e.target.closest(&quot;button[data-op]&quot;); if (!b) return;
+    var o = OPTS.filter(function(x){ return x.id === b.dataset.id; })[0];
+    var q = qty[o.id] || 0;
+    qty[o.id] = b.dataset.op === &quot;+&quot; ? Math.min(o.max, q + 1) : Math.max(0, q - 1);
+    render();
+  });
+  document.getElementById(&quot;dates&quot;).addEventListener(&quot;click&quot;, function(e){
+    var b = e.target.closest(&quot;.dchip&quot;); if (!b || b.disabled) return;
+    [].forEach.call(this.querySelectorAll(&quot;.dchip&quot;), function(x){ x.classList.remove(&quot;on&quot;); });
+    b.classList.add(&quot;on&quot;); date = b.dataset.d; render();
+  });
+  // hand the built order forward so Pay and Voucher show the same numbers
+  document.getElementById(&quot;go&quot;).addEventListener(&quot;click&quot;, function(){
+    var lines = OPTS.filter(function(o){ return qty[o.id]; })
+      .map(function(o){ return { name: o.n, qty: qty[o.id], unit: o.p }; });
+    PNAV(&quot;pcheckout&quot;, { kind: &quot;store&quot;, title: &quot;Island Day Trip — Koh Larn&quot;,
+      seller: &quot;Afterlight&quot;, date: date, lines: lines });
+  });
+  render();
+&lt;/script&gt;
+"></iframe>
+  <iframe class="pg" id="pg-pcheckout" data-key="pcheckout" title="Bumpy pcheckout" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Bumpy — Pay&lt;/title&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;style&gt;
+  :root{
+    --bg:#0a0a0c; --well:#050507;
+    --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+    --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+    --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+    --pos:#34d399; --pos-soft:rgba(52,211,153,.8); --warn:#ffc46b; --danger:#ff8a8a;
+    --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px;
+    --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+    --label:.72rem; --label-sm:.64rem; --cta-size:.92rem;
+    /* extracted from the item's own artwork (the Koh Larn dawn) */
+    --accent:#ff9e5a; --glow:#ffd18f; --accent-ink:#2a1206;
+  }
+
+  *{box-sizing:border-box} [hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+    font-variant-numeric:tabular-nums;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* header chrome — monochrome, never the item accent */
+  .hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.86);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+  .hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .hdr-in.funnel{max-width:640px;margin:0 auto;padding:.7rem clamp(.8rem,3vw,1.5rem)}
+  @font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+  .wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+    font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);
+    background:none;border:none;cursor:pointer;padding:0}
+  .wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+    transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+  @keyframes bumppulse{0%,100%{transform:scale(.5)}50%{transform:scale(1.5)}}
+  @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+  .navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;background:none;border:none;cursor:pointer}
+  .navlink:hover{opacity:.7}
+  @media (min-width:1024px){.hdr-in:not(.funnel){padding-top:1.2rem;padding-bottom:1.2rem}
+    .wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+  .icon-btn{width:2.3rem;height:2.3rem;border-radius:50%;border:none;background:transparent;color:var(--ink-2);
+    display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:background var(--dur) ease,color var(--dur) ease}
+  .icon-btn:hover{background:var(--glass);color:var(--ink)}
+  .icon-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* funnel step rail */
+  .steps{display:flex;align-items:center;gap:.5rem;min-width:0}
+  .step{display:flex;align-items:center;gap:.42rem;min-width:0}
+  .step .dot{width:.42rem;height:.42rem;border-radius:50%;background:var(--ink-3);flex-shrink:0}
+  .step.now .dot{background:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+  .step span{font-size:var(--label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-3);white-space:nowrap}
+  .step.now span{color:var(--ink)} .step.done span{color:var(--ink-2)}
+  .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
+  @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
+
+  .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
+    color:var(--ink-2);margin:0 0 .85rem}
+  .lbl.mt{margin-top:2rem}
+
+  .cta{border:none;cursor:pointer;font-weight:800;font-size:var(--cta-size);letter-spacing:.01em;
+    padding:.8rem 1.2rem;border-radius:var(--r-pill);color:var(--accent-ink);
+    background:linear-gradient(135deg,var(--glow),var(--accent));
+    box-shadow:0 8px 30px -8px color-mix(in oklab,var(--accent) 70%,transparent);
+    transition:transform 140ms var(--ease)}
+  .cta:hover:not(:disabled){transform:translateY(-1px)}
+  .cta:active:not(:disabled){transform:scale(.99)}
+  .cta:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .cta:disabled{background:var(--glass-2);color:var(--ink-3);box-shadow:none;cursor:not-allowed}
+  .cta.full{width:100%;margin-top:1.4rem;padding:.95rem 1.5rem}
+
+  .field{margin-top:.85rem}
+  .field label{display:block;font-size:var(--label-sm);font-weight:700;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-2);margin-bottom:.3rem}
+  .field input,.field select{width:100%;height:2.6rem;padding:0 .85rem;border-radius:.7rem;
+    border:1px solid var(--line);background:var(--glass);color:var(--ink);font:inherit;font-size:.9rem;
+    outline:none;transition:border-color var(--dur) ease}
+  .field input::placeholder{color:var(--ink-3)}
+  .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
+  .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
+
+  /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
+    justify-content:space-between;gap:1rem;padding:1.05rem clamp(1rem,4vw,1.5rem);
+    padding-bottom:calc(1.05rem + env(safe-area-inset-bottom,0px));
+    background:rgba(14,14,16,.92);border-top:1px solid var(--line);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 -10px 28px -8px rgba(0,0,0,.7)}
+  @media (min-width:881px){.bar{left:50%;right:auto;bottom:1.25rem;transform:translateX(-50%);
+    width:min(560px,calc(100vw - 3rem));padding:.8rem .8rem .8rem 1.35rem;border:1px solid var(--line);
+    border-radius:var(--r-pill);box-shadow:0 18px 50px -18px rgba(0,0,0,.75)}}
+  .bar .sum{line-height:1.25;min-width:0;flex:1;padding-right:.5rem}
+  .bar .sum b{font-size:1.02rem;white-space:nowrap}
+  .bar .sum small{display:block;margin-top:.22rem;color:var(--ink-2);font-size:.76rem;white-space:nowrap}
+  .bar .cta{padding:.78rem 1.35rem;font-size:.88rem}
+
+  /* footer — two columns (Blog dropped, Contact folded into Company) */
+  footer.site{border-top:1px solid var(--line);background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 6.5rem}
+  .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+  .foot-brand .wordmark{font-size:1.5rem}
+  .foot-tag{color:var(--ink-2);font-size:.9rem;margin:1rem 0 1.3rem;max-width:30ch}
+  .foot-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem}
+  .foot-h{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+  .foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;cursor:pointer}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+    display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+  @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}}
+
+  .cwrap{max-width:940px;margin:0 auto;padding:2rem clamp(.9rem,3vw,1.5rem) 4rem;
+    display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(1.5rem,4vw,3rem);align-items:start}
+  @media (max-width:860px){.cwrap{grid-template-columns:1fr;gap:2rem}}
+  .col-sticky{position:sticky;top:5rem}
+  @media (max-width:860px){.col-sticky{position:static}}
+
+  .item{display:flex;align-items:center;gap:.9rem;padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
+  .item .th{width:3.4rem;height:3.4rem;border-radius:.7rem;overflow:hidden;flex-shrink:0;
+    box-shadow:0 8px 26px -6px color-mix(in oklab,var(--accent) 45%,transparent)}
+  .item .th svg{display:block;width:100%;height:100%}
+  .item .t{font-weight:700;font-size:.98rem;margin:0}
+  .item .s{color:var(--ink-2);font-size:.8rem;margin:.1rem 0 0}
+
+  .ord-row{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:.62rem 0;font-size:.9rem}
+  .ord-row .n{color:var(--ink-2);min-width:0} .ord-row.item2 .n{color:var(--ink)}
+  .ord-row .n b{font-weight:700;margin-right:.3rem}
+  .ord-row .v{white-space:nowrap;font-weight:700}
+  .ord-sep{height:1px;background:var(--line);margin:.5rem 0}
+  .ord-row.total{padding-top:.2rem}
+  .ord-row.total .n{color:var(--ink);font-weight:700;font-size:1rem}
+  .ord-row.total .v{font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
+
+  .card-box{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);padding:1rem;margin-top:.9rem}
+  .stripe-note{color:var(--ink-3);font-size:.78rem;margin:.8rem 0 0;display:flex;gap:.4rem;align-items:flex-start}
+  .stripe-note svg{flex-shrink:0;margin-top:.15rem}
+  .seller-note{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);
+    padding:.85rem 1rem;margin-top:1.2rem;color:var(--ink-2);font-size:.86rem}
+  .seller-note b{color:var(--ink)}
+&lt;/style&gt;
+
+&lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;
+  &lt;linearGradient id=&quot;p-sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#1d1030&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#8a3f52&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffa25c&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;linearGradient id=&quot;p-sea&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#12324a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#07131f&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;g id=&quot;p-art&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#p-sky)&quot;/&gt;
+    &lt;circle cx=&quot;66&quot; cy=&quot;52&quot; r=&quot;11&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.95&quot;/&gt;
+    &lt;path d=&quot;M0 60 q14 -11 26 -1 q9 7 18 1 q10 -7 20 1 q8 6 16 -1 v10 H0 Z&quot; fill=&quot;#2a1430&quot; opacity=&quot;.85&quot;/&gt;
+    &lt;rect y=&quot;67&quot; width=&quot;100&quot; height=&quot;33&quot; fill=&quot;url(#p-sea)&quot;/&gt;
+    &lt;rect x=&quot;59&quot; y=&quot;71&quot; width=&quot;14&quot; height=&quot;1.8&quot; rx=&quot;.9&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.45&quot;/&gt;
+    &lt;rect x=&quot;62&quot; y=&quot;77&quot; width=&quot;8&quot; height=&quot;1.4&quot; rx=&quot;.7&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.28&quot;/&gt;
+    &lt;rect x=&quot;64&quot; y=&quot;83&quot; width=&quot;4&quot; height=&quot;1.1&quot; rx=&quot;.55&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.18&quot;/&gt;
+  &lt;/g&gt;
+&lt;/defs&gt;&lt;/svg&gt;
+
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in funnel&quot;&gt;
+  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;pselect&quot; aria-label=&quot;Back&quot;&gt;
+    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M15 5l-7 7 7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step done&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Choose&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step &quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
+  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;producer&quot; aria-label=&quot;Close&quot;&gt;
+    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;div class=&quot;cwrap&quot;&gt;
+  &lt;div&gt;
+    &lt;p class=&quot;lbl&quot;&gt;Your details&lt;/p&gt;
+    &lt;div class=&quot;field-row&quot;&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;fn&quot;&gt;First name&lt;/label&gt;&lt;input id=&quot;fn&quot; value=&quot;Eldar&quot; autocomplete=&quot;given-name&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ln&quot;&gt;Last name&lt;/label&gt;&lt;input id=&quot;ln&quot; value=&quot;Tsabari&quot; autocomplete=&quot;family-name&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;em&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;em&quot; type=&quot;email&quot; value=&quot;eldar@example.com&quot; autocomplete=&quot;email&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ph&quot;&gt;Phone&lt;/label&gt;&lt;input id=&quot;ph&quot; type=&quot;tel&quot; value=&quot;+66 80 123 4567&quot; autocomplete=&quot;tel&quot;&gt;&lt;/div&gt;
+
+    &lt;p class=&quot;lbl mt&quot;&gt;Payment&lt;/p&gt;
+    &lt;div class=&quot;card-box&quot;&gt;
+      &lt;div class=&quot;field&quot; style=&quot;margin-top:0&quot;&gt;&lt;label for=&quot;cc&quot;&gt;Card number&lt;/label&gt;&lt;input id=&quot;cc&quot; inputmode=&quot;numeric&quot; placeholder=&quot;4242 4242 4242 4242&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field-row&quot;&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ex&quot;&gt;Expiry&lt;/label&gt;&lt;input id=&quot;ex&quot; placeholder=&quot;MM / YY&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;cv&quot;&gt;CVC&lt;/label&gt;&lt;input id=&quot;cv&quot; inputmode=&quot;numeric&quot; placeholder=&quot;123&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class=&quot;stripe-note&quot;&gt;
+      &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 10V8a6 6 0 0 1 12 0v2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;rect x=&quot;4&quot; y=&quot;10&quot; width=&quot;16&quot; height=&quot;10&quot; rx=&quot;2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;/svg&gt;
+      &lt;span&gt;Card details go straight to Stripe — Bumpy never sees them.&lt;/span&gt;
+    &lt;/p&gt;
+
+    &lt;div class=&quot;seller-note&quot;&gt;
+      &lt;b&gt;Afterlight&lt;/b&gt; is the seller and runs this trip. Bumpy processes the payment and issues your voucher.
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;col-sticky&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;
+      &lt;span class=&quot;th&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;span&gt;&lt;p class=&quot;t&quot; id=&quot;s-title&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;s&quot; id=&quot;s-sub&quot;&gt;Afterlight · Thu, Sep 4&lt;/p&gt;&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;p class=&quot;lbl mt&quot;&gt;Order summary&lt;/p&gt;
+    &lt;div id=&quot;s-lines&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-sep&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-row&quot;&gt;&lt;span class=&quot;n&quot;&gt;Subtotal&lt;/span&gt;&lt;span class=&quot;v&quot; id=&quot;s-sub-v&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-row&quot;&gt;&lt;span class=&quot;n&quot;&gt;Service fee&lt;/span&gt;&lt;span class=&quot;v&quot; id=&quot;s-fee&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-sep&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-row total&quot;&gt;&lt;span class=&quot;n&quot;&gt;Total (incl. VAT)&lt;/span&gt;&lt;span class=&quot;v&quot; id=&quot;s-total&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
+
+    &lt;button class=&quot;cta full&quot; id=&quot;pay&quot;&gt;Pay&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;foot-cols&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a data-nav=&quot;login&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Apply to Bumpy&lt;/a&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;&lt;span&gt;© 2026 Bumpy&lt;/span&gt;&lt;/div&gt;
+&lt;/footer&gt;
+
+
+&lt;script&gt;
+  
+  function PNAV(key, order){
+    try{ if(window.parent &amp;&amp; window.parent!==window){
+      window.parent.postMessage(order?{bumpyNav:key,order:order}:{bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
+      partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
+      producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
+      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
+    if(R[key]) window.location.href=R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(function(el){
+    el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
+
+  // Fallback order so the page stands on its own when opened directly; the flow
+  // shell overwrites it with whatever was chosen on the previous step.
+  var order = { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;, date:&quot;Thu, Sep 4&quot;,
+    lines:[{name:&quot;Adult&quot;, qty:2, unit:2400}] };
+  function fmt(n){ return n.toLocaleString(&quot;en-US&quot;) + &quot; THB&quot;; }
+  function paint(){
+    document.getElementById(&quot;s-title&quot;).textContent = order.title;
+    document.getElementById(&quot;s-sub&quot;).textContent = order.seller + &quot; · &quot; + order.date;
+    document.getElementById(&quot;s-lines&quot;).innerHTML = order.lines.map(function(l){
+      return '&lt;div class=&quot;ord-row item2&quot;&gt;&lt;span class=&quot;n&quot;&gt;&lt;b&gt;' + l.qty + '×&lt;/b&gt;' + l.name + '&lt;/span&gt;' +
+        '&lt;span class=&quot;v&quot;&gt;' + fmt(l.qty * l.unit) + '&lt;/span&gt;&lt;/div&gt;';
+    }).join(&quot;&quot;);
+    var sub = order.lines.reduce(function(s,l){ return s + l.qty * l.unit; }, 0);
+    // fee carve-out invariant: the fee is shown, never folded silently into the line
+    var fee = Math.round(sub * 0.06);
+    document.getElementById(&quot;s-sub-v&quot;).textContent = fmt(sub);
+    document.getElementById(&quot;s-fee&quot;).textContent = fmt(fee);
+    document.getElementById(&quot;s-total&quot;).textContent = fmt(sub + fee);
+    document.getElementById(&quot;pay&quot;).textContent = &quot;Pay &quot; + fmt(sub + fee);
+    order.total = sub + fee; order.subtotal = sub; order.fee = fee;
+  }
+  window.addEventListener(&quot;message&quot;, function(e){
+    if (e.data &amp;&amp; e.data.bumpyOrder &amp;&amp; e.data.bumpyOrder.kind === &quot;store&quot;) { order = e.data.bumpyOrder; paint(); }
+  });
+  document.getElementById(&quot;pay&quot;).addEventListener(&quot;click&quot;, function(){ PNAV(&quot;pconfirm&quot;, order); });
+  paint();
+&lt;/script&gt;
+"></iframe>
+  <iframe class="pg" id="pg-pconfirm" data-key="pconfirm" title="Bumpy pconfirm" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Bumpy — Voucher&lt;/title&gt;
+&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;style&gt;
+  :root{
+    --bg:#0a0a0c; --well:#050507;
+    --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
+    --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
+    --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+    --pos:#34d399; --pos-soft:rgba(52,211,153,.8); --warn:#ffc46b; --danger:#ff8a8a;
+    --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px;
+    --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
+    --label:.72rem; --label-sm:.64rem; --cta-size:.92rem;
+    /* extracted from the item's own artwork (the Koh Larn dawn) */
+    --accent:#ff9e5a; --glow:#ffd18f; --accent-ink:#2a1206;
+  }
+
+  *{box-sizing:border-box} [hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
+    font-variant-numeric:tabular-nums;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* header chrome — monochrome, never the item accent */
+  .hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.86);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+  .hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .hdr-in.funnel{max-width:640px;margin:0 auto;padding:.7rem clamp(.8rem,3vw,1.5rem)}
+  @font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
+  .wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
+    font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);
+    background:none;border:none;cursor:pointer;padding:0}
+  .wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
+    transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
+  @keyframes bumppulse{0%,100%{transform:scale(.5)}50%{transform:scale(1.5)}}
+  @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
+  .navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;background:none;border:none;cursor:pointer}
+  .navlink:hover{opacity:.7}
+  @media (min-width:1024px){.hdr-in:not(.funnel){padding-top:1.2rem;padding-bottom:1.2rem}
+    .wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
+  .icon-btn{width:2.3rem;height:2.3rem;border-radius:50%;border:none;background:transparent;color:var(--ink-2);
+    display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:background var(--dur) ease,color var(--dur) ease}
+  .icon-btn:hover{background:var(--glass);color:var(--ink)}
+  .icon-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* funnel step rail */
+  .steps{display:flex;align-items:center;gap:.5rem;min-width:0}
+  .step{display:flex;align-items:center;gap:.42rem;min-width:0}
+  .step .dot{width:.42rem;height:.42rem;border-radius:50%;background:var(--ink-3);flex-shrink:0}
+  .step.now .dot{background:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+  .step span{font-size:var(--label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-3);white-space:nowrap}
+  .step.now span{color:var(--ink)} .step.done span{color:var(--ink-2)}
+  .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
+  @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
+
+  .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
+    color:var(--ink-2);margin:0 0 .85rem}
+  .lbl.mt{margin-top:2rem}
+
+  .cta{border:none;cursor:pointer;font-weight:800;font-size:var(--cta-size);letter-spacing:.01em;
+    padding:.8rem 1.2rem;border-radius:var(--r-pill);color:var(--accent-ink);
+    background:linear-gradient(135deg,var(--glow),var(--accent));
+    box-shadow:0 8px 30px -8px color-mix(in oklab,var(--accent) 70%,transparent);
+    transition:transform 140ms var(--ease)}
+  .cta:hover:not(:disabled){transform:translateY(-1px)}
+  .cta:active:not(:disabled){transform:scale(.99)}
+  .cta:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .cta:disabled{background:var(--glass-2);color:var(--ink-3);box-shadow:none;cursor:not-allowed}
+  .cta.full{width:100%;margin-top:1.4rem;padding:.95rem 1.5rem}
+
+  .field{margin-top:.85rem}
+  .field label{display:block;font-size:var(--label-sm);font-weight:700;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-2);margin-bottom:.3rem}
+  .field input,.field select{width:100%;height:2.6rem;padding:0 .85rem;border-radius:.7rem;
+    border:1px solid var(--line);background:var(--glass);color:var(--ink);font:inherit;font-size:.9rem;
+    outline:none;transition:border-color var(--dur) ease}
+  .field input::placeholder{color:var(--ink-3)}
+  .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
+  .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
+
+  /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
+    justify-content:space-between;gap:1rem;padding:1.05rem clamp(1rem,4vw,1.5rem);
+    padding-bottom:calc(1.05rem + env(safe-area-inset-bottom,0px));
+    background:rgba(14,14,16,.92);border-top:1px solid var(--line);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 -10px 28px -8px rgba(0,0,0,.7)}
+  @media (min-width:881px){.bar{left:50%;right:auto;bottom:1.25rem;transform:translateX(-50%);
+    width:min(560px,calc(100vw - 3rem));padding:.8rem .8rem .8rem 1.35rem;border:1px solid var(--line);
+    border-radius:var(--r-pill);box-shadow:0 18px 50px -18px rgba(0,0,0,.75)}}
+  .bar .sum{line-height:1.25;min-width:0;flex:1;padding-right:.5rem}
+  .bar .sum b{font-size:1.02rem;white-space:nowrap}
+  .bar .sum small{display:block;margin-top:.22rem;color:var(--ink-2);font-size:.76rem;white-space:nowrap}
+  .bar .cta{padding:.78rem 1.35rem;font-size:.88rem}
+
+  /* footer — two columns (Blog dropped, Contact folded into Company) */
+  footer.site{border-top:1px solid var(--line);background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 6.5rem}
+  .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
+  .foot-brand .wordmark{font-size:1.5rem}
+  .foot-tag{color:var(--ink-2);font-size:.9rem;margin:1rem 0 1.3rem;max-width:30ch}
+  .foot-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem}
+  .foot-h{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
+  .foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;cursor:pointer}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
+    display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
+  @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}}
+
+  .vwrap{max-width:640px;margin:0 auto;padding:2.2rem clamp(.9rem,3vw,1.5rem) 4rem;text-align:center}
+  .stamp{display:inline-flex;align-items:center;gap:.45rem;font-size:var(--label-sm);font-weight:800;
+    letter-spacing:.09em;text-transform:uppercase;color:var(--pos);
+    border:1px solid color-mix(in oklab,var(--pos) 40%,transparent);border-radius:var(--r-pill);padding:.3rem .7rem}
+  h1.headline{font-size:clamp(1.6rem,4.6vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin:1rem 0 .4rem}
+  .sub{color:var(--ink-2);margin:0 auto;max-width:44ch}
+  .sub b{color:var(--ink)}
+
+  /* The voucher is the object you show at the door — the same designed-pass
+     treatment a ticket gets, with the seller's wording rather than an event's. */
+  .voucher{margin:2rem 0 0;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--well);
+    overflow:hidden;text-align:left;box-shadow:0 26px 70px -30px color-mix(in oklab,var(--accent) 50%,transparent)}
+  .v-top{display:flex;align-items:center;gap:.9rem;padding:1rem 1.1rem;border-bottom:1px solid var(--line)}
+  .v-top .th{width:3rem;height:3rem;border-radius:.6rem;overflow:hidden;flex-shrink:0}
+  .v-top .th svg{display:block;width:100%;height:100%}
+  .v-top .t{font-weight:700;font-size:.96rem;margin:0}
+  .v-top .s{color:var(--ink-2);font-size:.79rem;margin:.1rem 0 0}
+  /* the perforation: a real pass has one, and it tells you which half to show */
+  .v-perf{position:relative;height:1px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 12px)}
+  .v-perf::before,.v-perf::after{content:&quot;&quot;;position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--bg)}
+  .v-perf::before{left:-9px} .v-perf::after{right:-9px}
+  .v-qr{padding:1.6rem 1.1rem 1.2rem;text-align:center}
+  .v-qr .code{width:min(200px,58vw);aspect-ratio:1;margin:0 auto;background:#fff;border-radius:.9rem;padding:.6rem}
+  .v-qr .code svg{display:block;width:100%;height:100%}
+  .v-no{margin:.9rem 0 0;font-size:.82rem;font-weight:700;letter-spacing:.16em;color:var(--ink-2)}
+  .v-use{margin:.35rem 0 0;color:var(--ink-3);font-size:.8rem}
+  .v-rows{padding:0 1.1rem 1.2rem}
+  .v-row{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;font-size:.88rem;border-top:1px solid var(--line-soft)}
+  .v-row .k{color:var(--ink-3)} .v-row .v{font-weight:700;text-align:right}
+
+  .sum{margin-top:2rem;text-align:left}
+  .ord-row{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:.6rem 0;font-size:.9rem}
+  .ord-row .n{color:var(--ink-2)} .ord-row .n b{color:var(--ink);font-weight:700;margin-right:.3rem}
+  .ord-row .v{font-weight:700;white-space:nowrap}
+  .ord-sep{height:1px;background:var(--line);margin:.5rem 0}
+  .ord-row.total .n{color:var(--ink);font-weight:700;font-size:1rem}
+  .ord-row.total .v{font-weight:800;font-size:1.2rem}
+
+  .actions{margin-top:2rem;display:grid;gap:.7rem}
+  .btn2{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
+    padding:.8rem 1.2rem;font:inherit;font-weight:700;font-size:.88rem;cursor:pointer}
+  .btn2:hover{background:var(--glass-2)}
+  .row-btns{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  .btn-text{background:none;border:none;color:var(--ink-3);font:inherit;font-size:.86rem;cursor:pointer;padding:.6rem}
+  .btn-text:hover{color:var(--ink)}
+  .deliver{margin-top:1.6rem;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);
+    padding:.9rem 1rem;color:var(--ink-2);font-size:.86rem;text-align:left}
+  .deliver b{color:var(--ink)}
+&lt;/style&gt;
+
+&lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;
+  &lt;linearGradient id=&quot;p-sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#1d1030&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#8a3f52&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffa25c&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;linearGradient id=&quot;p-sea&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+    &lt;stop offset=&quot;0&quot; stop-color=&quot;#12324a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#07131f&quot;/&gt;
+  &lt;/linearGradient&gt;
+  &lt;g id=&quot;p-art&quot;&gt;
+    &lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#p-sky)&quot;/&gt;
+    &lt;circle cx=&quot;66&quot; cy=&quot;52&quot; r=&quot;11&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.95&quot;/&gt;
+    &lt;path d=&quot;M0 60 q14 -11 26 -1 q9 7 18 1 q10 -7 20 1 q8 6 16 -1 v10 H0 Z&quot; fill=&quot;#2a1430&quot; opacity=&quot;.85&quot;/&gt;
+    &lt;rect y=&quot;67&quot; width=&quot;100&quot; height=&quot;33&quot; fill=&quot;url(#p-sea)&quot;/&gt;
+    &lt;rect x=&quot;59&quot; y=&quot;71&quot; width=&quot;14&quot; height=&quot;1.8&quot; rx=&quot;.9&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.45&quot;/&gt;
+    &lt;rect x=&quot;62&quot; y=&quot;77&quot; width=&quot;8&quot; height=&quot;1.4&quot; rx=&quot;.7&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.28&quot;/&gt;
+    &lt;rect x=&quot;64&quot; y=&quot;83&quot; width=&quot;4&quot; height=&quot;1.1&quot; rx=&quot;.55&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.18&quot;/&gt;
+  &lt;/g&gt;
+&lt;/defs&gt;&lt;/svg&gt;
+
+&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in funnel&quot;&gt;
+  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;pcheckout&quot; aria-label=&quot;Back&quot;&gt;
+    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M15 5l-7 7 7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step done&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Choose&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step done&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
+  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;producer&quot; aria-label=&quot;Close&quot;&gt;
+    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;&lt;/header&gt;
+
+&lt;div class=&quot;vwrap&quot;&gt;
+  &lt;span class=&quot;stamp&quot;&gt;
+    &lt;svg width=&quot;13&quot; height=&quot;13&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+    Paid
+  &lt;/span&gt;
+  &lt;h1 class=&quot;headline&quot;&gt;You're booked&lt;/h1&gt;
+  &lt;p class=&quot;sub&quot;&gt;Your voucher is below and a copy is on its way to &lt;b&gt;eldar@example.com&lt;/b&gt;.&lt;/p&gt;
+
+  &lt;div class=&quot;voucher&quot;&gt;
+    &lt;div class=&quot;v-top&quot;&gt;
+      &lt;span class=&quot;th&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+      &lt;span&gt;&lt;p class=&quot;t&quot; id=&quot;v-title&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;s&quot; id=&quot;v-sub&quot;&gt;Afterlight · Thu, Sep 4&lt;/p&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;v-perf&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;v-qr&quot;&gt;
+      &lt;div class=&quot;code&quot;&gt;&lt;svg id=&quot;qr&quot; viewBox=&quot;0 0 29 29&quot; shape-rendering=&quot;crispEdges&quot; role=&quot;img&quot; aria-label=&quot;Voucher QR code&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
+      &lt;p class=&quot;v-no&quot; id=&quot;v-no&quot;&gt;VCH · 8K2M · 4QP7&lt;/p&gt;
+      &lt;p class=&quot;v-use&quot;&gt;Show this at the pier — the crew scans it&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;v-rows&quot; id=&quot;v-rows&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;sum&quot;&gt;
+    &lt;p class=&quot;lbl&quot; style=&quot;margin-top:0&quot;&gt;Order summary &lt;span style=&quot;color:var(--ink-3);font-weight:500&quot; id=&quot;v-oid&quot;&gt;#2117&lt;/span&gt;&lt;/p&gt;
+    &lt;div id=&quot;v-lines&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-sep&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-row&quot;&gt;&lt;span class=&quot;n&quot;&gt;Service fee&lt;/span&gt;&lt;span class=&quot;v&quot; id=&quot;v-fee&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-sep&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;ord-row total&quot;&gt;&lt;span class=&quot;n&quot;&gt;Total (incl. VAT)&lt;/span&gt;&lt;span class=&quot;v&quot; id=&quot;v-total&quot;&gt;—&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;deliver&quot;&gt;
+    &lt;b&gt;Afterlight&lt;/b&gt; runs this trip and is your contact for anything about the day itself.
+    Questions about the payment or the voucher go to Bumpy.
+  &lt;/div&gt;
+
+  &lt;div class=&quot;actions&quot;&gt;
+    &lt;button class=&quot;cta&quot; id=&quot;a-wallet&quot;&gt;Add to Apple Wallet&lt;/button&gt;
+    &lt;div class=&quot;row-btns&quot;&gt;
+      &lt;button class=&quot;btn2&quot; id=&quot;a-cal&quot;&gt;Add to calendar&lt;/button&gt;
+      &lt;button class=&quot;btn2&quot; id=&quot;a-share&quot;&gt;Share&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;button class=&quot;btn-text&quot; data-nav=&quot;producer&quot;&gt;Back to Afterlight&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;footer class=&quot;site&quot;&gt;
+  &lt;div class=&quot;foot-in&quot;&gt;
+    &lt;div class=&quot;foot-brand&quot;&gt;
+      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
+      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;foot-cols&quot;&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
+        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
+      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
+        &lt;a data-nav=&quot;login&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Apply to Bumpy&lt;/a&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;foot-bottom&quot;&gt;&lt;span&gt;© 2026 Bumpy&lt;/span&gt;&lt;/div&gt;
+&lt;/footer&gt;
+
+
+&lt;script&gt;
+  
+  function PNAV(key, order){
+    try{ if(window.parent &amp;&amp; window.parent!==window){
+      window.parent.postMessage(order?{bumpyNav:key,order:order}:{bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
+    var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
+      partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
+      producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
+      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
+    if(R[key]) window.location.href=R[key];
+  }
+  document.querySelectorAll('[data-nav]').forEach(function(el){
+    el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
+
+  var order = { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;, date:&quot;Thu, Sep 4&quot;,
+    lines:[{name:&quot;Adult&quot;, qty:2, unit:2400}] };
+  function fmt(n){ return n.toLocaleString(&quot;en-US&quot;) + &quot; THB&quot;; }
+  function paint(){
+    document.getElementById(&quot;v-title&quot;).textContent = order.title;
+    document.getElementById(&quot;v-sub&quot;).textContent = order.seller + &quot; · &quot; + order.date;
+    var count = order.lines.reduce(function(s,l){ return s + l.qty; }, 0);
+    document.getElementById(&quot;v-rows&quot;).innerHTML =
+      '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;' + order.date + '&lt;/span&gt;&lt;/div&gt;' +
+      '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Meeting point&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;Bali Hai Pier, Pattaya&lt;br&gt;07:30&lt;/span&gt;&lt;/div&gt;' +
+      '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Admits&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;' + count + (count === 1 ? ' person' : ' people') + '&lt;/span&gt;&lt;/div&gt;' +
+      '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Booked by&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;Eldar Tsabari&lt;/span&gt;&lt;/div&gt;';
+    document.getElementById(&quot;v-lines&quot;).innerHTML = order.lines.map(function(l){
+      return '&lt;div class=&quot;ord-row&quot;&gt;&lt;span class=&quot;n&quot;&gt;&lt;b&gt;' + l.qty + '×&lt;/b&gt;' + l.name + '&lt;/span&gt;' +
+        '&lt;span class=&quot;v&quot;&gt;' + fmt(l.qty * l.unit) + '&lt;/span&gt;&lt;/div&gt;';
+    }).join(&quot;&quot;);
+    var sub = order.subtotal || order.lines.reduce(function(s,l){ return s + l.qty * l.unit; }, 0);
+    var fee = order.fee != null ? order.fee : Math.round(sub * 0.06);
+    document.getElementById(&quot;v-fee&quot;).textContent = fmt(fee);
+    document.getElementById(&quot;v-total&quot;).textContent = fmt(sub + fee);
+  }
+  window.addEventListener(&quot;message&quot;, function(e){
+    if (e.data &amp;&amp; e.data.bumpyOrder &amp;&amp; e.data.bumpyOrder.kind === &quot;store&quot;) { order = e.data.bumpyOrder; paint(); }
+  });
+
+  // Placeholder QR: a deterministic pattern with real finder squares. It reads
+  // as a code at a glance without pretending to be a scannable one.
+  (function(){
+    var N = 29, seed = 20260904, out = [];
+    function rnd(){ seed = (seed * 1103515245 + 12345) &amp; 0x7fffffff; return seed / 0x7fffffff; }
+    function finder(x, y){
+      out.push('&lt;rect x=&quot;' + x + '&quot; y=&quot;' + y + '&quot; width=&quot;7&quot; height=&quot;7&quot; fill=&quot;#000&quot;/&gt;');
+      out.push('&lt;rect x=&quot;' + (x+1) + '&quot; y=&quot;' + (y+1) + '&quot; width=&quot;5&quot; height=&quot;5&quot; fill=&quot;#fff&quot;/&gt;');
+      out.push('&lt;rect x=&quot;' + (x+2) + '&quot; y=&quot;' + (y+2) + '&quot; width=&quot;3&quot; height=&quot;3&quot; fill=&quot;#000&quot;/&gt;');
+    }
+    function inFinder(x, y){
+      return (x &lt; 8 &amp;&amp; y &lt; 8) || (x &gt; N - 9 &amp;&amp; y &lt; 8) || (x &lt; 8 &amp;&amp; y &gt; N - 9);
+    }
+    for (var y = 0; y &lt; N; y++) for (var x = 0; x &lt; N; x++) {
+      if (inFinder(x, y)) continue;
+      if (rnd() &gt; 0.52) out.push('&lt;rect x=&quot;' + x + '&quot; y=&quot;' + y + '&quot; width=&quot;1&quot; height=&quot;1&quot; fill=&quot;#000&quot;/&gt;');
+    }
+    finder(0, 0); finder(N - 7, 0); finder(0, N - 7);
+    document.getElementById(&quot;qr&quot;).innerHTML = out.join(&quot;&quot;);
+  })();
+
+  [&quot;a-wallet&quot;,&quot;a-cal&quot;,&quot;a-share&quot;].forEach(function(id){
+    document.getElementById(id).addEventListener(&quot;click&quot;, function(){ this.blur(); });
+  });
+  paint();
 &lt;/script&gt;
 "></iframe>
   <iframe class="pg" id="pg-partner" data-key="partner" title="Bumpy partner" srcdoc="&lt;title&gt;Bumpy for organizers — sell the night, not a form&lt;/title&gt;
@@ -6184,7 +7488,8 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 <button class="reset chip2" id="gatebtn" title="Preview a private (password-gated) event">🔒 Private event</button>
 
 <script>
-  const KEYS = ["event","select","checkout","confirm","login","gate","producer","partner","contact","about"];
+  const KEYS = ["event","select","checkout","confirm","login","gate","producer","partner","contact","about",
+                "product","pselect","pcheckout","pconfirm"];
   // the tickets chosen on "Choose Ticket", carried forward to Pay + Confirmation
   let lastOrder = null;
   let loggedIn = false;        // demo auth state that drives the checkout gate
@@ -6223,8 +7528,8 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
     if (typeof d.bumpyNav !== "string") return;
     if (d.order) lastOrder = d.order;
     // Auth gate: picking tickets sends you to login first; Pay resumes after
-    if (d.bumpyNav === "checkout" && !loggedIn) {
-      pendingRedirect = "checkout";
+    if ((d.bumpyNav === "checkout" || d.bumpyNav === "pcheckout") && !loggedIn) {
+      pendingRedirect = d.bumpyNav;
       show("login");
       return;
     }
