@@ -6088,11 +6088,16 @@
   .v-perf{position:relative;height:1px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 12px)}
   .v-perf::before,.v-perf::after{content:&quot;&quot;;position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--bg)}
   .v-perf::before{left:-9px} .v-perf::after{right:-9px}
-  .v-qr{padding:1.6rem 1.1rem 1.2rem;text-align:center}
-  .v-qr .code{width:min(200px,58vw);aspect-ratio:1;margin:0 auto;background:#fff;border-radius:.9rem;padding:.6rem}
-  .v-qr .code svg{display:block;width:100%;height:100%}
-  .v-no{margin:.9rem 0 0;font-size:.82rem;font-weight:700;letter-spacing:.16em;color:var(--ink-2)}
-  .v-use{margin:.35rem 0 0;color:var(--ink-3);font-size:.8rem}
+  /* No scannable code. Nothing scans a store item — the seller marks the order
+     redeemed from their dashboard, so the buyer's job is to be identifiable.
+     The reference is therefore the object, and it is sized to be read aloud
+     across a counter rather than held up to a lens. */
+  .v-code{padding:1.8rem 1.1rem 1.4rem;text-align:center}
+  .v-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(1.5rem,7vw,2rem);
+    font-weight:700;letter-spacing:.12em;color:var(--ink);line-height:1.1}
+  .v-reflbl{margin:0 0 .5rem;font-size:var(--label-sm);font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .v-use{margin:.7rem 0 0;color:var(--ink-3);font-size:.8rem;max-width:30ch;margin-inline:auto}
   .v-rows{padding:0 1.1rem 1.2rem}
   .v-row{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;font-size:.88rem;border-top:1px solid var(--line-soft)}
   .v-row .k{color:var(--ink-3)} .v-row .v{font-weight:700;text-align:right}
@@ -6156,10 +6161,10 @@
       &lt;span&gt;&lt;p class=&quot;t&quot; id=&quot;v-title&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;s&quot; id=&quot;v-sub&quot;&gt;Afterlight&lt;/p&gt;&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;v-perf&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;v-qr&quot;&gt;
-      &lt;div class=&quot;code&quot;&gt;&lt;svg id=&quot;qr&quot; viewBox=&quot;0 0 29 29&quot; shape-rendering=&quot;crispEdges&quot; role=&quot;img&quot; aria-label=&quot;Voucher QR code&quot;&gt;&lt;/svg&gt;&lt;/div&gt;
-      &lt;p class=&quot;v-no&quot; id=&quot;v-no&quot;&gt;VCH · 8K2M · 4QP7&lt;/p&gt;
-      &lt;p class=&quot;v-use&quot;&gt;Show this at the pier — the crew scans it&lt;/p&gt;
+    &lt;div class=&quot;v-code&quot;&gt;
+      &lt;p class=&quot;v-reflbl&quot;&gt;Voucher&lt;/p&gt;
+      &lt;p class=&quot;v-ref&quot; id=&quot;v-ref&quot;&gt;8K2M-4QP7&lt;/p&gt;
+      &lt;p class=&quot;v-use&quot; id=&quot;v-use&quot;&gt;Give this to Afterlight and they'll check you in.&lt;/p&gt;
     &lt;/div&gt;
     &lt;div class=&quot;v-rows&quot; id=&quot;v-rows&quot;&gt;&lt;/div&gt;
   &lt;/div&gt;
@@ -6174,8 +6179,7 @@
   &lt;/div&gt;
 
   &lt;div class=&quot;actions&quot;&gt;
-    &lt;button class=&quot;cta&quot; id=&quot;a-wallet&quot;&gt;Add to Apple Wallet&lt;/button&gt;
-    &lt;button class=&quot;btn2&quot; id=&quot;a-share&quot;&gt;Share&lt;/button&gt;
+    &lt;button class=&quot;cta&quot; id=&quot;a-share&quot;&gt;Share&lt;/button&gt;
     &lt;button class=&quot;btn-text&quot; data-nav=&quot;producer&quot;&gt;Back to Afterlight&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -6218,6 +6222,8 @@
   function paint(){
     document.getElementById(&quot;v-title&quot;).textContent = order.title;
     document.getElementById(&quot;v-sub&quot;).textContent = order.seller;
+    document.getElementById(&quot;v-use&quot;).textContent =
+      &quot;Give this to &quot; + order.seller + &quot; and they'll check you in.&quot;;
     var count = order.lines.reduce(function(s,l){ return s + l.qty; }, 0);
     document.getElementById(&quot;v-rows&quot;).innerHTML =
       '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Where&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;Bali Hai Pier, Pattaya&lt;/span&gt;&lt;/div&gt;' +
@@ -6237,28 +6243,7 @@
     if (e.data &amp;&amp; e.data.bumpyOrder &amp;&amp; e.data.bumpyOrder.kind === &quot;store&quot;) { order = e.data.bumpyOrder; paint(); }
   });
 
-  // Placeholder QR: a deterministic pattern with real finder squares. It reads
-  // as a code at a glance without pretending to be a scannable one.
-  (function(){
-    var N = 29, seed = 20260904, out = [];
-    function rnd(){ seed = (seed * 1103515245 + 12345) &amp; 0x7fffffff; return seed / 0x7fffffff; }
-    function finder(x, y){
-      out.push('&lt;rect x=&quot;' + x + '&quot; y=&quot;' + y + '&quot; width=&quot;7&quot; height=&quot;7&quot; fill=&quot;#000&quot;/&gt;');
-      out.push('&lt;rect x=&quot;' + (x+1) + '&quot; y=&quot;' + (y+1) + '&quot; width=&quot;5&quot; height=&quot;5&quot; fill=&quot;#fff&quot;/&gt;');
-      out.push('&lt;rect x=&quot;' + (x+2) + '&quot; y=&quot;' + (y+2) + '&quot; width=&quot;3&quot; height=&quot;3&quot; fill=&quot;#000&quot;/&gt;');
-    }
-    function inFinder(x, y){
-      return (x &lt; 8 &amp;&amp; y &lt; 8) || (x &gt; N - 9 &amp;&amp; y &lt; 8) || (x &lt; 8 &amp;&amp; y &gt; N - 9);
-    }
-    for (var y = 0; y &lt; N; y++) for (var x = 0; x &lt; N; x++) {
-      if (inFinder(x, y)) continue;
-      if (rnd() &gt; 0.52) out.push('&lt;rect x=&quot;' + x + '&quot; y=&quot;' + y + '&quot; width=&quot;1&quot; height=&quot;1&quot; fill=&quot;#000&quot;/&gt;');
-    }
-    finder(0, 0); finder(N - 7, 0); finder(0, N - 7);
-    document.getElementById(&quot;qr&quot;).innerHTML = out.join(&quot;&quot;);
-  })();
-
-  [&quot;a-wallet&quot;,&quot;a-share&quot;].forEach(function(id){
+  [&quot;a-share&quot;].forEach(function(id){
     document.getElementById(id).addEventListener(&quot;click&quot;, function(){ this.blur(); });
   });
   paint();
