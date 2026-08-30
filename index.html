@@ -5303,58 +5303,75 @@
   .art-main{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:1;
     box-shadow:0 30px 80px -30px color-mix(in oklab,var(--accent) 55%,transparent)}
   .art-main svg{display:block;width:100%;height:100%}
-  .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.6rem}
-  .thumbs button{aspect-ratio:1;border-radius:.7rem;overflow:hidden;border:1px solid var(--line);
-    background:var(--well);cursor:pointer;padding:0;opacity:.55;transition:opacity var(--dur) ease,border-color var(--dur) ease}
-  .thumbs button.on,.thumbs button:hover{opacity:1;border-color:color-mix(in oklab,var(--ink) 22%,transparent)}
-  .thumbs svg{display:block;width:100%;height:100%}
 
   .kind{display:inline-block;font-size:var(--label-sm);font-weight:800;letter-spacing:.09em;text-transform:uppercase;
     color:var(--accent);border:1px solid color-mix(in oklab,var(--accent) 40%,transparent);
     border-radius:var(--r-pill);padding:.24rem .6rem}
-  h1.title{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:.9rem 0 0}
+  h1.title{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:.9rem 0 1.3rem}
 
-  /* PRESENTED BY — the producer's own mark, never set on the Bumpy accent */
-  .org{display:flex;align-items:center;gap:.7rem;margin-top:1.3rem;padding:.75rem .9rem;
-    border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);cursor:pointer;width:100%;
-    text-align:left;color:inherit;font:inherit;transition:background var(--dur) ease}
-  .org:hover{background:var(--glass-2)}
-  .org .mark{width:2.4rem;height:2.4rem;border-radius:50%;overflow:hidden;flex-shrink:0}
-  .org .mark svg{display:block;width:100%;height:100%}
-  .org .k{font-size:var(--label-sm);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-  .org .n{font-weight:700;font-size:.95rem}
-  .org .chev{margin-left:auto;color:var(--ink-3);flex-shrink:0}
+  /* Same info block the event page uses — three cells divided by hairlines,
+     each one a target with an action cue. A store item answers the same three
+     questions an event does, so it should not invent a second layout for them. */
+  .info{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .info&gt;*{padding:1.05rem 1.1rem 1.05rem 0;border-left:1px solid var(--line);min-width:0}
+  .info&gt;*:first-child{border-left:none}
+  .info&gt;*:not(:first-child){padding-left:1.1rem}
+  @media (max-width:640px){
+    .info{grid-template-columns:1fr}
+    .info&gt;*{border-left:none;border-top:1px solid var(--line);padding-left:0}
+    .info&gt;*:first-child{border-top:none}
+    .info&gt;*:not(:first-child){padding-left:0}
+  }
+  .info .k{font-size:var(--label-sm);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+    margin:0 0 .35rem;font-weight:600}
+  .info .v{font-size:.92rem;font-weight:600;margin:0}
+  .info .s{font-size:.78rem;color:var(--ink-2);margin:.15rem 0 0}
+  .info button{all:unset;display:flex;flex-direction:column;align-items:flex-start;cursor:pointer;
+    padding:1.05rem 1.1rem;border-left:1px solid var(--line);transition:background var(--dur) ease}
+  .info button:hover{background:var(--glass)}
+  @media (max-width:640px){
+    .info button{border-left:none;border-top:1px solid var(--line);padding:1.05rem 0;
+      display:grid;grid-template-columns:minmax(0,1fr) auto;
+      grid-template-areas:&quot;k cue&quot; &quot;v cue&quot; &quot;s cue&quot;;align-items:center;column-gap:1rem}
+    .info button&gt;.k{grid-area:k} .info button&gt;.v,.info button&gt;.org-inline{grid-area:v}
+    .info button&gt;.s{grid-area:s} .info button&gt;.where-cue{grid-area:cue;margin-top:0;justify-self:end}
+  }
+  .info button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .where-cue{display:inline-flex;align-items:center;gap:.25rem;margin-top:.45rem;font-size:.68rem;
+    font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);transition:color var(--dur) ease}
+  .info button:hover .where-cue{color:var(--glow)}
+  /* small lockup: at this size the mark's glow ring aliases into noise, so it goes */
+  .org-inline{display:flex;align-items:center;gap:.45rem}
+  .org-inline i{width:1.6rem;height:1.6rem;border-radius:50%;overflow:hidden;flex-shrink:0}
+  .org-inline i svg{display:block;width:100%;height:100%}
 
-  /* WHEN / WHERE. An undated store item still fills the WHEN cell — &quot;Any date&quot;
-     is a real answer, not missing data, and it is what makes optional dates
-     legible to a buyer. */
-  .info{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.4rem}
-  @media (max-width:460px){.info{grid-template-columns:1fr}}
-  .cell{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);padding:.85rem .95rem}
-  .cell .k{font-size:var(--label-sm);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-  .cell .v{font-weight:700;font-size:.95rem;margin-top:.2rem}
-  .cell .s{color:var(--ink-2);font-size:.82rem;margin-top:.1rem}
+  /* Quantity is the only thing left to decide, so it sits on the page rather
+     than behind a step of its own. Always visible — the price card below is
+     desktop-only and the dock has no room for a stepper at 375px. */
+  .qty-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:1.15rem 0;border-bottom:1px solid var(--line)}
+  .qty-row .k{font-size:var(--label-sm);letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:600}
+  .qty{display:flex;align-items:center;gap:.3rem}
+  .qty button{width:2.2rem;height:2.2rem;border-radius:50%;border:1px solid var(--line);
+    background:var(--glass);color:var(--ink);font:inherit;font-size:1.05rem;line-height:1;
+    cursor:pointer;display:grid;place-items:center;transition:background var(--dur) ease}
+  .qty button:hover:not(:disabled){background:var(--glass-2)}
+  .qty button:disabled{opacity:.35;cursor:not-allowed}
+  .qty span{min-width:2rem;text-align:center;font-weight:800;font-size:1rem}
+
+  .price-card{padding:1.4rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    border-bottom:1px solid var(--line)}
+  .price-amount{margin:0;font-size:1.55rem;font-weight:800;letter-spacing:-.01em}
+  .price-detail{margin:.1rem 0 0;color:var(--ink-2);font-size:.82rem}
+  /* Mobile: pricing lives in the sticky dock only, same as the event page */
+  @media (max-width:880px){.price-card{display:none}}
 
   section.blk{margin-top:2.4rem}
   section.blk h2{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
     color:var(--ink-2);margin:0 0 .85rem}
   .prose{color:var(--ink-2);font-size:.97rem;max-width:62ch;margin:0}
   .prose+.prose{margin-top:.8rem}
-
-  /* Included / not included — the single most-asked question on anything sold
-     in advance, so it gets its own block rather than living inside prose. */
-  .incl{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-  @media (max-width:620px){.incl{grid-template-columns:1fr}}
-  .incl ul{list-style:none;margin:0;padding:0}
-  .incl li{display:flex;gap:.5rem;align-items:flex-start;font-size:.9rem;padding:.3rem 0;color:var(--ink-2)}
-  .incl li svg{flex-shrink:0;margin-top:.28rem}
-  .incl .yes li svg{color:var(--pos)} .incl .no li svg{color:var(--ink-3)}
-  .incl .h{font-size:var(--label-sm);font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-    color:var(--ink-3);margin:0 0 .45rem}
-
-  .note{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);
-    padding:.9rem 1rem;color:var(--ink-2);font-size:.88rem}
-  .note b{color:var(--ink)}
 
 &lt;/style&gt;
 
@@ -5389,27 +5406,60 @@
   &lt;div class=&quot;wrap&quot;&gt;
     &lt;div class=&quot;art-col&quot;&gt;
       &lt;div class=&quot;art-main&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; aria-label=&quot;Island Day Trip artwork&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;
-      &lt;div class=&quot;thumbs&quot;&gt;
-        &lt;button class=&quot;on&quot; aria-label=&quot;Photo 1&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
-        &lt;button aria-label=&quot;Photo 2&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
-        &lt;button aria-label=&quot;Photo 3&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
-        &lt;button aria-label=&quot;Photo 4&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
 
     &lt;div class=&quot;info-col&quot;&gt;
       &lt;span class=&quot;kind&quot;&gt;Trip&lt;/span&gt;
       &lt;h1 class=&quot;title&quot;&gt;Island Day Trip — Koh Larn&lt;/h1&gt;
 
-      &lt;button class=&quot;org&quot; data-nav=&quot;producer&quot;&gt;
-        &lt;span class=&quot;mark&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; role=&quot;img&quot; aria-label=&quot;Afterlight&quot;&gt;&lt;defs&gt;&lt;clipPath id=&quot;org-c&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;50&quot;/&gt;&lt;/clipPath&gt;&lt;radialGradient id=&quot;org-g&quot; cx=&quot;50%&quot; cy=&quot;50%&quot; r=&quot;50%&quot;&gt;&lt;stop offset=&quot;.62&quot; stop-color=&quot;#ff8a3d&quot; stop-opacity=&quot;0&quot;/&gt;&lt;stop offset=&quot;.78&quot; stop-color=&quot;#ff8a3d&quot; stop-opacity=&quot;.55&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ff8a3d&quot; stop-opacity=&quot;0&quot;/&gt;&lt;/radialGradient&gt;&lt;/defs&gt;&lt;g clip-path=&quot;url(#org-c)&quot;&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;#1b0f0c&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;46&quot; fill=&quot;url(#org-g)&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;30&quot; fill=&quot;none&quot; stroke=&quot;#ff8a3d&quot; stroke-width=&quot;5.5&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;27&quot; fill=&quot;#120a08&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/span&gt;
-        &lt;span&gt;&lt;span class=&quot;k&quot;&gt;Presented by&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;n&quot;&gt;Afterlight&lt;/span&gt;&lt;/span&gt;
-        &lt;svg class=&quot;chev&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M9 5l7 7-7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
-      &lt;/button&gt;
-
       &lt;div class=&quot;info&quot;&gt;
-        &lt;div class=&quot;cell&quot;&gt;&lt;div class=&quot;k&quot;&gt;When&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;Thu, Sep 4&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;07:30 — 18:00 · ICT&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;cell&quot;&gt;&lt;div class=&quot;k&quot;&gt;Departs&lt;/div&gt;&lt;div class=&quot;v&quot;&gt;Bali Hai Pier&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;Pattaya, Thailand&lt;/div&gt;&lt;/div&gt;
+        &lt;button type=&quot;button&quot; id=&quot;cal-btn&quot; aria-label=&quot;Add Island Day Trip to your calendar&quot;&gt;
+          &lt;p class=&quot;k&quot;&gt;When&lt;/p&gt;
+          &lt;p class=&quot;v&quot;&gt;Thu, Sep 4&lt;/p&gt;
+          &lt;p class=&quot;s&quot;&gt;07:30 – 18:00&lt;/p&gt;
+          &lt;span class=&quot;where-cue&quot;&gt;
+            &lt;svg width=&quot;12&quot; height=&quot;12&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3.5&quot; y=&quot;5&quot; width=&quot;17&quot; height=&quot;16&quot; rx=&quot;2.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;path d=&quot;M3.5 9.5h17M8 3.5v3M16 3.5v3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+            Add to calendar
+          &lt;/span&gt;
+        &lt;/button&gt;
+        &lt;button type=&quot;button&quot; id=&quot;where-btn&quot; aria-label=&quot;Show meeting point map and address&quot;&gt;
+          &lt;p class=&quot;k&quot;&gt;Where&lt;/p&gt;
+          &lt;p class=&quot;v&quot;&gt;Bali Hai Pier&lt;/p&gt;
+          &lt;p class=&quot;s&quot;&gt;Pattaya · Thailand&lt;/p&gt;
+          &lt;span class=&quot;where-cue&quot;&gt;
+            &lt;svg width=&quot;12&quot; height=&quot;12&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;circle cx=&quot;12&quot; cy=&quot;10&quot; r=&quot;2.4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;/svg&gt;
+            View map
+          &lt;/span&gt;
+        &lt;/button&gt;
+        &lt;button type=&quot;button&quot; data-nav=&quot;producer&quot; aria-label=&quot;Presented by Afterlight — view producer&quot;&gt;
+          &lt;p class=&quot;k&quot;&gt;Presented by&lt;/p&gt;
+          &lt;div class=&quot;org-inline&quot;&gt;
+            &lt;i aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;defs&gt;&lt;clipPath id=&quot;al-sm&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;50&quot;/&gt;&lt;/clipPath&gt;&lt;/defs&gt;&lt;g clip-path=&quot;url(#al-sm)&quot;&gt;&lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;#20120e&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;34&quot; fill=&quot;none&quot; stroke=&quot;#ff8a3d&quot; stroke-width=&quot;5&quot;/&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;31&quot; fill=&quot;#140b09&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/i&gt;
+            &lt;p class=&quot;v&quot;&gt;Afterlight&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;s&quot;&gt;5 events · Nightlife&lt;/p&gt;
+          &lt;span class=&quot;where-cue&quot;&gt;
+            &lt;svg width=&quot;12&quot; height=&quot;12&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M5 12h13M12 5l7 7-7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+            View producer
+          &lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;qty-row&quot;&gt;
+        &lt;span class=&quot;k&quot;&gt;Quantity&lt;/span&gt;
+        &lt;span class=&quot;qty&quot;&gt;
+          &lt;button id=&quot;q-minus&quot; aria-label=&quot;Remove one&quot; disabled&gt;−&lt;/button&gt;
+          &lt;span id=&quot;q-val&quot; aria-live=&quot;polite&quot;&gt;1&lt;/span&gt;
+          &lt;button id=&quot;q-plus&quot; aria-label=&quot;Add one&quot;&gt;+&lt;/button&gt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;price-card&quot;&gt;
+        &lt;div&gt;
+          &lt;p class=&quot;price-amount&quot; id=&quot;pc-total&quot;&gt;2,400 THB&lt;/p&gt;
+          &lt;p class=&quot;price-detail&quot; id=&quot;pc-detail&quot;&gt;2,400 THB each&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;cta&quot; id=&quot;buy-desktop&quot;&gt;Buy now&lt;/button&gt;
       &lt;/div&gt;
 
       &lt;section class=&quot;blk&quot;&gt;
@@ -5418,29 +5468,6 @@
           two beaches before the day-trip boats arrive, lunch on the sand, and back in time for the evening set.&lt;/p&gt;
         &lt;p class=&quot;prose&quot;&gt;Group size is capped at 24 so the boat stays quick and the beaches stay quiet.&lt;/p&gt;
       &lt;/section&gt;
-
-      &lt;section class=&quot;blk&quot;&gt;
-        &lt;h2&gt;What's included&lt;/h2&gt;
-        &lt;div class=&quot;incl&quot;&gt;
-          &lt;div&gt;&lt;p class=&quot;h&quot;&gt;Included&lt;/p&gt;&lt;ul class=&quot;yes&quot;&gt;
-            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Return speedboat transfer&lt;/span&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Lunch and soft drinks&lt;/span&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Snorkel gear and life vests&lt;/span&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 12.5l5 5L20 6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;English / Thai guide&lt;/span&gt;&lt;/li&gt;
-          &lt;/ul&gt;&lt;/div&gt;
-          &lt;div&gt;&lt;p class=&quot;h&quot;&gt;Not included&lt;/p&gt;&lt;ul class=&quot;no&quot;&gt;
-            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Hotel pickup&lt;/span&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Alcoholic drinks&lt;/span&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;span&gt;Travel insurance&lt;/span&gt;&lt;/li&gt;
-          &lt;/ul&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/section&gt;
-
-      &lt;section class=&quot;blk&quot;&gt;
-        &lt;h2&gt;Good to know&lt;/h2&gt;
-        &lt;p class=&quot;note&quot;&gt;Sold by &lt;b&gt;Afterlight&lt;/b&gt;, who run the trip. Bumpy handles the payment and your voucher.
-          Bring the voucher QR — the crew scans it at the pier.&lt;/p&gt;
-      &lt;/section&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -5464,8 +5491,8 @@
 
 
 &lt;div class=&quot;bar&quot;&gt;
-  &lt;div class=&quot;sum&quot;&gt;&lt;b&gt;From 2,400 THB&lt;/b&gt;&lt;small&gt;Thu, Sep 4 · 3 spots left&lt;/small&gt;&lt;/div&gt;
-  &lt;button class=&quot;cta&quot; data-nav=&quot;pselect&quot;&gt;Buy now&lt;/button&gt;
+  &lt;div class=&quot;sum&quot;&gt;&lt;b id=&quot;bar-total&quot;&gt;2,400 THB&lt;/b&gt;&lt;small id=&quot;bar-sub&quot;&gt;Thu, Sep 4 · 1 × 2,400 THB&lt;/small&gt;&lt;/div&gt;
+  &lt;button class=&quot;cta&quot; id=&quot;buy-mobile&quot;&gt;Buy now&lt;/button&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
@@ -5476,298 +5503,32 @@
     var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
       partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
       producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
-      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
+      pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
     if(R[key]) window.location.href=R[key];
   }
   document.querySelectorAll('[data-nav]').forEach(function(el){
     el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
 
-  var tb = document.querySelectorAll('.thumbs button');
-  tb.forEach(function(b){ b.addEventListener('click', function(){
-    tb.forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on'); }); });
-&lt;/script&gt;
-"></iframe>
-  <iframe class="pg" id="pg-pselect" data-key="pselect" title="Bumpy pselect" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
-&lt;title&gt;Bumpy — Choose Options&lt;/title&gt;
-&lt;meta name=&quot;color-scheme&quot; content=&quot;dark&quot;&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-&lt;style&gt;
-  :root{
-    --bg:#0a0a0c; --well:#050507;
-    --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.08);
-    --ink:#f6f5f4; --ink-2:#a8a29e; --ink-3:#8a8481;
-    --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
-    --pos:#34d399; --pos-soft:rgba(52,211,153,.8); --warn:#ffc46b; --danger:#ff8a8a;
-    --r-lg:1.35rem; --r-xl:1.65rem; --r-pill:999px;
-    --ease:cubic-bezier(.22,1,.36,1); --dur:220ms;
-    --label:.72rem; --label-sm:.64rem; --cta-size:.92rem;
-    /* extracted from the item's own artwork (the Koh Larn dawn) */
-    --accent:#ff9e5a; --glow:#ffd18f; --accent-ink:#2a1206;
-  }
-
-  *{box-sizing:border-box} [hidden]{display:none!important}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;
-    font-variant-numeric:tabular-nums;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-
-  /* header chrome — monochrome, never the item accent */
-  .hdr{position:sticky;top:0;z-index:40;background:rgba(10,10,12,.86);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
-  .hdr-in{padding:.85rem clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-  .hdr-in.funnel{max-width:640px;margin:0 auto;padding:.7rem clamp(.8rem,3vw,1.5rem)}
-  @font-face{font-family:'Baloo 2';font-weight:700;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAAATsAA4AAAAACIwAAASUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG4E6HDQGYD9TVEFUKgBcEQgKhhSFBgsQAAE2AiQDHAQgBYNiByAb+QbIxIfwrH8zSZUsdN2usxCd3qdUfNg9uJy+BRTI2GIp/djX2kfNbWMCJR6lT+1hgUZpHEiE2pJelZRewWF63AwCgEMcisCmZeSVwaOtfSIEtizRvLaveWwAHmAB4AOhvnA6AW3rHh2DSW/7yADO/0WAZnIsFJATNB6hAI4UQW2KWYgB25piR3+BljL8BXke/gTaCqQ9SQwONOVgYsDkOShodQhCbDvKtowAlglN6B30QUhidIdW4fZcdwJpQAixgtJ1KZYWkyDMxrek55Zl4FIImGYj/vsVa2JtqZEAckrGyIu0hkQBRitCo4yAlV1vDzrZ2TUWcGALICx9kKTXBZhaDqZ2hEUWASartVgKAS3oxxDGMQ18ML7U8JHhUsNZg2g4Muz32U80EhCDAaY+yFL0zkimVIkBSHwNFwtAQyEB/Qebsc4KO3OFQuGiUCoUvvzOw4RZfoQ33n0IdOlBroVnuM5drRZLGg23o/O5+mbC8FR9F7+rJ8s6budZt4pr9GUcc849/O596ARHlu/ndu60AkeWb/F8QM/var3V6jPqi5rBkeX7uZ17rSoe0PO7Wm0fT8U7uZ37SasXbd7V90zR1hqvK28E5Z957jYsabid5z1w1XMVHJbu43fvsa4kPJYe8mkqeqPbtQCDutbJOJuI2sqLdbqKcx5g5zloteX8LXq96znXZNYtaTQajd/MTj/seMMjT9hd/fAlrp0uv7l0ura7n+0z9tMlPyHy++TuqPih0rKk4fGYwoQqhzcKUlXxpyF316pC49IzMmOSggVrR2ayL0WZ0CEyK+FnfPu98F3OiLrRZdFR6Xf3vnihTVKctNEuLKjU4fvxbyMv0Tu6tIqNLo1O1ivf5pcrSt3iw6pdw/NfHxelJ2FnfPo9HZ9Vs4Sv1ulZUbry9vA0yeiPSRwur0oemAjLj65VvZ4XZJN5GvJMjrWL3fVBGXHpkU4y4/na20O7xVe9+n3OhJ8g+v4sMTPgC1+76LUD9aUq57xf6pTRmT3eMVXPN6vlJ+FnfPu8I54X5SvhZ7BXYnviR7d6z0Vl6YsrKqfpU2WW/6F1FmvkMuwwdY3uT3On5wV7s2K7BvcWr9q08PqaOn+3b5KL3xf/YoPPlv3hF2HHHaH+ZZtBjaZxv8kZ5kssj3cvO/dD8uB7lzbe+b/F/0T+OesFAulpZN4R9pYplvv/b/FnlPzzE24qo1egHM8+RNMQx2QhhiYhhiYghqqgrKlMhl9gjNvAtXOw74a8cN47WAWA8/F8qCcwwYN6Cjnu1DPww5aehQpDeglsUaGXQokknQnCYOQhYBzAge1vUSXa0Y1OdGHMrB3DEGIQyMwaRStG0I0hjJFSgEzit/chAIMYQScCUYgM5CEFzejDoHQ4BP5IwSD60IYKtGOk9uxBDEBAMAIQiSC8T5IEViX0lX5LLNKRizJkILbnPnegHykVxyFMw2VRoXMWByEY0RBQhi60jzVk7EgRRthCD9rRWhuTMb4KNIKVUQjwWhHHKIud6C6NjKNF+m0rBtGPQKSjF2WYxhDaEYiB97tK8eMMFyIEGgAA) format('woff2')}
-  .wordmark{display:inline-flex;align-items:center;gap:.34em;font-family:'Baloo 2',system-ui,sans-serif;
-    font-weight:700;font-size:1.25rem;letter-spacing:-.02em;line-height:1;color:var(--ink);
-    background:none;border:none;cursor:pointer;padding:0}
-  .wordmark .dot{width:.37em;height:.37em;border-radius:50%;background:#e7ff1a;flex:none;
-    transform-origin:center;animation:bumppulse 2.4s ease-in-out infinite}
-  @keyframes bumppulse{0%,100%{transform:scale(.5)}50%{transform:scale(1.5)}}
-  @media (prefers-reduced-motion:reduce){.wordmark .dot{animation:none}}
-  .navlink{font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;background:none;border:none;cursor:pointer}
-  .navlink:hover{opacity:.7}
-  @media (min-width:1024px){.hdr-in:not(.funnel){padding-top:1.2rem;padding-bottom:1.2rem}
-    .wordmark{font-size:1.6rem}.navlink{font-size:1.05rem}}
-  .icon-btn{width:2.3rem;height:2.3rem;border-radius:50%;border:none;background:transparent;color:var(--ink-2);
-    display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:background var(--dur) ease,color var(--dur) ease}
-  .icon-btn:hover{background:var(--glass);color:var(--ink)}
-  .icon-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-
-  /* funnel step rail */
-  .steps{display:flex;align-items:center;gap:.5rem;min-width:0}
-  .step{display:flex;align-items:center;gap:.42rem;min-width:0}
-  .step .dot{width:.42rem;height:.42rem;border-radius:50%;background:var(--ink-3);flex-shrink:0}
-  .step.now .dot{background:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
-  .step span{font-size:var(--label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--ink-3);white-space:nowrap}
-  .step.now span{color:var(--ink)} .step.done span{color:var(--ink-2)}
-  .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
-  @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
-
-  .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
-    color:var(--ink-2);margin:0 0 .85rem}
-  .lbl.mt{margin-top:2rem}
-
-  .cta{border:none;cursor:pointer;font-weight:800;font-size:var(--cta-size);letter-spacing:.01em;
-    padding:.8rem 1.2rem;border-radius:var(--r-pill);color:var(--accent-ink);
-    background:linear-gradient(135deg,var(--glow),var(--accent));
-    box-shadow:0 8px 30px -8px color-mix(in oklab,var(--accent) 70%,transparent);
-    transition:transform 140ms var(--ease)}
-  .cta:hover:not(:disabled){transform:translateY(-1px)}
-  .cta:active:not(:disabled){transform:scale(.99)}
-  .cta:focus-visible{outline:2px solid #fff;outline-offset:2px}
-  .cta:disabled{background:var(--glass-2);color:var(--ink-3);box-shadow:none;cursor:not-allowed}
-  .cta.full{width:100%;margin-top:1.4rem;padding:.95rem 1.5rem}
-
-  .field{margin-top:.85rem}
-  .field label{display:block;font-size:var(--label-sm);font-weight:700;text-transform:uppercase;
-    letter-spacing:.06em;color:var(--ink-2);margin-bottom:.3rem}
-  .field input,.field select{width:100%;height:2.6rem;padding:0 .85rem;border-radius:.7rem;
-    border:1px solid var(--line);background:var(--glass);color:var(--ink);font:inherit;font-size:.9rem;
-    outline:none;transition:border-color var(--dur) ease}
-  .field input::placeholder{color:var(--ink-3)}
-  .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
-  .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
-
-  /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
-  .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
-    justify-content:space-between;gap:1rem;padding:1.05rem clamp(1rem,4vw,1.5rem);
-    padding-bottom:calc(1.05rem + env(safe-area-inset-bottom,0px));
-    background:rgba(14,14,16,.92);border-top:1px solid var(--line);
-    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 -10px 28px -8px rgba(0,0,0,.7)}
-  @media (min-width:881px){.bar{left:50%;right:auto;bottom:1.25rem;transform:translateX(-50%);
-    width:min(560px,calc(100vw - 3rem));padding:.8rem .8rem .8rem 1.35rem;border:1px solid var(--line);
-    border-radius:var(--r-pill);box-shadow:0 18px 50px -18px rgba(0,0,0,.75)}}
-  .bar .sum{line-height:1.25;min-width:0;flex:1;padding-right:.5rem}
-  .bar .sum b{font-size:1.02rem;white-space:nowrap}
-  .bar .sum small{display:block;margin-top:.22rem;color:var(--ink-2);font-size:.76rem;white-space:nowrap}
-  .bar .cta{padding:.78rem 1.35rem;font-size:.88rem}
-
-  /* footer — two columns (Blog dropped, Contact folded into Company) */
-  footer.site{border-top:1px solid var(--line);background:var(--well);padding:3.5rem clamp(1rem,4vw,3rem) 6.5rem}
-  .foot-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr 2fr;gap:clamp(2rem,5vw,4rem)}
-  .foot-brand .wordmark{font-size:1.5rem}
-  .foot-tag{color:var(--ink-2);font-size:.9rem;margin:1rem 0 1.3rem;max-width:30ch}
-  .foot-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem}
-  .foot-h{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 .9rem}
-  .foot-col a{display:block;color:var(--ink-3);text-decoration:none;font-size:.86rem;padding:.32rem 0;cursor:pointer}
-  .foot-col a:hover{color:var(--ink)}
-  .foot-bottom{max-width:1180px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line-soft);
-    display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
-  @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}}
-
-  .fwrap{max-width:640px;margin:0 auto;padding:1.8rem clamp(.9rem,3vw,1.5rem) 9rem}
-  .item{display:flex;align-items:center;gap:.9rem;padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
-  .item .th{width:3.4rem;height:3.4rem;border-radius:.7rem;overflow:hidden;flex-shrink:0;
-    box-shadow:0 8px 26px -6px color-mix(in oklab,var(--accent) 45%,transparent)}
-  .item .th svg{display:block;width:100%;height:100%}
-  .item .t{font-weight:700;font-size:.98rem;letter-spacing:-.01em;margin:0}
-  .item .s{color:var(--ink-2);font-size:.8rem;margin:.1rem 0 0}
-
-  /* departure picker — only rendered when the item is dated */
-  .dates{display:flex;gap:.5rem;flex-wrap:wrap}
-  .dchip{border:1px solid var(--line);background:var(--glass);color:var(--ink-2);border-radius:var(--r-lg);
-    padding:.55rem .8rem;cursor:pointer;font:inherit;text-align:center;line-height:1.2;min-width:4.6rem;
-    transition:border-color var(--dur) ease,background var(--dur) ease,color var(--dur) ease}
-  .dchip b{display:block;font-size:.98rem;font-weight:800;color:var(--ink)}
-  .dchip small{font-size:.66rem;letter-spacing:.06em;text-transform:uppercase}
-  .dchip.on{border-color:var(--accent);background:color-mix(in oklab,var(--accent) 12%,transparent);color:var(--ink)}
-  .dchip:disabled{opacity:.4;cursor:not-allowed}
-
-  /* Two-line option rows with a fixed action column, same shape as ticket
-     selection so the funnel reads identically whichever thing you're buying. */
-  .row{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--glass);
-    border-radius:var(--r-lg);padding:.85rem 1rem;margin-top:.7rem;transition:border-color var(--dur) ease,background var(--dur) ease}
-  .row.on{border-color:color-mix(in oklab,var(--ink) 20%,transparent);background:var(--glass-2)}
-  .row-top{display:flex;align-items:center;gap:.9rem}
-  .row .n{flex:1;min-width:0}
-  .row .n b{display:block;font-weight:700;font-size:.95rem}
-  .row .n small{display:block;color:var(--ink-3);font-size:.8rem;margin-top:.1rem}
-  .qty{display:flex;align-items:center;gap:.2rem;flex-shrink:0;width:6.6rem;justify-content:flex-end}
-  .qty button{width:2rem;height:2rem;border-radius:50%;border:1px solid var(--line);background:var(--glass);
-    color:var(--ink);font:inherit;font-size:1rem;line-height:1;cursor:pointer;display:grid;place-items:center}
-  .qty button:hover:not(:disabled){background:var(--glass-2)}
-  .qty button:disabled{opacity:.35;cursor:not-allowed}
-  .qty span{min-width:1.6rem;text-align:center;font-weight:800}
-  .row .pr{padding-top:.6rem;margin-top:.6rem;border-top:1px solid var(--line-soft);font-weight:700;font-size:.94rem}
-  .row .pr small{color:var(--ink-3);font-weight:500;font-size:.72rem}
-
-  .hint{color:var(--ink-3);font-size:.8rem;margin:.9rem 0 0}
-&lt;/style&gt;
-
-&lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;
-  &lt;linearGradient id=&quot;p-sky&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
-    &lt;stop offset=&quot;0&quot; stop-color=&quot;#1d1030&quot;/&gt;&lt;stop offset=&quot;.55&quot; stop-color=&quot;#8a3f52&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#ffa25c&quot;/&gt;
-  &lt;/linearGradient&gt;
-  &lt;linearGradient id=&quot;p-sea&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
-    &lt;stop offset=&quot;0&quot; stop-color=&quot;#12324a&quot;/&gt;&lt;stop offset=&quot;1&quot; stop-color=&quot;#07131f&quot;/&gt;
-  &lt;/linearGradient&gt;
-  &lt;g id=&quot;p-art&quot;&gt;
-    &lt;rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(#p-sky)&quot;/&gt;
-    &lt;circle cx=&quot;66&quot; cy=&quot;52&quot; r=&quot;11&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.95&quot;/&gt;
-    &lt;path d=&quot;M0 60 q14 -11 26 -1 q9 7 18 1 q10 -7 20 1 q8 6 16 -1 v10 H0 Z&quot; fill=&quot;#2a1430&quot; opacity=&quot;.85&quot;/&gt;
-    &lt;rect y=&quot;67&quot; width=&quot;100&quot; height=&quot;33&quot; fill=&quot;url(#p-sea)&quot;/&gt;
-    &lt;rect x=&quot;59&quot; y=&quot;71&quot; width=&quot;14&quot; height=&quot;1.8&quot; rx=&quot;.9&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.45&quot;/&gt;
-    &lt;rect x=&quot;62&quot; y=&quot;77&quot; width=&quot;8&quot; height=&quot;1.4&quot; rx=&quot;.7&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.28&quot;/&gt;
-    &lt;rect x=&quot;64&quot; y=&quot;83&quot; width=&quot;4&quot; height=&quot;1.1&quot; rx=&quot;.55&quot; fill=&quot;#ffd9a3&quot; opacity=&quot;.18&quot;/&gt;
-  &lt;/g&gt;
-&lt;/defs&gt;&lt;/svg&gt;
-
-&lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in funnel&quot;&gt;
-  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;product&quot; aria-label=&quot;Back&quot;&gt;
-    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M15 5l-7 7 7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
-  &lt;/button&gt;
-  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Choose&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step &quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step &quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
-  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;producer&quot; aria-label=&quot;Close&quot;&gt;
-    &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
-  &lt;/button&gt;
-&lt;/div&gt;&lt;/header&gt;
-
-&lt;div class=&quot;fwrap&quot;&gt;
-  &lt;div class=&quot;item&quot;&gt;
-    &lt;span class=&quot;th&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
-    &lt;span&gt;&lt;p class=&quot;t&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;s&quot;&gt;Afterlight · Bali Hai Pier, Pattaya&lt;/p&gt;&lt;/span&gt;
-  &lt;/div&gt;
-
-  &lt;p class=&quot;lbl mt&quot;&gt;Departure&lt;/p&gt;
-  &lt;div class=&quot;dates&quot; id=&quot;dates&quot;&gt;
-    &lt;button class=&quot;dchip on&quot; data-d=&quot;Thu, Sep 4&quot;&gt;&lt;b&gt;4&lt;/b&gt;&lt;small&gt;Sep&lt;/small&gt;&lt;/button&gt;
-    &lt;button class=&quot;dchip&quot; data-d=&quot;Sun, Sep 7&quot;&gt;&lt;b&gt;7&lt;/b&gt;&lt;small&gt;Sep&lt;/small&gt;&lt;/button&gt;
-    &lt;button class=&quot;dchip&quot; data-d=&quot;Thu, Sep 11&quot;&gt;&lt;b&gt;11&lt;/b&gt;&lt;small&gt;Sep&lt;/small&gt;&lt;/button&gt;
-    &lt;button class=&quot;dchip&quot; disabled title=&quot;Sold out&quot;&gt;&lt;b&gt;14&lt;/b&gt;&lt;small&gt;Sold&lt;/small&gt;&lt;/button&gt;
-  &lt;/div&gt;
-
-  &lt;p class=&quot;lbl mt&quot;&gt;Options&lt;/p&gt;
-  &lt;div id=&quot;rows&quot;&gt;&lt;/div&gt;
-
-  &lt;p class=&quot;hint&quot;&gt;One item per order — buying a second thing is a second checkout.&lt;/p&gt;
-&lt;/div&gt;
-
-
-&lt;footer class=&quot;site&quot;&gt;
-  &lt;div class=&quot;foot-in&quot;&gt;
-    &lt;div class=&quot;foot-brand&quot;&gt;
-      &lt;span class=&quot;wordmark&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;bumpy&lt;/span&gt;
-      &lt;p class=&quot;foot-tag&quot;&gt;Tickets for the nights that matter — discover events, grab your spot, show up.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;foot-cols&quot;&gt;
-      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Company&lt;/p&gt;
-        &lt;a data-nav=&quot;about&quot;&gt;About us&lt;/a&gt;&lt;a data-nav=&quot;contact&quot;&gt;Contact us&lt;/a&gt;&lt;/div&gt;
-      &lt;div class=&quot;foot-col&quot;&gt;&lt;p class=&quot;foot-h&quot;&gt;Partners&lt;/p&gt;
-        &lt;a data-nav=&quot;login&quot;&gt;Dashboard&lt;/a&gt;&lt;a data-nav=&quot;partner&quot;&gt;Apply to Bumpy&lt;/a&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;foot-bottom&quot;&gt;&lt;span&gt;© 2026 Bumpy&lt;/span&gt;&lt;/div&gt;
-&lt;/footer&gt;
-
-
-&lt;div class=&quot;bar&quot;&gt;
-  &lt;div class=&quot;sum&quot;&gt;&lt;b id=&quot;bar-total&quot;&gt;Select an option&lt;/b&gt;&lt;small id=&quot;bar-sub&quot;&gt;Thu, Sep 4&lt;/small&gt;&lt;/div&gt;
-  &lt;button class=&quot;cta&quot; id=&quot;go&quot; disabled&gt;Continue&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;script&gt;
-  
-  function PNAV(key, order){
-    try{ if(window.parent &amp;&amp; window.parent!==window){
-      window.parent.postMessage(order?{bumpyNav:key,order:order}:{bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
-    var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
-      partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
-      producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
-      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
-    if(R[key]) window.location.href=R[key];
-  }
-  document.querySelectorAll('[data-nav]').forEach(function(el){
-    el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
-
-  var OPTS = [
-    {id:&quot;adult&quot;, n:&quot;Adult&quot;,  s:&quot;13 and over&quot;, p:2400, max:6},
-    {id:&quot;child&quot;, n:&quot;Child&quot;,  s:&quot;4–12 · under 4 free&quot;, p:1400, max:6},
-    {id:&quot;speed&quot;, n:&quot;Private speedboat upgrade&quot;, s:&quot;Whole boat, departs on your time&quot;, p:9800, max:1}
-  ];
-  var qty = {}, date = &quot;Thu, Sep 4&quot;;
-  var rows = document.getElementById(&quot;rows&quot;);
-
+  var UNIT = 2400, MAX = 8, qty = 1;
   function fmt(n){ return n.toLocaleString(&quot;en-US&quot;) + &quot; THB&quot;; }
-  function render(){
-    rows.innerHTML = OPTS.map(function(o){
-      var q = qty[o.id] || 0;
-      return '&lt;div class=&quot;row ' + (q ? 'on' : '') + '&quot;&gt;' +
-        '&lt;div class=&quot;row-top&quot;&gt;&lt;span class=&quot;n&quot;&gt;&lt;b&gt;' + o.n + '&lt;/b&gt;&lt;small&gt;' + o.s + '&lt;/small&gt;&lt;/span&gt;' +
-        '&lt;span class=&quot;qty&quot;&gt;' +
-          '&lt;button data-op=&quot;-&quot; data-id=&quot;' + o.id + '&quot; aria-label=&quot;Remove one ' + o.n + '&quot;' + (q ? '' : ' disabled') + '&gt;−&lt;/button&gt;' +
-          '&lt;span aria-live=&quot;polite&quot;&gt;' + q + '&lt;/span&gt;' +
-          '&lt;button data-op=&quot;+&quot; data-id=&quot;' + o.id + '&quot; aria-label=&quot;Add one ' + o.n + '&quot;' + (q &gt;= o.max ? ' disabled' : '') + '&gt;+&lt;/button&gt;' +
-        '&lt;/span&gt;&lt;/div&gt;' +
-        '&lt;div class=&quot;pr&quot;&gt;' + fmt(o.p) + ' &lt;small&gt;each&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;';
-    }).join(&quot;&quot;);
-    var total = OPTS.reduce(function(s, o){ return s + (qty[o.id] || 0) * o.p; }, 0);
-    var count = OPTS.reduce(function(s, o){ return s + (qty[o.id] || 0); }, 0);
-    document.getElementById(&quot;bar-total&quot;).textContent = count ? fmt(total) : &quot;Select an option&quot;;
-    document.getElementById(&quot;bar-sub&quot;).textContent = count
-      ? date + &quot; · &quot; + count + (count === 1 ? &quot; spot&quot; : &quot; spots&quot;)
-      : date;
-    document.getElementById(&quot;go&quot;).disabled = !count;
+  function paint(){
+    document.getElementById(&quot;q-val&quot;).textContent = qty;
+    document.getElementById(&quot;q-minus&quot;).disabled = qty &lt;= 1;
+    document.getElementById(&quot;q-plus&quot;).disabled = qty &gt;= MAX;
+    document.getElementById(&quot;pc-total&quot;).textContent = fmt(UNIT * qty);
+    document.getElementById(&quot;pc-detail&quot;).textContent = fmt(UNIT) + &quot; each&quot;;
+    document.getElementById(&quot;bar-total&quot;).textContent = fmt(UNIT * qty);
+    document.getElementById(&quot;bar-sub&quot;).textContent = &quot;Thu, Sep 4 · &quot; + qty + &quot; × &quot; + fmt(UNIT);
   }
-  rows.addEventListener(&quot;click&quot;, function(e){
-    var b = e.target.closest(&quot;button[data-op]&quot;); if (!b) return;
-    var o = OPTS.filter(function(x){ return x.id === b.dataset.id; })[0];
-    var q = qty[o.id] || 0;
-    qty[o.id] = b.dataset.op === &quot;+&quot; ? Math.min(o.max, q + 1) : Math.max(0, q - 1);
-    render();
-  });
-  document.getElementById(&quot;dates&quot;).addEventListener(&quot;click&quot;, function(e){
-    var b = e.target.closest(&quot;.dchip&quot;); if (!b || b.disabled) return;
-    [].forEach.call(this.querySelectorAll(&quot;.dchip&quot;), function(x){ x.classList.remove(&quot;on&quot;); });
-    b.classList.add(&quot;on&quot;); date = b.dataset.d; render();
-  });
-  // hand the built order forward so Pay and Voucher show the same numbers
-  document.getElementById(&quot;go&quot;).addEventListener(&quot;click&quot;, function(){
-    var lines = OPTS.filter(function(o){ return qty[o.id]; })
-      .map(function(o){ return { name: o.n, qty: qty[o.id], unit: o.p }; });
-    PNAV(&quot;pcheckout&quot;, { kind: &quot;store&quot;, title: &quot;Island Day Trip — Koh Larn&quot;,
-      seller: &quot;Afterlight&quot;, date: date, lines: lines });
-  });
-  render();
+  document.getElementById(&quot;q-minus&quot;).addEventListener(&quot;click&quot;, function(){ if (qty &gt; 1) { qty--; paint(); } });
+  document.getElementById(&quot;q-plus&quot;).addEventListener(&quot;click&quot;, function(){ if (qty &lt; MAX) { qty++; paint(); } });
+  function buy(){
+    PNAV(&quot;pcheckout&quot;, { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;,
+      date:&quot;Thu, Sep 4&quot;, lines:[{ name:&quot;Island Day Trip — Koh Larn&quot;, qty:qty, unit:UNIT }] });
+  }
+  document.getElementById(&quot;buy-desktop&quot;).addEventListener(&quot;click&quot;, buy);
+  document.getElementById(&quot;buy-mobile&quot;).addEventListener(&quot;click&quot;, buy);
+  paint();
 &lt;/script&gt;
 "></iframe>
   <iframe class="pg" id="pg-pcheckout" data-key="pcheckout" title="Bumpy pcheckout" srcdoc="&lt;meta charset=&quot;utf-8&quot;&gt;
@@ -5927,10 +5688,10 @@
 &lt;/defs&gt;&lt;/svg&gt;
 
 &lt;header class=&quot;hdr&quot;&gt;&lt;div class=&quot;hdr-in funnel&quot;&gt;
-  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;pselect&quot; aria-label=&quot;Back&quot;&gt;
+  &lt;button class=&quot;icon-btn&quot; data-nav=&quot;product&quot; aria-label=&quot;Back&quot;&gt;
     &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M15 5l-7 7 7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
   &lt;/button&gt;
-  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step done&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Choose&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step &quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
+  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step &quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
   &lt;button class=&quot;icon-btn&quot; data-nav=&quot;producer&quot; aria-label=&quot;Close&quot;&gt;
     &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
   &lt;/button&gt;
@@ -6008,7 +5769,7 @@
     var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
       partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
       producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
-      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
+      pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
     if(R[key]) window.location.href=R[key];
   }
   document.querySelectorAll('[data-nav]').forEach(function(el){
@@ -6222,7 +5983,7 @@
   &lt;button class=&quot;icon-btn&quot; data-nav=&quot;pcheckout&quot; aria-label=&quot;Back&quot;&gt;
     &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M15 5l-7 7 7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
   &lt;/button&gt;
-  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step done&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Choose&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step done&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
+  &lt;nav class=&quot;steps&quot; aria-label=&quot;Purchase progress&quot;&gt;&lt;span class=&quot;step done&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Pay&lt;/span&gt;&lt;/span&gt;&lt;i class=&quot;step-sep&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;step now&quot;&gt;&lt;i class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span aria-current=&quot;step&quot;&gt;Voucher&lt;/span&gt;&lt;/span&gt;&lt;/nav&gt;
   &lt;button class=&quot;icon-btn&quot; data-nav=&quot;producer&quot; aria-label=&quot;Close&quot;&gt;
     &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
   &lt;/button&gt;
@@ -6300,7 +6061,7 @@
     var R={event:&quot;bumpy-event-page-mockup.html&quot;,login:&quot;bumpy-login-mockup.html&quot;,
       partner:&quot;bumpy-partner-mockup.html&quot;,contact:&quot;bumpy-contact-mockup.html&quot;,about:&quot;bumpy-about-mockup.html&quot;,
       producer:&quot;bumpy-producer.html&quot;,product:&quot;bumpy-product-mockup.html&quot;,
-      pselect:&quot;bumpy-product-select.html&quot;,pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
+      pcheckout:&quot;bumpy-product-checkout.html&quot;,pconfirm:&quot;bumpy-product-confirm.html&quot;};
     if(R[key]) window.location.href=R[key];
   }
   document.querySelectorAll('[data-nav]').forEach(function(el){
@@ -7489,7 +7250,7 @@ footer.site{border-top:1px solid var(--line);margin-top:5rem;background:var(--we
 
 <script>
   const KEYS = ["event","select","checkout","confirm","login","gate","producer","partner","contact","about",
-                "product","pselect","pcheckout","pconfirm"];
+                "product","pcheckout","pconfirm"];
   // the tickets chosen on "Choose Ticket", carried forward to Pay + Confirmation
   let lastOrder = null;
   let loggedIn = false;        // demo auth state that drives the checkout gate
