@@ -4868,14 +4868,6 @@
   .pcard .art{aspect-ratio:4/3}
   .pcard .type{position:absolute;top:.7rem;left:.7rem;font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
     padding:.26rem .5rem;border-radius:var(--r-pill);background:rgba(10,10,12,.72);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink-2)}
-  /* Dates are optional on a store item, so the slot is always filled: a real
-     date when there is one, &quot;Any date&quot; when there isn't. Without this the grid
-     goes ragged and an undated item reads as missing data rather than as an
-     item you can buy whenever. */
-  .pcard .when{position:absolute;top:.7rem;right:.7rem;display:inline-flex;align-items:center;gap:.3rem;
-    font-size:.62rem;font-weight:700;letter-spacing:.03em;padding:.26rem .5rem;border-radius:var(--r-pill);
-    background:rgba(10,10,12,.72);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink)}
-  .pcard .when.any{color:var(--ink-3);font-weight:600}
   .pcard .body .d{color:var(--ink-2);font-size:.82rem;margin-top:.05rem}
   .pcard .body .p{margin-top:.7rem}
   .pcard .body .left{color:var(--warn);font-weight:600}
@@ -5087,10 +5079,10 @@
   // model is generic: a store item is a product with a price, some details and
   // OPTIONAL dates. `d`/`m` absent =&gt; undated, sells any time.
   const STORE = [
-    {t:&quot;Island Day Trip — Koh Larn&quot;, k:&quot;Trip&quot;,      sc:&quot;sc-island&quot;,   d:&quot;04&quot;, m:&quot;Sep&quot;, desc:&quot;Boat, lunch, two beaches&quot;, p:&quot;2,400&quot;, from:true, left:3},
-    {t:&quot;Sunset Boat Party&quot;,          k:&quot;Trip&quot;,      sc:&quot;sc-boat&quot;,     d:&quot;12&quot;, m:&quot;Sep&quot;, desc:&quot;3 hours · open deck · resident DJ&quot;, p:&quot;1,800&quot;},
-    {t:&quot;Afterlight Tee — Eclipse&quot;,   k:&quot;Merch&quot;,     sc:&quot;sc-tee&quot;,                       desc:&quot;Heavyweight cotton · S–XXL&quot;, p:&quot;890&quot;, from:true},
-    {t:&quot;Airport Transfer BKK ⇄ Sukhumvit&quot;, k:&quot;Transfer&quot;, sc:&quot;sc-transfer&quot;,             desc:&quot;Private car · up to 3 bags&quot;, p:&quot;650&quot;}
+    {t:&quot;Island Day Trip — Koh Larn&quot;, k:&quot;Trip&quot;,     sc:&quot;sc-island&quot;,   desc:&quot;Boat, lunch, two beaches&quot;, p:&quot;2,400&quot;, from:true, left:3},
+    {t:&quot;Sunset Boat Party&quot;,          k:&quot;Trip&quot;,     sc:&quot;sc-boat&quot;,     desc:&quot;3 hours · open deck · resident DJ&quot;, p:&quot;1,800&quot;},
+    {t:&quot;Afterlight Tee — Eclipse&quot;,   k:&quot;Merch&quot;,    sc:&quot;sc-tee&quot;,      desc:&quot;Heavyweight cotton · S–XXL&quot;, p:&quot;890&quot;, from:true},
+    {t:&quot;Airport Transfer BKK ⇄ Sukhumvit&quot;, k:&quot;Transfer&quot;, sc:&quot;sc-transfer&quot;, desc:&quot;Private car · up to 3 bags&quot;, p:&quot;650&quot;}
   ];
 
   // Producer descriptor = the top 1–2 categories across all their events. No genre
@@ -5127,9 +5119,6 @@
         &lt;svg viewBox=&quot;0 0 100 75&quot; preserveAspectRatio=&quot;xMidYMid slice&quot; aria-hidden=&quot;true&quot;
              style=&quot;display:block;width:100%;height:100%&quot;&gt;&lt;use href=&quot;#${i.sc}&quot;/&gt;&lt;/svg&gt;
         &lt;div class=&quot;type&quot;&gt;${i.k}&lt;/div&gt;
-        ${i.d
-          ? `&lt;div class=&quot;when&quot;&gt;${i.d} ${i.m}&lt;/div&gt;`
-          : `&lt;div class=&quot;when any&quot;&gt;Any date&lt;/div&gt;`}
       &lt;/div&gt;
       &lt;div class=&quot;body&quot;&gt;
         &lt;h3&gt;${i.t}&lt;/h3&gt;
@@ -5312,7 +5301,10 @@
   /* Same info block the event page uses — three cells divided by hairlines,
      each one a target with an action cue. A store item answers the same three
      questions an event does, so it should not invent a second layout for them. */
-  .info{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  /* auto-fit, not a hardcoded 3: a store item has no date, so this block
+     carries two cells where the event page carries three. */
+  .info{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .info&gt;*{padding:1.05rem 1.1rem 1.05rem 0;border-left:1px solid var(--line);min-width:0}
   .info&gt;*:first-child{border-left:none}
   .info&gt;*:not(:first-child){padding-left:1.1rem}
@@ -5413,15 +5405,6 @@
       &lt;h1 class=&quot;title&quot;&gt;Island Day Trip — Koh Larn&lt;/h1&gt;
 
       &lt;div class=&quot;info&quot;&gt;
-        &lt;button type=&quot;button&quot; id=&quot;cal-btn&quot; aria-label=&quot;Add Island Day Trip to your calendar&quot;&gt;
-          &lt;p class=&quot;k&quot;&gt;When&lt;/p&gt;
-          &lt;p class=&quot;v&quot;&gt;Thu, Sep 4&lt;/p&gt;
-          &lt;p class=&quot;s&quot;&gt;07:30 – 18:00&lt;/p&gt;
-          &lt;span class=&quot;where-cue&quot;&gt;
-            &lt;svg width=&quot;12&quot; height=&quot;12&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3.5&quot; y=&quot;5&quot; width=&quot;17&quot; height=&quot;16&quot; rx=&quot;2.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;path d=&quot;M3.5 9.5h17M8 3.5v3M16 3.5v3&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
-            Add to calendar
-          &lt;/span&gt;
-        &lt;/button&gt;
         &lt;button type=&quot;button&quot; id=&quot;where-btn&quot; aria-label=&quot;Show meeting point map and address&quot;&gt;
           &lt;p class=&quot;k&quot;&gt;Where&lt;/p&gt;
           &lt;p class=&quot;v&quot;&gt;Bali Hai Pier&lt;/p&gt;
@@ -5491,7 +5474,7 @@
 
 
 &lt;div class=&quot;bar&quot;&gt;
-  &lt;div class=&quot;sum&quot;&gt;&lt;b id=&quot;bar-total&quot;&gt;2,400 THB&lt;/b&gt;&lt;small id=&quot;bar-sub&quot;&gt;Thu, Sep 4 · 1 × 2,400 THB&lt;/small&gt;&lt;/div&gt;
+  &lt;div class=&quot;sum&quot;&gt;&lt;b id=&quot;bar-total&quot;&gt;2,400 THB&lt;/b&gt;&lt;small id=&quot;bar-sub&quot;&gt;1 × 2,400 THB&lt;/small&gt;&lt;/div&gt;
   &lt;button class=&quot;cta&quot; id=&quot;buy-mobile&quot;&gt;Buy now&lt;/button&gt;
 &lt;/div&gt;
 
@@ -5518,13 +5501,13 @@
     document.getElementById(&quot;pc-total&quot;).textContent = fmt(UNIT * qty);
     document.getElementById(&quot;pc-detail&quot;).textContent = fmt(UNIT) + &quot; each&quot;;
     document.getElementById(&quot;bar-total&quot;).textContent = fmt(UNIT * qty);
-    document.getElementById(&quot;bar-sub&quot;).textContent = &quot;Thu, Sep 4 · &quot; + qty + &quot; × &quot; + fmt(UNIT);
+    document.getElementById(&quot;bar-sub&quot;).textContent = qty + &quot; × &quot; + fmt(UNIT);
   }
   document.getElementById(&quot;q-minus&quot;).addEventListener(&quot;click&quot;, function(){ if (qty &gt; 1) { qty--; paint(); } });
   document.getElementById(&quot;q-plus&quot;).addEventListener(&quot;click&quot;, function(){ if (qty &lt; MAX) { qty++; paint(); } });
   function buy(){
     PNAV(&quot;pcheckout&quot;, { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;,
-      date:&quot;Thu, Sep 4&quot;, lines:[{ name:&quot;Island Day Trip — Koh Larn&quot;, qty:qty, unit:UNIT }] });
+      lines:[{ name:&quot;Island Day Trip — Koh Larn&quot;, qty:qty, unit:UNIT }] });
   }
   document.getElementById(&quot;buy-desktop&quot;).addEventListener(&quot;click&quot;, buy);
   document.getElementById(&quot;buy-mobile&quot;).addEventListener(&quot;click&quot;, buy);
@@ -5710,7 +5693,7 @@
   &lt;div class=&quot;col-sticky&quot;&gt;
     &lt;div class=&quot;ev&quot;&gt;
       &lt;span class=&quot;ev-art&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
-      &lt;span&gt;&lt;p class=&quot;ev-t&quot; id=&quot;s-title&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;ev-s&quot; id=&quot;s-sub&quot;&gt;Afterlight · Thu, Sep 4&lt;/p&gt;&lt;/span&gt;
+      &lt;span&gt;&lt;p class=&quot;ev-t&quot; id=&quot;s-title&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;ev-s&quot; id=&quot;s-sub&quot;&gt;Afterlight&lt;/p&gt;&lt;/span&gt;
     &lt;/div&gt;
 
     &lt;p class=&quot;lbl mt&quot;&gt;Order summary &lt;span class=&quot;lbl-sub&quot; id=&quot;s-count&quot;&gt;1 item&lt;/span&gt;&lt;/p&gt;
@@ -5795,12 +5778,12 @@
 
   // Fallback order so the page stands on its own when opened directly; the flow
   // shell overwrites it with whatever was chosen on the item page.
-  var order = { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;, date:&quot;Thu, Sep 4&quot;,
+  var order = { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;,
     lines:[{name:&quot;Island Day Trip — Koh Larn&quot;, qty:1, unit:2400}] };
   function fmt(n){ return n.toLocaleString(&quot;en-US&quot;) + &quot; THB&quot;; }
   function paint(){
     document.getElementById(&quot;s-title&quot;).textContent = order.title;
-    document.getElementById(&quot;s-sub&quot;).textContent = order.seller + &quot; · &quot; + order.date;
+    document.getElementById(&quot;s-sub&quot;).textContent = order.seller;
     var count = order.lines.reduce(function(s,l){ return s + l.qty; }, 0);
     document.getElementById(&quot;s-count&quot;).textContent = count + (count === 1 ? &quot; item&quot; : &quot; items&quot;);
     document.getElementById(&quot;s-lines&quot;).innerHTML = order.lines.map(function(l){
@@ -5963,7 +5946,8 @@
 
   .sum{margin-top:2rem;text-align:left}
   .ord-row{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:.6rem 0;font-size:.9rem}
-  .ord-row .n{color:var(--ink-2)} .ord-row .n b{color:var(--ink);font-weight:700;margin-right:.3rem}
+  .ord-row .n{color:var(--ink-2)} .ord-row.item .n{color:var(--ink)}
+  .ord-row .n b{color:var(--ink);font-weight:700;margin-right:.3rem}
   .ord-row .v{font-weight:700;white-space:nowrap}
   .ord-sep{height:1px;background:var(--line);margin:.5rem 0}
   .ord-row.total .n{color:var(--ink);font-weight:700;font-size:1rem}
@@ -5973,7 +5957,6 @@
   .btn2{border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:var(--r-pill);
     padding:.8rem 1.2rem;font:inherit;font-weight:700;font-size:.88rem;cursor:pointer}
   .btn2:hover{background:var(--glass-2)}
-  .row-btns{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
   .btn-text{background:none;border:none;color:var(--ink-3);font:inherit;font-size:.86rem;cursor:pointer;padding:.6rem}
   .btn-text:hover{color:var(--ink)}
   .deliver{margin-top:1.6rem;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);
@@ -6020,7 +6003,7 @@
   &lt;div class=&quot;voucher&quot;&gt;
     &lt;div class=&quot;v-top&quot;&gt;
       &lt;span class=&quot;th&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&lt;use href=&quot;#p-art&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
-      &lt;span&gt;&lt;p class=&quot;t&quot; id=&quot;v-title&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;s&quot; id=&quot;v-sub&quot;&gt;Afterlight · Thu, Sep 4&lt;/p&gt;&lt;/span&gt;
+      &lt;span&gt;&lt;p class=&quot;t&quot; id=&quot;v-title&quot;&gt;Island Day Trip — Koh Larn&lt;/p&gt;&lt;p class=&quot;s&quot; id=&quot;v-sub&quot;&gt;Afterlight&lt;/p&gt;&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;v-perf&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;v-qr&quot;&gt;
@@ -6047,10 +6030,7 @@
 
   &lt;div class=&quot;actions&quot;&gt;
     &lt;button class=&quot;cta&quot; id=&quot;a-wallet&quot;&gt;Add to Apple Wallet&lt;/button&gt;
-    &lt;div class=&quot;row-btns&quot;&gt;
-      &lt;button class=&quot;btn2&quot; id=&quot;a-cal&quot;&gt;Add to calendar&lt;/button&gt;
-      &lt;button class=&quot;btn2&quot; id=&quot;a-share&quot;&gt;Share&lt;/button&gt;
-    &lt;/div&gt;
+    &lt;button class=&quot;btn2&quot; id=&quot;a-share&quot;&gt;Share&lt;/button&gt;
     &lt;button class=&quot;btn-text&quot; data-nav=&quot;producer&quot;&gt;Back to Afterlight&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -6087,20 +6067,20 @@
   document.querySelectorAll('[data-nav]').forEach(function(el){
     el.addEventListener('click',function(e){e.preventDefault();PNAV(el.dataset.nav);});});
 
-  var order = { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;, date:&quot;Thu, Sep 4&quot;,
+  var order = { kind:&quot;store&quot;, title:&quot;Island Day Trip — Koh Larn&quot;, seller:&quot;Afterlight&quot;,
     lines:[{name:&quot;Adult&quot;, qty:2, unit:2400}] };
   function fmt(n){ return n.toLocaleString(&quot;en-US&quot;) + &quot; THB&quot;; }
   function paint(){
     document.getElementById(&quot;v-title&quot;).textContent = order.title;
-    document.getElementById(&quot;v-sub&quot;).textContent = order.seller + &quot; · &quot; + order.date;
+    document.getElementById(&quot;v-sub&quot;).textContent = order.seller;
     var count = order.lines.reduce(function(s,l){ return s + l.qty; }, 0);
     document.getElementById(&quot;v-rows&quot;).innerHTML =
-      '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;' + order.date + '&lt;/span&gt;&lt;/div&gt;' +
-      '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Meeting point&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;Bali Hai Pier, Pattaya&lt;br&gt;07:30&lt;/span&gt;&lt;/div&gt;' +
+      '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Where&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;Bali Hai Pier, Pattaya&lt;/span&gt;&lt;/div&gt;' +
       '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Admits&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;' + count + (count === 1 ? ' person' : ' people') + '&lt;/span&gt;&lt;/div&gt;' +
       '&lt;div class=&quot;v-row&quot;&gt;&lt;span class=&quot;k&quot;&gt;Booked by&lt;/span&gt;&lt;span class=&quot;v&quot;&gt;Eldar Tsabari&lt;/span&gt;&lt;/div&gt;';
+    // same row format as the pay step: leading bold quantity, no multiplication sign
     document.getElementById(&quot;v-lines&quot;).innerHTML = order.lines.map(function(l){
-      return '&lt;div class=&quot;ord-row&quot;&gt;&lt;span class=&quot;n&quot;&gt;&lt;b&gt;' + l.qty + '×&lt;/b&gt;' + l.name + '&lt;/span&gt;' +
+      return '&lt;div class=&quot;ord-row item&quot;&gt;&lt;span class=&quot;n&quot;&gt;&lt;b&gt;' + l.qty + '&lt;/b&gt;' + l.name + '&lt;/span&gt;' +
         '&lt;span class=&quot;v&quot;&gt;' + fmt(l.qty * l.unit) + '&lt;/span&gt;&lt;/div&gt;';
     }).join(&quot;&quot;);
     var sub = order.subtotal || order.lines.reduce(function(s,l){ return s + l.qty * l.unit; }, 0);
@@ -6133,7 +6113,7 @@
     document.getElementById(&quot;qr&quot;).innerHTML = out.join(&quot;&quot;);
   })();
 
-  [&quot;a-wallet&quot;,&quot;a-cal&quot;,&quot;a-share&quot;].forEach(function(id){
+  [&quot;a-wallet&quot;,&quot;a-share&quot;].forEach(function(id){
     document.getElementById(id).addEventListener(&quot;click&quot;, function(){ this.blur(); });
   });
   paint();
