@@ -5272,7 +5272,9 @@
     outline:none;transition:border-color var(--dur) ease}
   .field input::placeholder{color:var(--ink-3)}
   .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
+  .field select{cursor:pointer;padding:0 .6rem}
   .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
+  .sect{margin-top:1.6rem} .sect:first-of-type{margin-top:0}
 
   /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
   .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
@@ -5620,7 +5622,9 @@
     outline:none;transition:border-color var(--dur) ease}
   .field input::placeholder{color:var(--ink-3)}
   .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
+  .field select{cursor:pointer;padding:0 .6rem}
   .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
+  .sect{margin-top:1.6rem} .sect:first-of-type{margin-top:0}
 
   /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
   .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
@@ -5757,17 +5761,33 @@
     &lt;div class=&quot;view&quot; id=&quot;view-details&quot;&gt;
       &lt;div class=&quot;view-head&quot;&gt;
         &lt;div&gt;
-          &lt;p class=&quot;view-title&quot;&gt;Your details&lt;/p&gt;
-          &lt;p class=&quot;view-sub&quot;&gt;Where we send the voucher&lt;/p&gt;
+          &lt;p class=&quot;view-title&quot;&gt;Complete your profile&lt;/p&gt;
+          &lt;p class=&quot;view-sub&quot;&gt;We need a few details before you continue&lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;div class=&quot;field-row&quot;&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;fn&quot;&gt;First name&lt;/label&gt;&lt;input id=&quot;fn&quot; class=&quot;req&quot; value=&quot;Eldar&quot; autocomplete=&quot;given-name&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ln&quot;&gt;Last name&lt;/label&gt;&lt;input id=&quot;ln&quot; class=&quot;req&quot; value=&quot;Tsabari&quot; autocomplete=&quot;family-name&quot;&gt;&lt;/div&gt;
+      &lt;!-- Same field set as the ticket profile view, in the same order. No
+           phone: the buyer authenticated with one, and the summary column
+           already shows it — asking again is asking twice. --&gt;
+      &lt;div class=&quot;sect&quot;&gt;
+        &lt;div class=&quot;field-row&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;p-first&quot;&gt;First name&lt;/label&gt;&lt;input id=&quot;p-first&quot; class=&quot;req&quot; value=&quot;Eldar&quot; autocomplete=&quot;given-name&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;p-last&quot;&gt;Last name&lt;/label&gt;&lt;input id=&quot;p-last&quot; class=&quot;req&quot; value=&quot;Tsabari&quot; autocomplete=&quot;family-name&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;p-email&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;p-email&quot; class=&quot;req&quot; type=&quot;email&quot; value=&quot;eldar@example.com&quot; autocomplete=&quot;email&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;field-row&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;p-dob&quot;&gt;Date of birth&lt;/label&gt;&lt;input id=&quot;p-dob&quot; class=&quot;req&quot; type=&quot;date&quot; value=&quot;1992-04-17&quot; autocomplete=&quot;bday&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;
+            &lt;label for=&quot;p-gender&quot;&gt;Gender&lt;/label&gt;
+            &lt;select id=&quot;p-gender&quot; class=&quot;req&quot;&gt;
+              &lt;option value=&quot;&quot; disabled&gt;Select&lt;/option&gt;
+              &lt;option value=&quot;male&quot; selected&gt;Male&lt;/option&gt;
+              &lt;option value=&quot;female&quot;&gt;Female&lt;/option&gt;
+              &lt;option value=&quot;other&quot;&gt;Other&lt;/option&gt;
+            &lt;/select&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;em&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;em&quot; class=&quot;req&quot; type=&quot;email&quot; value=&quot;eldar@example.com&quot; autocomplete=&quot;email&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ph&quot;&gt;Phone&lt;/label&gt;&lt;input id=&quot;ph&quot; class=&quot;req&quot; type=&quot;tel&quot; value=&quot;+66 80 123 4567&quot; autocomplete=&quot;tel&quot;&gt;&lt;/div&gt;
 
       &lt;button class=&quot;cta full&quot; id=&quot;cta-details&quot;&gt;Continue to payment&lt;/button&gt;
     &lt;/div&gt;
@@ -5966,7 +5986,9 @@
     outline:none;transition:border-color var(--dur) ease}
   .field input::placeholder{color:var(--ink-3)}
   .field input:focus,.field select:focus{border-color:color-mix(in oklab,var(--accent) 60%,transparent)}
+  .field select{cursor:pointer;padding:0 .6rem}
   .field-row{display:flex;gap:.7rem}.field-row .field{flex:1;min-width:0}
+  .sect{margin-top:1.6rem} .sect:first-of-type{margin-top:0}
 
   /* sticky dock — full-bleed on mobile, centred pill from 881px (§3) */
   .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;
