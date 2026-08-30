@@ -4833,8 +4833,22 @@
   .ch:hover{color:var(--ink);background:var(--glass-2);transform:translateY(-2px)}
   .ch:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
-  /* tabs */
-  .tabs{display:flex;gap:.3rem;margin:2.6rem .3rem 1.4rem;border-bottom:1px solid var(--line)}
+  /* tabs — two tiers. Events and Store are different things a producer sells,
+     so they sit at the top; Upcoming/Past only slices Events, so it sits under
+     it and disappears when Store is showing. Flattening all three into one row
+     implied Store was a third kind of event, which it isn't. */
+  .tabs{display:flex;gap:.3rem;margin:2.6rem .3rem 0;border-bottom:1px solid var(--line)}
+  .subtabs{display:flex;gap:.4rem;margin:1.1rem .3rem 1.4rem}
+  .subtab{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-pill);
+    color:var(--ink-3);font:inherit;font-size:.82rem;font-weight:600;padding:.4rem .9rem;cursor:pointer;
+    transition:background var(--dur) ease,color var(--dur) ease,border-color var(--dur) ease}
+  .subtab:hover{color:var(--ink-2);background:var(--glass-2)}
+  .subtab.on{background:var(--glass-2);border-color:color-mix(in oklab,var(--ink) 22%,transparent);color:var(--ink)}
+  .subtab .c{color:var(--ink-3);font-weight:700;font-size:.74rem;margin-left:.3rem}
+  .subtab.on .c{color:var(--ink-2)}
+  /* Store has no sub-slice, so the grid needs the margin the subtabs were giving it */
+  .subtabs[hidden]{display:none}
+  .grid.nosub{margin-top:1.4rem}
   .tab{background:none;border:none;color:var(--ink-3);font:inherit;font-size:.92rem;font-weight:600;padding:.6rem .8rem;cursor:pointer;position:relative}
   .tab.on{color:var(--ink)}
   .tab.on::after{content:&quot;&quot;;position:absolute;left:.8rem;right:.8rem;bottom:-1px;height:2px;background:var(--accent);border-radius:2px}
@@ -5032,9 +5046,13 @@
   &lt;/div&gt;
 
   &lt;div class=&quot;tabs&quot;&gt;
-    &lt;button class=&quot;tab on&quot; data-tab=&quot;up&quot;&gt;Upcoming &lt;span class=&quot;c&quot;&gt;1&lt;/span&gt;&lt;/button&gt;
-    &lt;button class=&quot;tab&quot; data-tab=&quot;past&quot;&gt;Past &lt;span class=&quot;c&quot;&gt;4&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;tab on&quot; data-tab=&quot;events&quot;&gt;Events &lt;span class=&quot;c&quot;&gt;5&lt;/span&gt;&lt;/button&gt;
     &lt;button class=&quot;tab&quot; data-tab=&quot;store&quot;&gt;Store &lt;span class=&quot;c&quot;&gt;4&lt;/span&gt;&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;subtabs&quot; id=&quot;subtabs&quot;&gt;
+    &lt;button class=&quot;subtab on&quot; data-sub=&quot;up&quot;&gt;Upcoming &lt;span class=&quot;c&quot;&gt;1&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;subtab&quot; data-sub=&quot;past&quot;&gt;Past &lt;span class=&quot;c&quot;&gt;4&lt;/span&gt;&lt;/button&gt;
   &lt;/div&gt;
 
   &lt;div class=&quot;grid&quot; id=&quot;grid&quot;&gt;&lt;/div&gt;
@@ -5128,23 +5146,32 @@
       &lt;/div&gt;
     &lt;/div&gt;`;
 
-  // tabs — Upcoming / Past / Store all clickable, swap the single grid
+  // Two tiers: Events | Store on top, Upcoming | Past nested under Events.
   const grid = document.getElementById('grid');
+  const subtabs = document.getElementById('subtabs');
   const tabs = [...document.querySelectorAll('.tab')];
-  let current = 'up';
-  function render(which){
-    current = which;
-    if (which === 'store') {
+  const subs = [...document.querySelectorAll('.subtab')];
+  let current = 'events';   // which top tab
+  let sub = 'up';           // which slice of Events
+
+  function render(){
+    const isStore = current === 'store';
+    subtabs.hidden = isStore;
+    grid.classList.toggle('nosub', isStore);
+
+    if (isStore) {
       grid.innerHTML = STORE.length
         ? STORE.map(pcard).join('')
         : `&lt;div class=&quot;empty&quot; style=&quot;grid-column:1/-1&quot;&gt;&lt;b&gt;Nothing in the store yet&lt;/b&gt;Trips, add-ons and merch this producer sells will show up here.&lt;/div&gt;`;
     } else {
-      const list = which === 'past' ? PAST : UP;
-      grid.innerHTML = list.map(e =&gt; card(e, which === 'past')).join('');
+      const list = sub === 'past' ? PAST : UP;
+      grid.innerHTML = list.map(e =&gt; card(e, sub === 'past')).join('');
     }
-    tabs.forEach(t =&gt; t.classList.toggle('on', t.dataset.tab === which));
+    tabs.forEach(t =&gt; t.classList.toggle('on', t.dataset.tab === current));
+    subs.forEach(t =&gt; t.classList.toggle('on', t.dataset.sub === sub));
   }
-  tabs.forEach(t =&gt; t.addEventListener('click', () =&gt; render(t.dataset.tab)));
+  tabs.forEach(t =&gt; t.addEventListener('click', () =&gt; { current = t.dataset.tab; render(); }));
+  subs.forEach(t =&gt; t.addEventListener('click', () =&gt; { sub = t.dataset.sub; render(); }));
 
   // whole card is the click target → the event page (same full-cell affordance as WHERE),
   // or the product page when the Store tab is showing
@@ -5156,7 +5183,7 @@
   grid.addEventListener('click', e =&gt; { if (e.target.closest('.card')) goCard(); });
   grid.addEventListener('keydown', e =&gt; { const c = e.target.closest('.card'); if (c &amp;&amp; (e.key==='Enter' || e.key===' ')){ e.preventDefault(); goCard(); } });
 
-  render('up');
+  render();
   // header/footer navigation (logo -&gt; home, login, footer links)
   function PNAV(key){
     try{ if(window.parent &amp;&amp; window.parent!==window){ window.parent.postMessage({bumpyNav:key},&quot;*&quot;); return; } }catch(e){}
@@ -5646,6 +5673,17 @@
   .ord-row.total .n{color:var(--ink);font-weight:700;font-size:1rem}
   .ord-row.total .v{font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
 
+  /* View switch — same machine the ticket pay step runs: one view at a time,
+     each with its own title and CTA, and a back-link out of the later one. */
+  .view-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.1rem}
+  .view-title{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin:0}
+  .view-sub{color:var(--ink-2);font-size:.83rem;margin:.2rem 0 0}
+  .backlink{display:inline-flex;align-items:center;gap:.4rem;background:none;border:none;
+    padding:.3rem 0;margin-bottom:.7rem;color:var(--ink-3);font:inherit;font-size:.82rem;
+    font-weight:600;cursor:pointer;transition:color var(--dur) ease}
+  .backlink:hover{color:var(--ink)}
+  .backlink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
   .lbl-sub{font-weight:500;letter-spacing:.04em;color:var(--ink-3);margin-left:.4rem}
   .signed{display:flex;align-items:center;gap:.55rem;margin-top:1.1rem;font-size:.8rem;color:var(--ink-3)}
   .signed b{color:var(--ink-2);font-weight:600}
@@ -5713,34 +5751,59 @@
     &lt;/p&gt;
   &lt;/div&gt;
 
-  &lt;!-- RIGHT: the form, and the CTA that submits it --&gt;
+  &lt;!-- RIGHT: two views, one at a time --&gt;
   &lt;div&gt;
-    &lt;p class=&quot;lbl&quot;&gt;Your details&lt;/p&gt;
-    &lt;div class=&quot;field-row&quot;&gt;
-      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;fn&quot;&gt;First name&lt;/label&gt;&lt;input id=&quot;fn&quot; value=&quot;Eldar&quot; autocomplete=&quot;given-name&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ln&quot;&gt;Last name&lt;/label&gt;&lt;input id=&quot;ln&quot; value=&quot;Tsabari&quot; autocomplete=&quot;family-name&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;em&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;em&quot; type=&quot;email&quot; value=&quot;eldar@example.com&quot; autocomplete=&quot;email&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ph&quot;&gt;Phone&lt;/label&gt;&lt;input id=&quot;ph&quot; type=&quot;tel&quot; value=&quot;+66 80 123 4567&quot; autocomplete=&quot;tel&quot;&gt;&lt;/div&gt;
-
-    &lt;p class=&quot;lbl mt&quot;&gt;Payment&lt;/p&gt;
-    &lt;div class=&quot;card-box&quot;&gt;
-      &lt;div class=&quot;field&quot; style=&quot;margin-top:0&quot;&gt;&lt;label for=&quot;cc&quot;&gt;Card number&lt;/label&gt;&lt;input id=&quot;cc&quot; inputmode=&quot;numeric&quot; placeholder=&quot;4242 4242 4242 4242&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;field-row&quot;&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ex&quot;&gt;Expiry&lt;/label&gt;&lt;input id=&quot;ex&quot; placeholder=&quot;MM / YY&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;cv&quot;&gt;CVC&lt;/label&gt;&lt;input id=&quot;cv&quot; inputmode=&quot;numeric&quot; placeholder=&quot;123&quot;&gt;&lt;/div&gt;
+    &lt;!-- ═══════════ VIEW 1: YOUR DETAILS ═══════════ --&gt;
+    &lt;div class=&quot;view&quot; id=&quot;view-details&quot;&gt;
+      &lt;div class=&quot;view-head&quot;&gt;
+        &lt;div&gt;
+          &lt;p class=&quot;view-title&quot;&gt;Your details&lt;/p&gt;
+          &lt;p class=&quot;view-sub&quot;&gt;Where we send the voucher&lt;/p&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;p class=&quot;stripe-note&quot;&gt;
-      &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 10V8a6 6 0 0 1 12 0v2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;rect x=&quot;4&quot; y=&quot;10&quot; width=&quot;16&quot; height=&quot;10&quot; rx=&quot;2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;/svg&gt;
-      &lt;span&gt;Card details go straight to Stripe — Bumpy never sees them.&lt;/span&gt;
-    &lt;/p&gt;
 
-    &lt;div class=&quot;seller-note&quot;&gt;
-      &lt;b&gt;Afterlight&lt;/b&gt; is the seller and runs this trip. Bumpy processes the payment and issues your voucher.
+      &lt;div class=&quot;field-row&quot;&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;fn&quot;&gt;First name&lt;/label&gt;&lt;input id=&quot;fn&quot; class=&quot;req&quot; value=&quot;Eldar&quot; autocomplete=&quot;given-name&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ln&quot;&gt;Last name&lt;/label&gt;&lt;input id=&quot;ln&quot; class=&quot;req&quot; value=&quot;Tsabari&quot; autocomplete=&quot;family-name&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;em&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;em&quot; class=&quot;req&quot; type=&quot;email&quot; value=&quot;eldar@example.com&quot; autocomplete=&quot;email&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ph&quot;&gt;Phone&lt;/label&gt;&lt;input id=&quot;ph&quot; class=&quot;req&quot; type=&quot;tel&quot; value=&quot;+66 80 123 4567&quot; autocomplete=&quot;tel&quot;&gt;&lt;/div&gt;
+
+      &lt;button class=&quot;cta full&quot; id=&quot;cta-details&quot;&gt;Continue to payment&lt;/button&gt;
     &lt;/div&gt;
 
-    &lt;button class=&quot;cta full&quot; id=&quot;pay&quot;&gt;Pay&lt;/button&gt;
+    &lt;!-- ═══════════ VIEW 2: PAYMENT ═══════════ --&gt;
+    &lt;div class=&quot;view&quot; id=&quot;view-payment&quot; hidden&gt;
+      &lt;button class=&quot;backlink&quot; id=&quot;back-details&quot;&gt;
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;path d=&quot;M15 5l-7 7 7 7&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;
+        &lt;/svg&gt;
+        Your details
+      &lt;/button&gt;
+
+      &lt;div class=&quot;view-head&quot;&gt;
+        &lt;div&gt;
+          &lt;p class=&quot;view-title&quot;&gt;Payment&lt;/p&gt;
+          &lt;p class=&quot;view-sub&quot;&gt;Card details are handled by Stripe&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;cc&quot;&gt;Card number&lt;/label&gt;&lt;input id=&quot;cc&quot; inputmode=&quot;numeric&quot; placeholder=&quot;1234 1234 1234 1234&quot; autocomplete=&quot;cc-number&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field-row&quot;&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ex&quot;&gt;Expiry&lt;/label&gt;&lt;input id=&quot;ex&quot; placeholder=&quot;MM / YY&quot; autocomplete=&quot;cc-exp&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;cv&quot;&gt;CVC&lt;/label&gt;&lt;input id=&quot;cv&quot; inputmode=&quot;numeric&quot; placeholder=&quot;123&quot; autocomplete=&quot;cc-csc&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;p class=&quot;stripe-note&quot;&gt;
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 10V8a6 6 0 0 1 12 0v2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;rect x=&quot;4&quot; y=&quot;10&quot; width=&quot;16&quot; height=&quot;10&quot; rx=&quot;2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.9&quot;/&gt;&lt;/svg&gt;
+        &lt;span&gt;Card details go straight to Stripe — Bumpy never sees them.&lt;/span&gt;
+      &lt;/p&gt;
+
+      &lt;div class=&quot;seller-note&quot;&gt;
+        &lt;b&gt;Afterlight&lt;/b&gt; is the seller and runs this trip. Bumpy processes the payment and issues your voucher.
+      &lt;/div&gt;
+
+      &lt;button class=&quot;cta full&quot; id=&quot;pay&quot;&gt;Pay&lt;/button&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -5803,6 +5866,24 @@
     if (e.data &amp;&amp; e.data.bumpyOrder &amp;&amp; e.data.bumpyOrder.kind === &quot;store&quot;) { order = e.data.bumpyOrder; paint(); }
   });
   document.getElementById(&quot;pay&quot;).addEventListener(&quot;click&quot;, function(){ PNAV(&quot;pconfirm&quot;, order); });
+
+  // View switch. Details first, payment only once they're filled — the card
+  // form is the last thing a buyer should be looking at, and asking for it
+  // beside a half-empty contact form is how you get abandoned carts.
+  var vDetails = document.getElementById(&quot;view-details&quot;);
+  var vPayment = document.getElementById(&quot;view-payment&quot;);
+  function showView(which){
+    vDetails.hidden = which !== &quot;details&quot;;
+    vPayment.hidden = which !== &quot;payment&quot;;
+    window.scrollTo(0, 0);
+  }
+  document.getElementById(&quot;cta-details&quot;).addEventListener(&quot;click&quot;, function(){
+    var missing = [].filter.call(document.querySelectorAll(&quot;.req&quot;), function(i){ return !i.value.trim(); });
+    if (missing.length) { missing[0].focus(); return; }
+    showView(&quot;payment&quot;);
+  });
+  document.getElementById(&quot;back-details&quot;).addEventListener(&quot;click&quot;, function(){ showView(&quot;details&quot;); });
+
   paint();
 &lt;/script&gt;
 "></iframe>
