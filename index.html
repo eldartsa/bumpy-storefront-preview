@@ -5249,6 +5249,19 @@
   .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
   @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
 
+  /* Hold timer — the reservation TTL, same bar the ticket checkout runs.
+     A store item holds stock while you pay, so the buyer is told for how long. */
+  .timer{position:relative;height:2px;background:var(--glass-2);max-width:640px;margin:0 auto}
+  .timer-fill{height:100%;background:linear-gradient(90deg,var(--glow),var(--accent));
+    transition:width 1s linear,background 400ms ease}
+  .timer.warn .timer-fill{background:var(--warn)}
+  /* Centred under the step header and labelled — a bare number in the corner
+     doesn't say what is being counted. */
+  .timer-txt{position:absolute;left:50%;transform:translateX(-50%);top:.55rem;white-space:nowrap;
+    font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--ink-3);transition:color 400ms ease}
+  .timer-txt b{font-weight:700;color:var(--ink-2)}
+  .timer.warn .timer-txt,.timer.warn .timer-txt b{color:var(--warn)}
+
   .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
     color:var(--ink-2);margin:0 0 .85rem}
   .lbl.mt{margin-top:2rem}
@@ -5599,6 +5612,19 @@
   .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
   @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
 
+  /* Hold timer — the reservation TTL, same bar the ticket checkout runs.
+     A store item holds stock while you pay, so the buyer is told for how long. */
+  .timer{position:relative;height:2px;background:var(--glass-2);max-width:640px;margin:0 auto}
+  .timer-fill{height:100%;background:linear-gradient(90deg,var(--glow),var(--accent));
+    transition:width 1s linear,background 400ms ease}
+  .timer.warn .timer-fill{background:var(--warn)}
+  /* Centred under the step header and labelled — a bare number in the corner
+     doesn't say what is being counted. */
+  .timer-txt{position:absolute;left:50%;transform:translateX(-50%);top:.55rem;white-space:nowrap;
+    font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--ink-3);transition:color 400ms ease}
+  .timer-txt b{font-weight:700;color:var(--ink-2)}
+  .timer.warn .timer-txt,.timer.warn .timer-txt b{color:var(--warn)}
+
   .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
     color:var(--ink-2);margin:0 0 .85rem}
   .lbl.mt{margin-top:2rem}
@@ -5653,7 +5679,9 @@
     display:flex;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;flex-wrap:wrap;color:var(--ink-3);font-size:.78rem}
   @media (max-width:760px){.foot-in{grid-template-columns:1fr;gap:2.2rem}}
 
-  .cwrap{max-width:940px;margin:0 auto;padding:2rem clamp(.9rem,3vw,1.5rem) 4rem;
+  /* 2.3rem, not 2: the hold-timer label floats below the header on its own
+     layer, so the content has to leave room for it. */
+  .cwrap{max-width:940px;margin:0 auto;padding:2.3rem clamp(.9rem,3vw,1.5rem) 4rem;
     display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(1.5rem,4vw,3rem);align-items:start}
   @media (max-width:860px){.cwrap{grid-template-columns:1fr;gap:2rem}}
   .col-sticky{position:sticky;top:5rem}
@@ -5695,9 +5723,6 @@
   .card-box{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);padding:1rem;margin-top:.9rem}
   .stripe-note{color:var(--ink-3);font-size:.78rem;margin:.8rem 0 0;display:flex;gap:.4rem;align-items:flex-start}
   .stripe-note svg{flex-shrink:0;margin-top:.15rem}
-  .seller-note{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--glass);
-    padding:.85rem 1rem;margin-top:1.2rem;color:var(--ink-2);font-size:.86rem}
-  .seller-note b{color:var(--ink)}
 &lt;/style&gt;
 
 &lt;svg width=&quot;0&quot; height=&quot;0&quot; style=&quot;position:absolute&quot; aria-hidden=&quot;true&quot;&gt;&lt;defs&gt;
@@ -5726,7 +5751,11 @@
   &lt;button class=&quot;icon-btn&quot; data-nav=&quot;producer&quot; aria-label=&quot;Close&quot;&gt;
     &lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M6 6l12 12M18 6L6 18&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
   &lt;/button&gt;
-&lt;/div&gt;&lt;/header&gt;
+&lt;/div&gt;
+  &lt;div class=&quot;timer&quot; id=&quot;timer&quot;&gt;
+    &lt;div class=&quot;timer-fill&quot; id=&quot;timer-fill&quot; style=&quot;width:100%&quot;&gt;&lt;/div&gt;
+    &lt;span class=&quot;timer-txt&quot; role=&quot;timer&quot; aria-live=&quot;off&quot;&gt;Held for &lt;b id=&quot;timer-txt&quot;&gt;10:00&lt;/b&gt;&lt;/span&gt;
+  &lt;/div&gt;&lt;/header&gt;
 
 &lt;div class=&quot;cwrap&quot;&gt;
   &lt;!-- LEFT: the summary, same side it sits on in ticket checkout. Column order
@@ -5818,10 +5847,6 @@
         &lt;span&gt;Card details go straight to Stripe — Bumpy never sees them.&lt;/span&gt;
       &lt;/p&gt;
 
-      &lt;div class=&quot;seller-note&quot;&gt;
-        &lt;b&gt;Afterlight&lt;/b&gt; is the seller and runs this trip. Bumpy processes the payment and issues your voucher.
-      &lt;/div&gt;
-
       &lt;button class=&quot;cta full&quot; id=&quot;pay&quot;&gt;Pay&lt;/button&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -5886,6 +5911,18 @@
     if (e.data &amp;&amp; e.data.bumpyOrder &amp;&amp; e.data.bumpyOrder.kind === &quot;store&quot;) { order = e.data.bumpyOrder; paint(); }
   });
   document.getElementById(&quot;pay&quot;).addEventListener(&quot;click&quot;, function(){ PNAV(&quot;pconfirm&quot;, order); });
+
+  // Reservation countdown — 10 minutes, warns under two, same as tickets.
+  var TOTAL = 600, left = 600;
+  function tick(){
+    var m = Math.floor(left / 60), sec = left % 60;
+    document.getElementById(&quot;timer-txt&quot;).textContent =
+      String(m).padStart(2,&quot;0&quot;) + &quot;:&quot; + String(sec).padStart(2,&quot;0&quot;);
+    document.getElementById(&quot;timer-fill&quot;).style.width = (left / TOTAL) * 100 + &quot;%&quot;;
+    document.getElementById(&quot;timer&quot;).classList.toggle(&quot;warn&quot;, left &lt;= 120);
+    if (left &gt; 0) left--;
+  }
+  tick(); setInterval(tick, 1000);
 
   // View switch. Details first, payment only once they're filled — the card
   // form is the last thing a buyer should be looking at, and asking for it
@@ -5962,6 +5999,19 @@
   .step.now span{color:var(--ink)} .step.done span{color:var(--ink-2)}
   .step-sep{width:1.1rem;height:1px;background:var(--line);flex-shrink:0}
   @media (max-width:620px){.step:not(.now) span{display:none}.step-sep{width:.7rem}}
+
+  /* Hold timer — the reservation TTL, same bar the ticket checkout runs.
+     A store item holds stock while you pay, so the buyer is told for how long. */
+  .timer{position:relative;height:2px;background:var(--glass-2);max-width:640px;margin:0 auto}
+  .timer-fill{height:100%;background:linear-gradient(90deg,var(--glow),var(--accent));
+    transition:width 1s linear,background 400ms ease}
+  .timer.warn .timer-fill{background:var(--warn)}
+  /* Centred under the step header and labelled — a bare number in the corner
+     doesn't say what is being counted. */
+  .timer-txt{position:absolute;left:50%;transform:translateX(-50%);top:.55rem;white-space:nowrap;
+    font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--ink-3);transition:color 400ms ease}
+  .timer-txt b{font-weight:700;color:var(--ink-2)}
+  .timer.warn .timer-txt,.timer.warn .timer-txt b{color:var(--warn)}
 
   .lbl{font-size:var(--label);font-weight:700;text-transform:uppercase;letter-spacing:.09em;
     color:var(--ink-2);margin:0 0 .85rem}
